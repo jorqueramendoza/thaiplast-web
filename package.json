@@ -11,7 +11,8 @@
     "astro": "astro",
     "validate": "node scripts/validate-products.mjs",
     "import": "node scripts/import-products.mjs",
-    "import:xlsx": "node scripts/import-products.mjs --xlsx"
+    "import:xlsx": "node scripts/import-products.mjs --xlsx",
+    "extract:catalogo": "node scripts/extract-catalog-images.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

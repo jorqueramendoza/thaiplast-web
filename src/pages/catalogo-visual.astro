@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import paginas from '../../data/catalogo-paginas.json';
+import { waListaPrecios } from '../lib/whatsapp';
+
+const lista = waListaPrecios('catalogo-visual');
+const pages = paginas as { n: number; src: string }[];
+---
+<BaseLayout
+  title="Catálogo visual 2026"
+  description="Hojea el catálogo ThaiPlast 2026 completo: vasos, envases, bolsas, bandejas y más. Solicita precios por WhatsApp."
+>
+  <section class="section--tight cvhead">
+    <div class="container">
+      <nav class="crumbs" aria-label="Migas de pan">
+        <a href="/">Inicio</a> <span>/</span> <a href="/catalogo">Catálogo</a> <span>/</span> <strong>Catálogo visual</strong>
+      </nav>
+      <p class="eyebrow">Catálogo 2026</p>
+      <h1>Hojea nuestro catálogo completo</h1>
+      <p class="lead" style="max-width:60ch">
+        {pages.length} páginas con todos nuestros productos. Toca cualquier página para ampliarla.
+        ¿Lista para pedir? Escríbenos por WhatsApp.
+      </p>
+      <div class="cvhead__cta">
+        <a href="/catalogo-thaiplast.pdf" class="btn btn--blue" target="_blank" rel="noopener"><Icon name="doc" size={18} /> Descargar PDF</a>
+        <a href={lista} class="btn btn--wa" target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> Solicitar precios</a>
+        <a href="/catalogo" class="btn btn--ghost"><Icon name="list" size={18} /> Ver catálogo interactivo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ul class="cvgrid">
+        {pages.map((p) => (
+          <li>
+            <button class="cvpage" data-page={p.n} data-src={p.src} aria-label={`Ampliar página ${p.n}`}>
+              <img src={p.src} alt={`Catálogo ThaiPlast página ${p.n}`} loading="lazy" decoding="async" width="420" height="594" />
+              <span class="cvpage__n">{p.n}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section--tight"><div class="container"><CtaBlock origen="catalogo-visual" /></div></section>
+
+  <!-- Lightbox -->
+  <dialog class="lb" id="lightbox" aria-label="Visor de catálogo">
+    <button class="lb__close" data-lb-close aria-label="Cerrar">&times;</button>
+    <button class="lb__nav lb__prev" data-lb-prev aria-label="Anterior">&#8249;</button>
+    <img class="lb__img" id="lb-img" alt="" />
+    <button class="lb__nav lb__next" data-lb-next aria-label="Siguiente">&#8250;</button>
+    <span class="lb__count" id="lb-count"></span>
+  </dialog>
+</BaseLayout>
+
+<style>
+  .cvhead { background: linear-gradient(180deg, #eef2fb, var(--tp-bg)); }
+  .crumbs { font-size: .85rem; color: var(--tp-muted); margin-bottom: .6rem; }
+  .crumbs a:hover { color: var(--tp-red); } .crumbs span { margin: 0 .35rem; }
+  .cvhead__cta { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
+
+  .cvgrid { list-style: none; padding: 0; display: grid; gap: clamp(10px, 2vw, 18px); grid-template-columns: repeat(2, 1fr); }
+  .cvpage { display: block; width: 100%; padding: 0; border: 1px solid var(--tp-line); border-radius: var(--r-md); overflow: hidden; background: #fff; position: relative; box-shadow: var(--shadow-sm); transition: transform .12s ease, box-shadow .12s ease; }
+  .cvpage:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .cvpage img { width: 100%; height: auto; display: block; }
+  .cvpage__n { position: absolute; top: 8px; left: 8px; background: rgba(11,27,69,.85); color: #fff; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: var(--r-pill); }
+  @media (min-width: 640px) { .cvgrid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 980px) { .cvgrid { grid-template-columns: repeat(4, 1fr); } }
+
+  /* Lightbox */
+  .lb { width: min(96vw, 900px); max-width: 96vw; max-height: 92vh; border: 0; background: transparent; padding: 0; overflow: visible; }
+  .lb::backdrop { background: rgba(8, 14, 34, .92); }
+  .lb[open] { display: grid; place-items: center; }
+  .lb__img { max-width: 96vw; max-height: 88vh; width: auto; height: auto; border-radius: var(--r-sm); box-shadow: var(--shadow-lg); }
+  .lb__close { position: fixed; top: 14px; right: 16px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,.15); color: #fff; font-size: 1.8rem; line-height: 1; }
+  .lb__close:hover { background: var(--tp-red); }
+  .lb__nav { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: 0; border-radius: 50%; background: rgba(255,255,255,.15); color: #fff; font-size: 2rem; line-height: 1; }
+  .lb__nav:hover { background: var(--tp-blue); }
+  .lb__prev { left: 12px; } .lb__next { right: 12px; }
+  .lb__count { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: #fff; font-size: .9rem; background: rgba(0,0,0,.4); padding: .3rem .8rem; border-radius: var(--r-pill); }
+</style>
+
+<script>
+  const pages = Array.from(document.querySelectorAll('.cvpage')) as HTMLButtonElement[];
+  const dlg = document.getElementById('lightbox') as HTMLDialogElement;
+  const img = document.getElementById('lb-img') as HTMLImageElement;
+  const count = document.getElementById('lb-count')!;
+  const srcs = pages.map((p) => p.dataset.src!);
+  let idx = 0;
+
+  function show(i: number) {
+    idx = (i + srcs.length) % srcs.length;
+    img.src = srcs[idx];
+    count.textContent = `${idx + 1} / ${srcs.length}`;
+  }
+  function open(i: number) { show(i); if (!dlg.open) dlg.showModal(); }
+
+  pages.forEach((p, i) => p.addEventListener('click', () => open(i)));
+  dlg.querySelector('[data-lb-close]')!.addEventListener('click', () => dlg.close());
+  dlg.querySelector('[data-lb-prev]')!.addEventListener('click', () => show(idx - 1));
+  dlg.querySelector('[data-lb-next]')!.addEventListener('click', () => show(idx + 1));
+  // click en el backdrop cierra
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  // teclado
+  document.addEventListener('keydown', (e) => {
+    if (!dlg.open) return;
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    else if (e.key === 'ArrowRight') show(idx + 1);
+  });
+</script>

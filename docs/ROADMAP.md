@@ -21,9 +21,18 @@
 - [ ] Pruebas en celular (flujo de pedido → WhatsApp)
 - [ ] Deploy en Cloudflare Pages
 
+## Hecho después del lanzamiento
+
+- [x] Sitio publicado en Cloudflare (Workers Builds) y conectado a GitHub
+- [x] Datos de contacto reales (WhatsApp, correo, Instagram) en `src/lib/site.ts`
+- [x] **Catálogo visual**: 37 páginas del PDF extraídas → `/catalogo-visual` con lightbox
+- [x] Pipeline de fotos por producto (columna `Imagen` + detección por slug)
+- [x] Handoff para Codex: `docs/ESTADO_DEL_PROYECTO.md` y `docs/CODEX_AGENTS_PROMPT.md`
+
 ## Backlog (mejora continua)
 
-- [ ] **Fotos reales** de producto (reemplazar placeholders por grupo)
+- [ ] **Fotos reales** de producto (recortar desde `public/img/catalogo/` → `public/img/products/<grupo>/<slug>.jpg`)
+- [ ] Analítica de clics a WhatsApp (Plausible/GA4) usando los UTM de origen
 - [ ] Corregir las 5 filas "Vasos Térmicos" desalineadas en el Excel
 - [ ] Imagen Open Graph dedicada (1200×630)
 - [ ] Google Analytics / medición de clics a WhatsApp

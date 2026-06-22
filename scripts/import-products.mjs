@@ -14,7 +14,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {
-  DATA_DIR, parseCsv, slugify, parsePrice, formatPrice,
+  ROOT, DATA_DIR, parseCsv, slugify, parsePrice, formatPrice,
   loadCategoryMap, findHeaderIndex, normalizeRow,
 } from './lib.mjs';
 
@@ -47,6 +47,25 @@ function placeholderImage(grupoSlug) {
   return `/img/products/_placeholder/${grupoSlug}.svg`;
 }
 
+const PUBLIC_DIR = path.join(ROOT, 'public');
+const IMG_EXTS = ['jpg', 'jpeg', 'webp', 'png', 'avif'];
+
+/**
+ * Resuelve la imagen de un producto, en orden de prioridad:
+ *  1) valor explícito de la columna "Imagen" del CSV (si existe),
+ *  2) archivo en public/img/products/<grupo>/<slug>.(jpg|jpeg|webp|png|avif),
+ *  3) placeholder por grupo.
+ */
+function resolveImage(grupoSlug, slug, explicit) {
+  const ex = (explicit || '').trim();
+  if (ex) return ex.startsWith('/') || /^https?:/i.test(ex) ? ex : `/${ex.replace(/^\.?\/*/, '')}`;
+  for (const ext of IMG_EXTS) {
+    const rel = `/img/products/${grupoSlug}/${slug}.${ext}`;
+    if (fs.existsSync(path.join(PUBLIC_DIR, rel.replace(/^\//, '')))) return rel;
+  }
+  return placeholderImage(grupoSlug);
+}
+
 function buildDescription({ nombre, medida, material, uso }) {
   const parts = [nombre];
   if (medida && !nombre.toLowerCase().includes(medida.toLowerCase())) parts.push(medida);
@@ -63,6 +82,10 @@ function main() {
   const rows = readRows();
   const headerIdx = findHeaderIndex(rows);
   if (headerIdx < 0) { console.error('✖ No se encontró la fila de encabezado (SKU,...). Abortando.'); process.exit(1); }
+
+  // Detecta una columna opcional "Imagen" en el encabezado (no existe en el CSV actual).
+  const header = rows[headerIdx].map((h) => String(h).trim().toLowerCase());
+  const imagenIdx = header.findIndex((h) => h === 'imagen' || h === 'imagen url' || h === 'foto');
 
   const existing = loadExisting();
   const usedIds = new Set();
@@ -113,7 +136,7 @@ function main() {
       descripcion: buildDescription(row),
       precio: row.precio,
       precio_formato: formatPrice(row.precio),
-      imagen: placeholderImage(grupoSlug),
+      imagen: resolveImage(grupoSlug, slug, imagenIdx >= 0 ? fields[imagenIdx] : ''),
       unidad_venta: row.presentacion || 'Unidad',
       stock: row.stockRaw ? Number(row.stockRaw) || row.stockRaw : null,
       activo: true,

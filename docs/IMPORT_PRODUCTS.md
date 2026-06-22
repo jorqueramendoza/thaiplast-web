@@ -45,13 +45,31 @@ SKU,Categoría,Producto,Medida/Capacidad,Presentación,Color,Material,Uso Recome
 
 ## Fotos de producto
 
-Hoy cada producto usa un **placeholder por grupo**. Para fotos reales:
+Hoy cada producto usa un **placeholder por grupo**. El importador resuelve la imagen así
+(función `resolveImage()` en `scripts/import-products.mjs`), en orden de prioridad:
 
-1. Guarda la imagen en `public/img/products/<grupo>/<slug>.jpg` (cuadrada, ~600×600).
-2. Agrega una columna `Imagen` al CSV con esa ruta, o ajusta `placeholderImage()` /
-   el mapeo en `scripts/import-products.mjs`.
+1. **Columna `Imagen`** en el CSV (ruta `/img/...` o URL `https://...`), si existe.
+2. **Archivo por slug**: `public/img/products/<grupo>/<slug>.(jpg|jpeg|webp|png|avif)`.
+3. **Placeholder** del grupo.
 
-## Catálogos nuevos (PDF)
+### Forma recomendada (sin tocar el CSV)
+1. Mira en `data/products.json` el `grupo` y el `slug` del producto.
+2. Guarda la foto (cuadrada, ~600×600, WebP/JPG) como
+   `public/img/products/<grupo>/<slug>.jpg`. Ejemplo:
+   `public/img/products/vasos-y-tapas/vaso-90-cc-90-cc.jpg`.
+3. `npm run import` y la foto aparece sola en la tarjeta y la ficha.
 
-El catálogo PDF es **solo imágenes** (sin texto extraíble). El documento canónico siempre es
-el CSV/Excel. Cuando llegue un catálogo nuevo, transcribe los productos al Excel y reimporta.
+> Las fotos se pueden recortar desde las páginas del catálogo en `public/img/catalogo/`.
+
+## Catálogo visual (páginas del PDF)
+
+El catálogo PDF son **páginas-imagen** (sin texto extraíble). Para regenerar la galería
+`/catalogo-visual` a partir del PDF:
+
+```bash
+npm run extract:catalogo   # vuelca las páginas a public/img/catalogo/pagina-*.jpg
+```
+
+Si llega un catálogo nuevo: reemplaza `Catálogo ThaiPlast .pdf` (o `public/catalogo-thaiplast.pdf`),
+corre `npm run extract:catalogo` y vuelve a publicar. El documento canónico de **datos**
+sigue siendo el CSV/Excel: transcribe los productos nuevos ahí y reimporta.
