@@ -49,7 +49,9 @@ Edita `src/lib/site.ts` con los **datos reales**:
 | Archivo | Contenido |
 |---|---|
 | [ESTADO_DEL_PROYECTO.md](ESTADO_DEL_PROYECTO.md) | **Empieza aquí**: estado actual, despliegue y handoff |
+| [BITACORA.md](BITACORA.md) | Registro cronológico de todo lo hecho + config del dominio |
 | [CODEX_AGENTS_PROMPT.md](CODEX_AGENTS_PROMPT.md) | Prompt + roles de agentes para iterar con Codex |
+| [DISTRIBUCION.md](DISTRIBUCION.md) | Kit para traer visitas (Google Business, redes, QR) |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Estructura del proyecto y decisiones técnicas |
 | [DATABASE.md](DATABASE.md) | Esquema de datos de productos y categorías |
 | [IMPORT_PRODUCTS.md](IMPORT_PRODUCTS.md) | Cómo cargar/actualizar productos |

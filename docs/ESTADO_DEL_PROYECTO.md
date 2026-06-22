@@ -12,7 +12,9 @@ un mensaje de WhatsApp prearmado.
 
 ## 2. Estado actual (vivo)
 
-- **Producción:** https://thaiplast-web.jorquera-mendoza.workers.dev
+- **Producción (dominio oficial):** https://thaiplast.cl ✅ (con SSL).
+  `www.thaiplast.cl` redirige (301) al dominio sin www. La URL del Worker
+  `thaiplast-web.jorquera-mendoza.workers.dev` sigue activa como respaldo.
 - **Repo:** https://github.com/jorqueramendoza/thaiplast-web (rama `main`)
 - **Despliegue:** Cloudflare (Workers Builds, conectado a GitHub). En cada `git push` a
   `main`, Cloudflare corre `npm run build` y publica. Durante ese build Cloudflare ejecuta
@@ -21,9 +23,13 @@ un mensaje de WhatsApp prearmado.
   build local usa salida `static` y el de Cloudflare usa el adapter; ambos funcionan. Si se
   quiere reproducibilidad total, commitear el adapter; por ahora **no es necesario**.
 - **Contacto real ya cargado** en `src/lib/site.ts`: WhatsApp `56957896128`
-  (+56 9 5789 6128), correo `thaiplast.spa@gmail.com`, Instagram `@thaiplast`.
-- **Pendiente de confirmar:** dirección y horario (hoy de ejemplo), dominio final
-  (`thaiplast.cl` provisional en `astro.config.mjs` y `site.ts`).
+  (+56 9 5789 6128), correo `thaiplast.spa@gmail.com`, Instagram `@thaiplast`, razón social
+  **ThaiPlast SpA**, dirección **Arturo Godoy 1713, Santiago**.
+- **Configuración del dominio:** detalle completo en `docs/BITACORA.md` §Dominio
+  (nameservers Cloudflare en NIC, custom domain del Worker, CNAME `www`, Page Rule de
+  redirección).
+- **Pendiente de confirmar:** horario de atención (hoy de ejemplo); ID de Google Analytics
+  (GA4) para activar la medición; subir fotos reales de producto.
 
 ## 3. Stack y versiones
 
@@ -123,12 +129,17 @@ editar el CSV → `npm run import` → `git push`. Detalle en `docs/IMPORT_PRODU
 ## 9. Issues conocidos / deuda
 
 - Imágenes de producto = placeholders hasta cargar fotos reales (ver §7).
-- Dirección, horario y dominio aún de ejemplo (ver §2).
+- **Horario** del negocio aún de ejemplo en `site.ts` (dirección y razón social ya reales).
+- **Analítica pendiente de activar:** falta pegar el ID de GA4 (`G-XXXX`) en
+  `site.ts → analytics.ga4` (o el dominio en `plausibleDomain`). El código ya está integrado.
+- **QR del sitio** sin generar todavía: `npm run qr` crea `public/img/brand/qr-thaiplast.png`
+  apuntando a `https://thaiplast.cl`.
+- **Resuelto:** dominio `thaiplast.cl` en vivo con SSL + redirección `www`.
 - **Resuelto:** 5 filas "Vasos Térmicos" corregidas en el CSV (nombre/medida/material).
-- **Resuelto:** imagen Open Graph dedicada 1200×630 en `public/img/brand/og-image.jpg`
-  (regenerable con el script en `scripts/` si se necesita).
+- **Resuelto:** Open Graph 1200×630 (`og-image.jpg`) + favicons PNG (16/32/180).
+- **Resuelto:** schema `LocalBusiness` con teléfono, dirección y zona (RM).
 - **Resuelto:** medición de clics a WhatsApp en `BaseLayout.astro` (evento `whatsapp_click`
-  a `dataLayer`/Plausible, con el `origen` del CTA); inerte hasta conectar GA4/Plausible.
+  a GA4/`dataLayer`/Plausible, con el `origen` del CTA); inerte hasta conectar analítica.
 
 ## 10. Próximos pasos
 
