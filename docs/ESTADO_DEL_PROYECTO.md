@@ -122,11 +122,13 @@ editar el CSV → `npm run import` → `git push`. Detalle en `docs/IMPORT_PRODU
 
 ## 9. Issues conocidos / deuda
 
-- **5 filas "Vasos Térmicos"** del CSV tienen columnas corridas; se importan salvadas pero
-  con medida/material levemente desalineados. Corregir en el CSV cuando se pueda.
 - Imágenes de producto = placeholders hasta cargar fotos reales (ver §7).
 - Dirección, horario y dominio aún de ejemplo (ver §2).
-- OG image usa el logo cuadrado; idealmente una imagen 1200×630 dedicada.
+- **Resuelto:** 5 filas "Vasos Térmicos" corregidas en el CSV (nombre/medida/material).
+- **Resuelto:** imagen Open Graph dedicada 1200×630 en `public/img/brand/og-image.jpg`
+  (regenerable con el script en `scripts/` si se necesita).
+- **Resuelto:** medición de clics a WhatsApp en `BaseLayout.astro` (evento `whatsapp_click`
+  a `dataLayer`/Plausible, con el `origen` del CTA); inerte hasta conectar GA4/Plausible.
 
 ## 10. Próximos pasos
 

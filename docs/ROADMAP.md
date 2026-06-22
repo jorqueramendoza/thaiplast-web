@@ -28,6 +28,9 @@
 - [x] **Catálogo visual**: 37 páginas del PDF extraídas → `/catalogo-visual` con lightbox
 - [x] Pipeline de fotos por producto (columna `Imagen` + detección por slug)
 - [x] Handoff para Codex: `docs/ESTADO_DEL_PROYECTO.md` y `docs/CODEX_AGENTS_PROMPT.md`
+- [x] Corregidas las 5 filas "Vasos Térmicos" del CSV
+- [x] Imagen Open Graph 1200×630 de marca (`public/img/brand/og-image.jpg`)
+- [x] Medición de clics a WhatsApp (evento `whatsapp_click`, listo para GA4/Plausible)
 
 ## Backlog (mejora continua)
 

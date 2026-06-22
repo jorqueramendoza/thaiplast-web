@@ -15,7 +15,7 @@ interface Props {
 const {
   title,
   description = site.descripcion,
-  image = '/img/brand/logo.jpg',
+  image = '/img/brand/og-image.jpg',
   jsonLd,
   noindex = false,
 } = Astro.props;
@@ -120,6 +120,26 @@ const lds = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])
         toastTimer = window.setTimeout(() => { toast.classList.remove('is-show'); }, 2200);
       }
       window.addEventListener(CART_EVENT, () => {});
+
+      // --- Medición de conversión: clic en cualquier enlace de WhatsApp ---
+      // La métrica del proyecto. Empuja un evento listo para GA4/Plausible.
+      // Inerte si no hay analítica conectada (solo console.debug).
+      document.addEventListener('click', (e) => {
+        const a = (e.target as HTMLElement).closest('a[href*="wa.me"]') as HTMLAnchorElement | null;
+        if (!a) return;
+        let origen = 'desconocido';
+        try {
+          const text = new URL(a.href).searchParams.get('text') || '';
+          origen = (text.match(/Origen:\s*([^)\n]+)/) || [])[1]?.trim() || 'directo';
+        } catch {}
+        const payload = { origen, href: a.href, path: location.pathname };
+        // GA4 / GTM
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({ event: 'whatsapp_click', ...payload });
+        // Plausible
+        (window as any).plausible?.('WhatsApp', { props: { origen } });
+        console.debug('[lead] whatsapp_click', payload);
+      });
     </script>
 
     <style>

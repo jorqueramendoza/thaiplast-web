@@ -6,7 +6,7 @@ export const site = {
   nombre: 'ThaiPlast',
   tagline: 'Todo en desechables',
   descripcion:
-    'Distribuidor mayorista de productos desechables y packaging para tu negocio: vasos, envases, bolsas, bandejas, cubiertos y más. Despacho en Santiago y región.',
+    'Desechables y packaging por mayor para tu negocio: vasos, envases, bolsas, bandejas, cubiertos y más, con precios competitivos y despacho en Santiago y RM. Pide tu lista de precios por WhatsApp.',
   url: 'https://thaiplast.cl', // ← dominio final
 
   // WhatsApp: SOLO dígitos en formato internacional, sin "+" ni espacios.
