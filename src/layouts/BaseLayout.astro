@@ -24,18 +24,30 @@ const fullTitle = title ? `${title} · ${site.nombre}` : `${site.nombre} · ${si
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(image, site.url).href;
 
-// JSON-LD base: la organización, presente en todas las páginas.
+// JSON-LD base: la organización/negocio local, presente en todas las páginas.
 const orgLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': ['Organization', 'LocalBusiness'],
+  '@id': `${site.url}/#business`,
   name: site.nombre,
   url: site.url,
   logo: new URL('/img/brand/logo.jpg', site.url).href,
+  image: new URL('/img/brand/og-image.jpg', site.url).href,
   description: site.descripcion,
+  telephone: `+${site.whatsapp}`,
+  email: site.email,
   sameAs: [site.redes.instagram, site.redes.facebook].filter(Boolean),
+  areaServed: { '@type': 'AdministrativeArea', name: 'Región Metropolitana, Chile' },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Maipú',
+    addressRegion: 'Región Metropolitana',
+    addressCountry: 'CL',
+  },
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
+    telephone: `+${site.whatsapp}`,
     areaServed: 'CL',
     availableLanguage: 'es',
   },
