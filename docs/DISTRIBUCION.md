@@ -53,8 +53,23 @@ Campos sugeridos (ajusta a tu realidad):
 ## 4. Otros canales gratis
 
 - Firma de correo con el link.
-- Tarjetas/volantes con un **QR** al sitio (se puede generar gratis).
+- Tarjetas/volantes con un **QR** al sitio (ver abajo).
 - Marketplaces locales / grupos de comerciantes de tu comuna.
+
+### QR del sitio (para mostrador, bolsas, volantes)
+
+Hay un generador listo. Crea un PNG de alta resolución (900 px, navy de marca) que
+apunta a `https://thaiplast.cl`:
+
+```bash
+npm run qr
+```
+
+Salida: **`public/img/brand/qr-thaiplast.png`** (listo para imprimir).
+
+> Pendiente de generar hasta que el dominio `thaiplast.cl` esté activo, para que el QR
+> apunte al dominio final. Cuando lo necesites, pídelo y se genera al instante
+> (o corre `npm run qr`). Si cambia la URL, edita `URL` en `scripts/make-qr.mjs`.
 
 ---
 
