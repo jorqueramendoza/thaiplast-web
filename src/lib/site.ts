@@ -14,8 +14,9 @@ export const site = {
   whatsapp: '56957896128',
   whatsappLabel: '+56 9 5789 6128', // visible para humanos
 
+  razonSocial: 'ThaiPlast SpA',
   email: 'thaiplast.spa@gmail.com',
-  direccion: 'Maipú, Santiago de Chile', // ← confirmar/ajustar dirección real
+  direccion: 'Arturo Godoy 1713, Santiago',
   horario: 'Lun a Vie · 9:00 a 18:00', // ← confirmar/ajustar horario real
 
   redes: {

@@ -30,6 +30,7 @@ const orgLd = {
   '@type': ['Organization', 'LocalBusiness'],
   '@id': `${site.url}/#business`,
   name: site.nombre,
+  legalName: site.razonSocial,
   url: site.url,
   logo: new URL('/img/brand/logo.jpg', site.url).href,
   image: new URL('/img/brand/og-image.jpg', site.url).href,
@@ -40,7 +41,8 @@ const orgLd = {
   areaServed: { '@type': 'AdministrativeArea', name: 'Región Metropolitana, Chile' },
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Maipú',
+    streetAddress: 'Arturo Godoy 1713',
+    addressLocality: 'Santiago',
     addressRegion: 'Región Metropolitana',
     addressCountry: 'CL',
   },
