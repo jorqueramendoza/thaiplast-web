@@ -28,8 +28,25 @@ Estos datos están en un solo lugar: `src/lib/site.ts`. Hay que editar:
 ## Medir cuántas solicitudes llegan
 
 Cada botón de WhatsApp incluye una etiqueta de origen en el mensaje (ej. "Origen: home-hero").
-Así sabes desde qué parte del sitio te escribió cada cliente. Para estadísticas más completas,
-se puede conectar Google Analytics más adelante (ver [ROADMAP.md](ROADMAP.md)).
+Así sabes desde qué parte del sitio te escribió cada cliente.
+
+### Conectar analítica (para contar clics a WhatsApp)
+
+El sitio ya registra el evento **`whatsapp_click`** en cada clic de WhatsApp. Solo falta
+conectar una herramienta. Edita `src/lib/site.ts` → bloque `analytics`:
+
+**Opción A — Google Analytics 4 (gratis):**
+1. Crea una cuenta en <https://analytics.google.com> → Administrar → Crear propiedad.
+2. Agrega un flujo de datos "Web" con tu dominio y copia el **ID de medición** (`G-XXXXXXXXXX`).
+3. Pega ese ID en `analytics.ga4` y publica (`git push`).
+4. En GA4, marca el evento `whatsapp_click` como **conversión** (Administrar → Eventos).
+
+**Opción B — Plausible (más simple, de pago):**
+1. Crea cuenta en <https://plausible.io>, agrega tu dominio.
+2. Pon ese dominio en `analytics.plausibleDomain` y publica.
+3. Verás el objetivo "WhatsApp" con la propiedad `origen`.
+
+> Puedes usar una u otra (o ambas). Si dejas los dos en `''`, no se carga nada.
 
 ## ¿Qué NO se puede romper fácil?
 

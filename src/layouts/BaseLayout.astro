@@ -75,6 +75,23 @@ const lds = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])
     />
 
     {lds.map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld)} />)}
+
+    {/* Analítica (se activan solo si hay un ID configurado en src/lib/site.ts) */}
+    {site.analytics.ga4 && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.analytics.ga4}`}></script>
+        <script define:vars={{ ga4: site.analytics.ga4 }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', ga4);
+        </script>
+      </>
+    )}
+    {site.analytics.plausibleDomain && (
+      <script defer data-domain={site.analytics.plausibleDomain} src="https://plausible.io/js/script.js"></script>
+    )}
   </head>
   <body>
     <a href="#main" class="sr-only">Saltar al contenido</a>
@@ -133,11 +150,14 @@ const lds = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])
           origen = (text.match(/Origen:\s*([^)\n]+)/) || [])[1]?.trim() || 'directo';
         } catch {}
         const payload = { origen, href: a.href, path: location.pathname };
-        // GA4 / GTM
-        (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push({ event: 'whatsapp_click', ...payload });
-        // Plausible
-        (window as any).plausible?.('WhatsApp', { props: { origen } });
+        const w = window as any;
+        // GA4 (gtag.js) — evento personalizado
+        w.gtag?.('event', 'whatsapp_click', payload);
+        // GTM (dataLayer)
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({ event: 'whatsapp_click', ...payload });
+        // Plausible — evento "WhatsApp" con propiedad origen
+        w.plausible?.('WhatsApp', { props: { origen } });
         console.debug('[lead] whatsapp_click', payload);
       });
     </script>

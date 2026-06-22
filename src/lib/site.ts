@@ -26,6 +26,15 @@ export const site = {
   // Métrica del proyecto: todas las conversiones apuntan a WhatsApp.
   // Estas etiquetas UTM permiten medir desde qué CTA llegó el lead.
   utmSource: 'web',
+
+  // Analítica: deja en '' lo que no uses. Al poner un valor, el sitio carga
+  // automáticamente ese servicio y registra el evento "whatsapp_click".
+  //  - ga4: ID de Google Analytics 4, formato 'G-XXXXXXXXXX'
+  //  - plausibleDomain: el dominio registrado en Plausible, ej. 'thaiplast.cl'
+  analytics: {
+    ga4: '',
+    plausibleDomain: '',
+  },
 } as const;
 
 export type IndustriaSlug =
