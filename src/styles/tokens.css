@@ -1,6 +1,6 @@
 /* ============================================================
    Tokens de marca ThaiPlast — derivados del logo oficial.
-   Colores muestreados directamente de logo.jpg. No inventar variantes.
+   Colores muestreados de logo.jpg. No inventar variantes de marca.
    ============================================================ */
 :root {
   /* Marca */
@@ -8,7 +8,9 @@
   --tp-red-dark: #9c0a11;
   --tp-blue: #0a3f95;         /* azul "Plast" / elefante */
   --tp-blue-dark: #072c68;
+  --tp-blue-bright: #1257c9;  /* azul más vivo para gradientes/profundidad */
   --tp-navy: #0b1b45;         /* fondo de hero / secciones oscuras */
+  --tp-navy-2: #16306e;       /* navy de apoyo para degradados */
   --tp-gold: #dea621;         /* corona / copa / tagline */
   --tp-gold-light: #f2c14e;
 
@@ -18,23 +20,40 @@
 
   /* Neutros */
   --tp-white: #ffffff;
-  --tp-ink: #16203a;          /* texto principal */
-  --tp-muted: #5b6577;        /* texto secundario */
-  --tp-line: #e6e9f0;         /* bordes */
-  --tp-bg: #f6f8fc;           /* fondo de página */
+  --tp-ink: #14203c;          /* texto principal */
+  --tp-muted: #5d6880;        /* texto secundario */
+  --tp-line: #e7ebf3;         /* bordes */
+  --tp-bg: #f4f6fc;           /* fondo de página */
+  --tp-bg-soft: #eef2fb;      /* fondo de secciones alternas */
   --tp-card: #ffffff;
+
+  /* Gradientes de marca */
+  --grad-blue: linear-gradient(135deg, var(--tp-blue-bright), var(--tp-blue));
+  --grad-red: linear-gradient(135deg, #e0232d, var(--tp-red));
+  --grad-gold: linear-gradient(135deg, var(--tp-gold-light), var(--tp-gold));
+  --grad-wa: linear-gradient(135deg, #2ee06f, var(--wa-green-dark));
+  --grad-hero: radial-gradient(120% 130% at 100% 0%, var(--tp-navy-2) 0%, var(--tp-navy) 58%);
 
   /* Tipografía */
   --font-sans: "Poppins", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
 
-  /* Radios y sombras */
-  --r-sm: 8px;
-  --r-md: 14px;
-  --r-lg: 22px;
+  /* Radios */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 26px;
   --r-pill: 999px;
-  --shadow-sm: 0 1px 2px rgba(11, 27, 69, .06), 0 2px 8px rgba(11, 27, 69, .05);
-  --shadow-md: 0 6px 22px rgba(11, 27, 69, .10);
-  --shadow-lg: 0 18px 48px rgba(11, 27, 69, .16);
+
+  /* Sombras (elevación suave y por capas, estilo moderno) */
+  --shadow-sm: 0 1px 2px rgba(16, 32, 74, .04), 0 2px 8px rgba(16, 32, 74, .06);
+  --shadow-md: 0 6px 16px -6px rgba(16, 32, 74, .14), 0 10px 30px -10px rgba(16, 32, 74, .12);
+  --shadow-lg: 0 24px 60px -18px rgba(16, 32, 74, .30);
+
+  /* Sombras de color para CTAs */
+  --shadow-blue: 0 10px 22px -8px rgba(10, 63, 149, .50);
+  --shadow-red: 0 10px 22px -8px rgba(200, 16, 26, .45);
+  --shadow-gold: 0 10px 22px -8px rgba(222, 166, 33, .50);
+  --shadow-wa: 0 10px 22px -8px rgba(37, 211, 102, .50);
 
   /* Layout */
   --maxw: 1200px;

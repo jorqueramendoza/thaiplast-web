@@ -38,11 +38,12 @@ const wa = waProducto(p);
 </article>
 
 <style>
-  .pc { display: flex; flex-direction: column; overflow: hidden; transition: transform .12s ease, box-shadow .12s ease; }
-  .pc:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-  .pc__media { position: relative; aspect-ratio: 1; background: #f1f4fb; display: grid; place-items: center; }
-  .pc__media img { width: 78%; height: 78%; object-fit: contain; }
-  .pc__cat { position: absolute; top: 8px; left: 8px; background: rgba(11,27,69,.85); color: #fff; font-size: .68rem; font-weight: 600; padding: .2rem .55rem; border-radius: var(--r-pill); }
+  .pc { display: flex; flex-direction: column; overflow: hidden; transition: transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, border-color .2s ease; }
+  .pc:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--tp-blue) 22%, var(--tp-line)); }
+  .pc__media { position: relative; aspect-ratio: 1; background: linear-gradient(160deg, #f6f9ff, #e9eef9); display: grid; place-items: center; }
+  .pc__media img { width: 80%; height: 80%; object-fit: contain; transition: transform .25s ease; }
+  .pc:hover .pc__media img { transform: scale(1.04); }
+  .pc__cat { position: absolute; top: 10px; left: 10px; background: color-mix(in srgb, var(--tp-navy) 88%, transparent); color: #fff; font-size: .68rem; font-weight: 600; padding: .22rem .6rem; border-radius: var(--r-pill); backdrop-filter: blur(4px); }
   .pc__body { padding: .85rem .9rem 1rem; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
   .pc__title { font-size: .98rem; font-weight: 700; color: var(--tp-navy); }
   .pc__title a:hover { color: var(--tp-red); }
