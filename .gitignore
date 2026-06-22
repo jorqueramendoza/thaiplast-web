@@ -30,3 +30,9 @@ Thumbs.db
 /idea_pagina.png
 /logo.jpg
 /Excel/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example

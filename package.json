@@ -7,18 +7,25 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "npm run import && astro build",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
     "validate": "node scripts/validate-products.mjs",
     "import": "node scripts/import-products.mjs",
     "import:xlsx": "node scripts/import-products.mjs --xlsx",
-    "extract:catalogo": "node scripts/extract-catalog-images.mjs"
+    "extract:catalogo": "node scripts/extract-catalog-images.mjs",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.7.0",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.4.8"
   },
   "devDependencies": {
+    "wrangler": "^4.103.0",
     "xlsx": "^0.18.5"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
