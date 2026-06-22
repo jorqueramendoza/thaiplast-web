@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import { industrias } from '../../lib/site';
+---
+<BaseLayout
+  title="Soluciones por industria"
+  description="Desechables y packaging para minimarkets, sushi y delivery, cafeterías, salud/clínicas y food trucks. Encuentra lo que tu rubro necesita."
+>
+  <section class="section--tight" style="background:linear-gradient(180deg,#eef2fb,var(--tp-bg))">
+    <div class="container">
+      <p class="eyebrow">Soluciones por industria</p>
+      <h1>Productos pensados para tu rubro</h1>
+      <p class="lead" style="max-width:60ch">Agrupamos el catálogo según lo que cada negocio necesita, para que armes tu pedido más rápido.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ul class="indus grid">
+        {industrias.map((ind) => (
+          <li class="indus__card card">
+            <a href={`/industrias/${ind.slug}`}>
+              <span class="indus__icon"><Icon name={ind.icono} size={28} /></span>
+              <h3>{ind.nombre}</h3>
+              <p>{ind.descripcion}</p>
+              <span class="indus__more">Ver soluciones <Icon name="arrow" size={16} /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section--tight"><div class="container"><CtaBlock origen="industrias" /></div></section>
+</BaseLayout>
+
+<style>
+  .indus { grid-template-columns: 1fr; }
+  .indus__card a { display: block; padding: 1.5rem; height: 100%; }
+  .indus__card { transition: transform .12s ease, box-shadow .12s ease; }
+  .indus__card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .indus__icon { display: grid; place-items: center; width: 56px; height: 56px; border-radius: var(--r-md); background: #eef2fb; color: var(--tp-blue); margin-bottom: 1rem; }
+  .indus__card p { color: var(--tp-muted); font-size: .95rem; margin: .5rem 0 1rem; }
+  .indus__more { display: inline-flex; align-items: center; gap: .3rem; color: var(--tp-red); font-weight: 600; }
+  @media (min-width: 720px) { .indus { grid-template-columns: repeat(3, 1fr); } }
+</style>

@@ -1,0 +1,56 @@
+---
+import Icon from './Icon.astro';
+import type { Product } from '../lib/products';
+import { waProducto } from '../lib/whatsapp';
+
+interface Props { product: Product; }
+const { product: p } = Astro.props;
+const wa = waProducto(p);
+---
+<article class="pc card">
+  <a href={`/producto/${p.slug}`} class="pc__media" aria-label={p.nombre}>
+    <img src={p.imagen} alt={p.nombre} width="300" height="300" loading="lazy" decoding="async" />
+    <span class="pc__cat">{p.categoria}</span>
+  </a>
+  <div class="pc__body">
+    <h3 class="pc__title"><a href={`/producto/${p.slug}`}>{p.nombre}</a></h3>
+    <p class="pc__meta">
+      {p.medida && <span>{p.medida}</span>}
+      {p.presentacion && <span>· {p.presentacion}</span>}
+    </p>
+    <div class="pc__priceRow">
+      <span class="pc__price">{p.precio_formato}</span>
+      {p.color && <span class="badge">{p.color}</span>}
+    </div>
+    <div class="pc__actions">
+      <button
+        class="btn btn--blue pc__add"
+        data-add-to-cart
+        data-id={p.id} data-slug={p.slug} data-sku={p.sku}
+        data-nombre={p.nombre} data-presentacion={p.presentacion}
+        data-precio={p.precio ?? ''} data-imagen={p.imagen}
+      ><Icon name="plus" size={18} /> Agregar</button>
+      <a class="btn btn--wa pc__wa" href={wa} target="_blank" rel="noopener" aria-label={`Consultar ${p.nombre} por WhatsApp`}>
+        <Icon name="whatsapp" size={18} />
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .pc { display: flex; flex-direction: column; overflow: hidden; transition: transform .12s ease, box-shadow .12s ease; }
+  .pc:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .pc__media { position: relative; aspect-ratio: 1; background: #f1f4fb; display: grid; place-items: center; }
+  .pc__media img { width: 78%; height: 78%; object-fit: contain; }
+  .pc__cat { position: absolute; top: 8px; left: 8px; background: rgba(11,27,69,.85); color: #fff; font-size: .68rem; font-weight: 600; padding: .2rem .55rem; border-radius: var(--r-pill); }
+  .pc__body { padding: .85rem .9rem 1rem; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
+  .pc__title { font-size: .98rem; font-weight: 700; color: var(--tp-navy); }
+  .pc__title a:hover { color: var(--tp-red); }
+  .pc__meta { font-size: .8rem; color: var(--tp-muted); display: flex; gap: .25rem; flex-wrap: wrap; }
+  .pc__priceRow { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: auto; }
+  .pc__price { font-size: 1.25rem; font-weight: 800; color: var(--tp-red); }
+  .pc__actions { display: flex; gap: .4rem; margin-top: .5rem; }
+  .pc__add { flex: 1; padding: .6rem .8rem; font-size: .9rem; }
+  .pc__wa { padding: .6rem .75rem; }
+  .pc__add.is-added { background: var(--wa-green); }
+</style>

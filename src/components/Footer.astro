@@ -1,0 +1,79 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../lib/site';
+import { activeCategories } from '../lib/products';
+import { waGeneral } from '../lib/whatsapp';
+
+const grupos = activeCategories().slice(0, 6);
+const year = new Date().getFullYear();
+---
+<footer class="ft">
+  <div class="container ft__grid">
+    <div class="ft__brand">
+      <div class="ft__brandrow">
+        <img src="/img/brand/logo.jpg" width="44" height="44" alt={`Logo ${site.nombre}`} />
+        <strong>{site.nombre}</strong>
+      </div>
+      <p>{site.descripcion}</p>
+      <div class="ft__social">
+        {site.redes.instagram && <a href={site.redes.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" size={20} /></a>}
+        {site.redes.facebook && <a href={site.redes.facebook} target="_blank" rel="noopener" aria-label="Facebook"><Icon name="facebook" size={20} /></a>}
+      </div>
+    </div>
+
+    <div class="ft__col">
+      <h4>Catálogo</h4>
+      <ul>
+        {grupos.map((g) => <li><a href={`/catalogo/${g.slug}`}>{g.nombre}</a></li>)}
+        <li><a href="/catalogo">Ver todo</a></li>
+      </ul>
+    </div>
+
+    <div class="ft__col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="/nosotros">Nosotros</a></li>
+        <li><a href="/industrias">Industrias</a></li>
+        <li><a href="/pedido">Armar pedido</a></li>
+        <li><a href="/lista-precios">Lista de precios</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="ft__col">
+      <h4>Contacto</h4>
+      <ul class="ft__contact">
+        <li><Icon name="whatsapp" size={18} /> <a href={waGeneral('footer')} target="_blank" rel="noopener">{site.whatsappLabel}</a></li>
+        <li><Icon name="mail" size={18} /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><Icon name="pin" size={18} /> {site.direccion}</li>
+        <li><Icon name="clock" size={18} /> {site.horario}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ft__bar">
+    <div class="container ft__barrow">
+      <span>© {year} {site.nombre} · Todo en desechables.</span>
+      <span>Hecho en Chile · <a href="/lista-precios">Solicita tu lista de precios</a></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ft { background: var(--tp-navy); color: #cdd6ea; margin-top: 2rem; }
+  .ft__grid { display: grid; gap: 2rem; padding-block: clamp(36px, 6vw, 64px); grid-template-columns: 1fr; }
+  .ft__brandrow { display: flex; align-items: center; gap: .6rem; color: #fff; font-size: 1.25rem; }
+  .ft__brandrow img { border-radius: 50%; }
+  .ft__brand p { margin-top: .8rem; max-width: 36ch; font-size: .92rem; color: #aab6d2; }
+  .ft__social { display: flex; gap: .6rem; margin-top: 1rem; }
+  .ft__social a { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.08); color: #fff; }
+  .ft__social a:hover { background: var(--tp-red); }
+  .ft__col h4 { color: #fff; font-size: 1rem; margin-bottom: .8rem; }
+  .ft__col ul { list-style: none; padding: 0; display: grid; gap: .5rem; font-size: .92rem; }
+  .ft__col a:hover { color: #fff; }
+  .ft__contact li { display: flex; align-items: center; gap: .5rem; }
+  .ft__bar { border-top: 1px solid rgba(255,255,255,.1); }
+  .ft__barrow { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; padding-block: 1rem; font-size: .82rem; color: #8d99bf; }
+  .ft__barrow a { color: var(--tp-gold-light); }
+  @media (min-width: 720px) { .ft__grid { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; } }
+</style>

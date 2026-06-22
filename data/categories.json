@@ -1,0 +1,336 @@
+[
+  {
+    "slug": "vasos-y-tapas",
+    "nombre": "Vasos y Tapas",
+    "descripcion": "Vasos plásticos, PET, polipapel, térmicos y acrílicos con sus tapas, para bebidas frías y calientes.",
+    "icono": "cup",
+    "destacado": true,
+    "conteo": 43,
+    "categorias": [
+      {
+        "nombre": "Vasos",
+        "conteo": 8
+      },
+      {
+        "nombre": "Vasos PET",
+        "conteo": 6
+      },
+      {
+        "nombre": "Vasos Polipapel",
+        "conteo": 12
+      },
+      {
+        "nombre": "Vasos Térmicos",
+        "conteo": 5
+      },
+      {
+        "nombre": "Vasos Acrílicos",
+        "conteo": 3
+      },
+      {
+        "nombre": "Tapas",
+        "conteo": 6
+      },
+      {
+        "nombre": "Heladeras",
+        "conteo": 2
+      },
+      {
+        "nombre": "Cartones",
+        "conteo": 1
+      }
+    ]
+  },
+  {
+    "slug": "envases-y-contenedores",
+    "nombre": "Envases y Contenedores",
+    "descripcion": "Contenedores, termoformados, bowls y envases para delivery y comida preparada.",
+    "icono": "box",
+    "destacado": true,
+    "conteo": 40,
+    "categorias": [
+      {
+        "nombre": "Contenedores",
+        "conteo": 19
+      },
+      {
+        "nombre": "Termoformados",
+        "conteo": 13
+      },
+      {
+        "nombre": "Triangulares",
+        "conteo": 3
+      },
+      {
+        "nombre": "Darnel",
+        "conteo": 1
+      },
+      {
+        "nombre": "Bowls Kraft",
+        "conteo": 4
+      }
+    ]
+  },
+  {
+    "slug": "bandejas-y-platos",
+    "nombre": "Bandejas y Platos",
+    "descripcion": "Bandejas térmicas y de cartón, platos plásticos y de cartón para servicio y eventos.",
+    "icono": "tray",
+    "destacado": true,
+    "conteo": 15,
+    "categorias": [
+      {
+        "nombre": "Bandejas",
+        "conteo": 6
+      },
+      {
+        "nombre": "Platos",
+        "conteo": 9
+      }
+    ]
+  },
+  {
+    "slug": "cajas-y-delivery",
+    "nombre": "Cajas y Delivery",
+    "descripcion": "Cajas para comida, canastos, porta sandwich y envases de comida rápida y delivery.",
+    "icono": "delivery",
+    "destacado": true,
+    "conteo": 22,
+    "categorias": [
+      {
+        "nombre": "Cajas",
+        "conteo": 12
+      },
+      {
+        "nombre": "Caja Papas",
+        "conteo": 3
+      },
+      {
+        "nombre": "Canastos",
+        "conteo": 3
+      },
+      {
+        "nombre": "Porta Sandwich",
+        "conteo": 2
+      },
+      {
+        "nombre": "Hot Dog",
+        "conteo": 2
+      }
+    ]
+  },
+  {
+    "slug": "bolsas",
+    "nombre": "Bolsas",
+    "descripcion": "Bolsas kraft, camiseta, prepicadas, de basura, taco, zipper y rollos.",
+    "icono": "bag",
+    "destacado": true,
+    "conteo": 44,
+    "categorias": [
+      {
+        "nombre": "Bolsas Kraft",
+        "conteo": 13
+      },
+      {
+        "nombre": "Bolsas Blancas",
+        "conteo": 1
+      },
+      {
+        "nombre": "Bolsas Camiseta",
+        "conteo": 7
+      },
+      {
+        "nombre": "Prepicados",
+        "conteo": 4
+      },
+      {
+        "nombre": "Bolsas Basura",
+        "conteo": 4
+      },
+      {
+        "nombre": "Bolsa Taco",
+        "conteo": 2
+      },
+      {
+        "nombre": "Zipper",
+        "conteo": 10
+      },
+      {
+        "nombre": "Rollos",
+        "conteo": 3
+      }
+    ]
+  },
+  {
+    "slug": "film-y-empaque",
+    "nombre": "Film y Empaque",
+    "descripcion": "Polietileno, polipropileno, film plástico, foil de aluminio y paletizadores para empaque industrial.",
+    "icono": "roll",
+    "destacado": false,
+    "conteo": 80,
+    "categorias": [
+      {
+        "nombre": "Polietileno",
+        "conteo": 37
+      },
+      {
+        "nombre": "Polipropileno",
+        "conteo": 23
+      },
+      {
+        "nombre": "Plástico Film",
+        "conteo": 7
+      },
+      {
+        "nombre": "Foil",
+        "conteo": 3
+      },
+      {
+        "nombre": "Paletizadores",
+        "conteo": 1
+      },
+      {
+        "nombre": "Hilo",
+        "conteo": 3
+      },
+      {
+        "nombre": "Cubos",
+        "conteo": 6
+      }
+    ]
+  },
+  {
+    "slug": "copas-y-postres",
+    "nombre": "Copas y Postres",
+    "descripcion": "Copas, cúpulas, potes y bisagras para postres, repostería y eventos.",
+    "icono": "dessert",
+    "destacado": true,
+    "conteo": 53,
+    "categorias": [
+      {
+        "nombre": "Copas",
+        "conteo": 14
+      },
+      {
+        "nombre": "Cupulas",
+        "conteo": 8
+      },
+      {
+        "nombre": "Potes",
+        "conteo": 25
+      },
+      {
+        "nombre": "Bisagras",
+        "conteo": 6
+      }
+    ]
+  },
+  {
+    "slug": "cubiertos-y-bombillas",
+    "nombre": "Cubiertos y Bombillas",
+    "descripcion": "Cubiertos de plástico y madera, bombillas, brochetas, palos y pinchos.",
+    "icono": "cutlery",
+    "destacado": true,
+    "conteo": 34,
+    "categorias": [
+      {
+        "nombre": "Cubiertos",
+        "conteo": 12
+      },
+      {
+        "nombre": "Bombillas",
+        "conteo": 6
+      },
+      {
+        "nombre": "Brochetas",
+        "conteo": 8
+      },
+      {
+        "nombre": "Palos",
+        "conteo": 3
+      },
+      {
+        "nombre": "Mondadientes",
+        "conteo": 1
+      },
+      {
+        "nombre": "Pinchos",
+        "conteo": 3
+      },
+      {
+        "nombre": "Banderitas",
+        "conteo": 1
+      }
+    ]
+  },
+  {
+    "slug": "cafeteria",
+    "nombre": "Cafetería",
+    "descripcion": "Sachets, servilletas y moldes para cafeterías, panaderías y repostería.",
+    "icono": "coffee",
+    "destacado": false,
+    "conteo": 17,
+    "categorias": [
+      {
+        "nombre": "Sachets",
+        "conteo": 8
+      },
+      {
+        "nombre": "Servilletas",
+        "conteo": 5
+      },
+      {
+        "nombre": "Moldes",
+        "conteo": 4
+      }
+    ]
+  },
+  {
+    "slug": "insumos-clinicos",
+    "nombre": "Insumos Clínicos · Health",
+    "descripcion": "Guantes, mascarillas, gorros, pecheras y algodón. Línea ThaiPlast Health para clínicas y manipulación de alimentos.",
+    "icono": "health",
+    "destacado": true,
+    "conteo": 13,
+    "categorias": [
+      {
+        "nombre": "Guantes",
+        "conteo": 4
+      },
+      {
+        "nombre": "Gorros",
+        "conteo": 2
+      },
+      {
+        "nombre": "Pecheras",
+        "conteo": 1
+      },
+      {
+        "nombre": "Mascarillas",
+        "conteo": 2
+      },
+      {
+        "nombre": "Cubre Zapatos",
+        "conteo": 1
+      },
+      {
+        "nombre": "Algodón",
+        "conteo": 3
+      }
+    ]
+  },
+  {
+    "slug": "fiestas-y-eventos",
+    "nombre": "Fiestas y Eventos",
+    "descripcion": "Decoración y artículos para fiestas y eventos.",
+    "icono": "party",
+    "destacado": false,
+    "conteo": 1,
+    "categorias": [
+      {
+        "nombre": "Fiestas",
+        "conteo": 1
+      }
+    ]
+  }
+]

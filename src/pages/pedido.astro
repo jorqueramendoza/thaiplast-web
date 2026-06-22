@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { waListaPrecios } from '../lib/whatsapp';
+const lista = waListaPrecios('pedido');
+---
+<BaseLayout
+  title="Armar pedido"
+  description="Arma tu pedido de desechables: agrega productos, ajusta cantidades y envíalo por WhatsApp. Sin pagos online, atención directa."
+  noindex={true}
+>
+  <section class="section">
+    <div class="container">
+      <h1>Tu pedido</h1>
+      <p class="lead">Ajusta las cantidades y envíalo por WhatsApp. Te confirmamos stock, precio final y despacho.</p>
+
+      <div class="order" id="order">
+        <!-- Estado vacío -->
+        <div class="order__empty" id="empty">
+          <Icon name="cart" size={48} />
+          <h2>Tu pedido está vacío</h2>
+          <p>Explora el catálogo y agrega productos con el botón “Agregar”.</p>
+          <a href="/catalogo" class="btn btn--blue btn--lg"><Icon name="list" size={20} /> Ir al catálogo</a>
+        </div>
+
+        <!-- Lista + resumen -->
+        <div class="order__content" id="content" hidden>
+          <ul class="order__list" id="list"></ul>
+
+          <aside class="order__summary card" id="summary">
+            <h2>Resumen</h2>
+            <div class="order__totals">
+              <div><span>Productos</span><strong id="sum-items">0</strong></div>
+              <div><span>Total estimado</span><strong id="sum-total" class="order__total">$0</strong></div>
+            </div>
+            <p class="order__note">El total es referencial. El precio final por mayor se confirma por WhatsApp.</p>
+            <a class="btn btn--wa btn--lg btn--block" id="send" href="#" target="_blank" rel="noopener">
+              <Icon name="whatsapp" size={20} /> Enviar pedido por WhatsApp
+            </a>
+            <a class="btn btn--gold btn--block" href={lista} target="_blank" rel="noopener">
+              <Icon name="doc" size={18} /> Pedir lista de precios
+            </a>
+            <button class="order__clear" id="clear"><Icon name="trash" size={16} /> Vaciar pedido</button>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .order { margin-top: 2rem; }
+  .order__empty { text-align: center; padding: clamp(40px, 8vw, 80px) 1rem; color: var(--tp-muted); display: grid; gap: 1rem; justify-items: center; }
+  .order__empty :global(svg) { color: var(--tp-line); }
+  .order__content { display: grid; gap: 1.5rem; grid-template-columns: 1fr; align-items: start; }
+  .order__list { list-style: none; padding: 0; display: grid; gap: .8rem; }
+  .oi { display: grid; grid-template-columns: 64px 1fr auto; gap: .9rem; align-items: center; padding: .8rem; }
+  .oi__img { width: 64px; height: 64px; border-radius: var(--r-sm); background: #f1f4fb; object-fit: contain; padding: 6px; }
+  .oi__name { font-weight: 700; color: var(--tp-navy); font-size: .98rem; }
+  .oi__name a:hover { color: var(--tp-red); }
+  .oi__meta { font-size: .8rem; color: var(--tp-muted); }
+  .oi__price { font-weight: 700; color: var(--tp-red); margin-top: .2rem; }
+  .oi__right { display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; }
+  .qty { display: inline-flex; align-items: center; border: 1px solid var(--tp-line); border-radius: var(--r-pill); overflow: hidden; }
+  .qty button { width: 32px; height: 32px; display: grid; place-items: center; background: #fff; border: 0; color: var(--tp-navy); }
+  .qty button:hover { background: #eef2fb; }
+  .qty input { width: 42px; text-align: center; border: 0; outline: 0; font-weight: 700; font-size: .95rem; -moz-appearance: textfield; }
+  .qty input::-webkit-outer-spin-button, .qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .oi__remove { background: none; border: 0; color: var(--tp-muted); display: inline-flex; align-items: center; gap: .25rem; font-size: .8rem; }
+  .oi__remove:hover { color: var(--tp-red); }
+  .order__summary { padding: 1.3rem; position: sticky; top: 80px; display: grid; gap: .9rem; }
+  .order__totals { display: grid; gap: .5rem; }
+  .order__totals div { display: flex; justify-content: space-between; align-items: baseline; }
+  .order__total { font-size: 1.5rem; color: var(--tp-red); }
+  .order__note { font-size: .8rem; color: var(--tp-muted); }
+  .order__clear { background: none; border: 0; color: var(--tp-muted); display: inline-flex; align-items: center; gap: .35rem; justify-self: center; font-size: .85rem; }
+  .order__clear:hover { color: var(--tp-red); }
+  @media (min-width: 860px) { .order__content { grid-template-columns: 1fr 340px; } }
+</style>
+
+<script>
+  import { getCart, setQty, removeItem, clearCart, onCartChange } from '../lib/cart';
+  import { waPedido } from '../lib/whatsapp';
+
+  const empty = document.getElementById('empty') as HTMLElement;
+  const content = document.getElementById('content') as HTMLElement;
+  const list = document.getElementById('list') as HTMLElement;
+  const sumItems = document.getElementById('sum-items')!;
+  const sumTotal = document.getElementById('sum-total')!;
+  const send = document.getElementById('send') as HTMLAnchorElement;
+
+  const clp = (n: number) => '$' + n.toLocaleString('es-CL');
+
+  function render() {
+    const items = getCart();
+    const has = items.length > 0;
+    empty.hidden = has;
+    content.hidden = !has;
+    if (!has) return;
+
+    list.innerHTML = items.map((i) => `
+      <li class="oi card" data-id="${i.id}">
+        <img class="oi__img" src="${i.imagen}" alt="" width="64" height="64" />
+        <div>
+          <div class="oi__name"><a href="/producto/${i.slug}">${i.nombre}</a></div>
+          <div class="oi__meta">${i.presentacion || ''}${i.sku ? ' · ' + i.sku : ''}</div>
+          <div class="oi__price">${i.precio != null ? clp(i.precio) : 'Consultar'} c/u</div>
+        </div>
+        <div class="oi__right">
+          <div class="qty">
+            <button data-dec aria-label="Quitar uno">−</button>
+            <input type="number" min="1" value="${i.cantidad}" data-qty aria-label="Cantidad de ${i.nombre}" />
+            <button data-inc aria-label="Agregar uno">+</button>
+          </div>
+          <button class="oi__remove" data-remove>Eliminar</button>
+        </div>
+      </li>`).join('');
+
+    const totalItems = items.reduce((n, i) => n + i.cantidad, 0);
+    const total = items.reduce((s, i) => s + (i.precio ?? 0) * i.cantidad, 0);
+    sumItems.textContent = String(totalItems);
+    sumTotal.textContent = clp(total);
+    send.href = waPedido(items.map((i) => ({
+      nombre: i.nombre, sku: i.sku, presentacion: i.presentacion, precio: i.precio, cantidad: i.cantidad,
+    })));
+  }
+
+  // Eventos delegados sobre la lista
+  list.addEventListener('click', (e) => {
+    const el = e.target as HTMLElement;
+    const li = el.closest('.oi') as HTMLElement | null;
+    if (!li) return;
+    const id = li.dataset.id!;
+    const input = li.querySelector('[data-qty]') as HTMLInputElement;
+    if (el.closest('[data-inc]')) setQty(id, Number(input.value) + 1);
+    else if (el.closest('[data-dec]')) setQty(id, Number(input.value) - 1);
+    else if (el.closest('[data-remove]')) removeItem(id);
+  });
+  list.addEventListener('change', (e) => {
+    const el = e.target as HTMLElement;
+    if (!el.matches('[data-qty]')) return;
+    const li = el.closest('.oi') as HTMLElement;
+    setQty(li.dataset.id!, Math.max(1, Number((el as HTMLInputElement).value) || 1));
+  });
+
+  document.getElementById('clear')?.addEventListener('click', () => {
+    if (confirm('¿Vaciar todo el pedido?')) clearCart();
+  });
+
+  render();
+  onCartChange(render);
+</script>

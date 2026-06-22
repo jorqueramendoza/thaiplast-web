@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import { activeCategories, productsInGroup, getCategory } from '../../lib/products';
+import { site } from '../../lib/site';
+
+export function getStaticPaths() {
+  return activeCategories().map((c) => ({ params: { categoria: c.slug } }));
+}
+
+const { categoria } = Astro.params;
+const cat = getCategory(categoria!)!;
+const items = productsInGroup(categoria!).sort((a, b) => (a.precio ?? 0) - (b.precio ?? 0));
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Catálogo', item: `${site.url}/catalogo` },
+    { '@type': 'ListItem', position: 3, name: cat.nombre, item: `${site.url}/catalogo/${cat.slug}` },
+  ],
+};
+---
+<BaseLayout
+  title={`${cat.nombre} desechables por mayor`}
+  description={`${cat.descripcion} ${items.length} productos disponibles en ThaiPlast. Solicita precios por mayor por WhatsApp.`}
+  jsonLd={breadcrumbLd}
+>
+  <section class="section--tight cathead">
+    <div class="container">
+      <nav class="crumbs" aria-label="Migas de pan">
+        <a href="/">Inicio</a> <span>/</span> <a href="/catalogo">Catálogo</a> <span>/</span> <strong>{cat.nombre}</strong>
+      </nav>
+      <h1>{cat.nombre}</h1>
+      <p class="lead">{cat.descripcion}</p>
+      <div class="subcats">
+        {cat.categorias.map((sc) => <span class="badge">{sc.nombre} · {sc.conteo}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="resultcount"><strong>{items.length}</strong> productos en {cat.nombre}</p>
+      <ul class="catgrid">
+        {items.map((p) => <li><ProductCard product={p} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container"><CtaBlock origen={`cat-${cat.slug}`} /></div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cathead { background: linear-gradient(180deg, #eef2fb, var(--tp-bg)); }
+  .crumbs { font-size: .85rem; color: var(--tp-muted); margin-bottom: .6rem; }
+  .crumbs a:hover { color: var(--tp-red); }
+  .crumbs span { margin: 0 .35rem; }
+  .subcats { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+  .resultcount { color: var(--tp-muted); font-size: .9rem; margin-bottom: 1rem; }
+  .catgrid { list-style: none; padding: 0; display: grid; gap: clamp(12px, 2vw, 20px); grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 640px) { .catgrid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 980px) { .catgrid { grid-template-columns: repeat(4, 1fr); } }
+</style>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import { site } from '../lib/site';
+import { waGeneral } from '../lib/whatsapp';
+const wa = waGeneral('pagina-contacto');
+---
+<BaseLayout
+  title="Contacto"
+  description={`Contáctanos por WhatsApp, correo o visítanos. ${site.nombre} — todo en desechables para tu negocio.`}
+>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Contacto</p>
+      <h1>Hablemos de tu negocio</h1>
+      <p class="lead" style="max-width:55ch">La forma más rápida de cotizar y pedir es por WhatsApp. Te responde un asesor real.</p>
+
+      <div class="ct">
+        <a class="ct__card card ct__card--wa" href={wa} target="_blank" rel="noopener">
+          <span class="ct__icon"><Icon name="whatsapp" size={26} /></span>
+          <div><strong>WhatsApp</strong><span>{site.whatsappLabel}</span></div>
+        </a>
+        <a class="ct__card card" href={`mailto:${site.email}`}>
+          <span class="ct__icon"><Icon name="mail" size={26} /></span>
+          <div><strong>Correo</strong><span>{site.email}</span></div>
+        </a>
+        <div class="ct__card card">
+          <span class="ct__icon"><Icon name="pin" size={26} /></span>
+          <div><strong>Ubicación</strong><span>{site.direccion}</span></div>
+        </div>
+        <div class="ct__card card">
+          <span class="ct__icon"><Icon name="clock" size={26} /></span>
+          <div><strong>Horario</strong><span>{site.horario}</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight"><div class="container"><CtaBlock origen="contacto" /></div></section>
+</BaseLayout>
+
+<style>
+  .ct { display: grid; gap: 1rem; grid-template-columns: 1fr; margin-top: 2rem; }
+  .ct__card { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; }
+  .ct__icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: var(--r-md); background: #eef2fb; color: var(--tp-blue); flex: none; }
+  .ct__card strong { display: block; color: var(--tp-navy); }
+  .ct__card span { color: var(--tp-muted); font-size: .92rem; }
+  .ct__card--wa .ct__icon { background: var(--wa-green); color: #fff; }
+  @media (min-width: 720px) { .ct { grid-template-columns: repeat(2, 1fr); } }
+</style>

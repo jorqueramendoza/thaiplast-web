@@ -1,0 +1,135 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import { site } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+}
+const {
+  title,
+  description = site.descripcion,
+  image = '/img/brand/logo.jpg',
+  jsonLd,
+  noindex = false,
+} = Astro.props;
+
+const fullTitle = title ? `${title} · ${site.nombre}` : `${site.nombre} · ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(image, site.url).href;
+
+// JSON-LD base: la organización, presente en todas las páginas.
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.nombre,
+  url: site.url,
+  logo: new URL('/img/brand/logo.jpg', site.url).href,
+  description: site.descripcion,
+  sameAs: [site.redes.instagram, site.redes.facebook].filter(Boolean),
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    areaServed: 'CL',
+    availableLanguage: 'es',
+  },
+};
+const lds = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta name="theme-color" content="#0b1b45" />
+
+    <link rel="icon" href="/img/brand/logo.jpg" />
+    <link rel="apple-touch-icon" href="/img/brand/logo.jpg" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.nombre} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_CL" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Tipografía -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    {lds.map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld)} />)}
+  </head>
+  <body>
+    <a href="#main" class="sr-only">Saltar al contenido</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+
+    <!-- Toast de confirmación al agregar al pedido -->
+    <div class="toast" data-toast hidden role="status" aria-live="polite"></div>
+
+    <script>
+      import { addItem, CART_EVENT } from '../lib/cart';
+
+      // Delegación: cualquier botón [data-add-to-cart] agrega su producto al pedido.
+      document.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('[data-add-to-cart]') as HTMLElement | null;
+        if (!btn) return;
+        const d = btn.dataset;
+        addItem({
+          id: d.id!, slug: d.slug!, sku: d.sku || '',
+          nombre: d.nombre!, presentacion: d.presentacion || '',
+          precio: d.precio ? Number(d.precio) : null,
+          imagen: d.imagen || '',
+        });
+        btn.classList.add('is-added');
+        const original = btn.innerHTML;
+        btn.innerHTML = '✓ Agregado';
+        setTimeout(() => { btn.innerHTML = original; btn.classList.remove('is-added'); }, 1400);
+        showToast(`${d.nombre} agregado al pedido`);
+      });
+
+      const toast = document.querySelector('[data-toast]') as HTMLElement | null;
+      let toastTimer: number | undefined;
+      function showToast(msg: string) {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.hidden = false;
+        toast.classList.add('is-show');
+        clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => { toast.classList.remove('is-show'); }, 2200);
+      }
+      window.addEventListener(CART_EVENT, () => {});
+    </script>
+
+    <style>
+      .toast {
+        position: fixed; left: 50%; bottom: 86px; transform: translateX(-50%) translateY(20px);
+        background: var(--tp-navy); color: #fff; padding: .7rem 1.1rem; border-radius: var(--r-pill);
+        font-size: .9rem; font-weight: 600; box-shadow: var(--shadow-lg); z-index: var(--z-float);
+        opacity: 0; pointer-events: none; transition: .25s ease; max-width: 90vw;
+      }
+      .toast.is-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+  </body>
+</html>

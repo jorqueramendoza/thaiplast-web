@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import Icon from '../../components/Icon.astro';
+import { industrias, site } from '../../lib/site';
+import { getCategory, productsInGroup } from '../../lib/products';
+
+export function getStaticPaths() {
+  return industrias.map((ind) => ({ params: { slug: ind.slug }, props: { ind } }));
+}
+const { ind } = Astro.props;
+
+const grupos = ind.grupos
+  .map((g) => getCategory(g))
+  .filter((g): g is NonNullable<typeof g> => Boolean(g) && (g!.conteo > 0));
+
+// Una muestra de productos de los grupos relevantes
+const sample = ind.grupos.flatMap((g) => productsInGroup(g).slice(0, 4)).slice(0, 8);
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Industrias', item: `${site.url}/industrias` },
+    { '@type': 'ListItem', position: 3, name: ind.nombre, item: `${site.url}/industrias/${ind.slug}` },
+  ],
+};
+---
+<BaseLayout
+  title={`Desechables para ${ind.nombre}`}
+  description={`${ind.descripcion} Catálogo y precios por mayor en ThaiPlast. Pide por WhatsApp.`}
+  jsonLd={breadcrumbLd}
+>
+  <section class="section--tight ihead">
+    <div class="container">
+      <nav class="crumbs"><a href="/">Inicio</a> <span>/</span> <a href="/industrias">Industrias</a> <span>/</span> <strong>{ind.nombre}</strong></nav>
+      <span class="ihead__icon"><Icon name={ind.icono} size={30} /></span>
+      <h1>{ind.nombre}</h1>
+      <p class="lead" style="max-width:60ch">{ind.descripcion}</p>
+      <div class="ihead__groups">
+        {grupos.map((g) => <a class="badge" href={`/catalogo/${g.slug}`}>{g.nombre} · {g.conteo}</a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Productos recomendados para tu rubro</h2>
+      <ul class="catgrid">
+        {sample.map((p) => <li><ProductCard product={p} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section--tight"><div class="container"><CtaBlock origen={`industria-${ind.slug}`} /></div></section>
+</BaseLayout>
+
+<style>
+  .ihead { background: linear-gradient(180deg, #eef2fb, var(--tp-bg)); }
+  .crumbs { font-size: .85rem; color: var(--tp-muted); margin-bottom: 1rem; }
+  .crumbs a:hover { color: var(--tp-red); } .crumbs span { margin: 0 .35rem; }
+  .ihead__icon { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: var(--r-md); background: var(--tp-blue); color: #fff; margin-bottom: .8rem; }
+  .ihead__groups { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+  .catgrid { list-style: none; padding: 0; display: grid; gap: clamp(12px, 2vw, 20px); grid-template-columns: repeat(2, 1fr); margin-top: 1.4rem; }
+  @media (min-width: 640px) { .catgrid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 980px) { .catgrid { grid-template-columns: repeat(4, 1fr); } }
+</style>

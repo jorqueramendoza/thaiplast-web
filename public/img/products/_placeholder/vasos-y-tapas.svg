@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Vasos y Tapas">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2fb"/><stop offset="1" stop-color="#dde6f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#g)"/>
+  <circle cx="200" cy="170" r="78" fill="#ffffff" stroke="#0a3f95" stroke-width="3"/>
+  <path d="M168 140h64l-7 70a10 10 0 0 1-10 9h-30a10 10 0 0 1-10-9z" fill="none" stroke="#0a3f95" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M162 140h76" stroke="#c8101a" stroke-width="6" stroke-linecap="round"/>
+  <text x="200" y="300" text-anchor="middle" font-family="Poppins,Segoe UI,sans-serif" font-size="30" font-weight="800" fill="#0b1b45">ThaiPlast</text>
+  <text x="200" y="332" text-anchor="middle" font-family="Poppins,Segoe UI,sans-serif" font-size="20" font-weight="600" fill="#dea621">Vasos y Tapas</text>
+</svg>

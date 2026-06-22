@@ -1,0 +1,23 @@
+{
+  "name": "thaiplast-web",
+  "version": "1.0.0",
+  "description": "Sitio web B2B ThaiPlast — catálogo de desechables con generación de leads por WhatsApp",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "npm run import && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "validate": "node scripts/validate-products.mjs",
+    "import": "node scripts/import-products.mjs",
+    "import:xlsx": "node scripts/import-products.mjs --xlsx"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.8"
+  },
+  "devDependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

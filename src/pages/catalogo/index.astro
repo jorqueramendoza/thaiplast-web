@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import Icon from '../../components/Icon.astro';
+import { products, activeCategories, totalProducts } from '../../lib/products';
+
+const grupos = activeCategories();
+const materiales = [...new Set(products.map((p) => p.material).filter(Boolean))].sort();
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://thaiplast.cl/' },
+    { '@type': 'ListItem', position: 2, name: 'Catálogo', item: 'https://thaiplast.cl/catalogo' },
+  ],
+};
+---
+<BaseLayout
+  title="Catálogo de desechables por mayor"
+  description={`Explora ${totalProducts} productos desechables y de packaging: vasos, envases, bolsas, bandejas, cubiertos y más. Pide tu lista de precios por WhatsApp.`}
+  jsonLd={breadcrumbLd}
+>
+  <section class="section--tight" style="background:var(--tp-navy);color:#fff">
+    <div class="container">
+      <p class="eyebrow" style="color:var(--tp-gold-light)">Catálogo completo</p>
+      <h1 style="color:#fff">Todo en desechables, en un solo lugar</h1>
+      <p class="lead" style="color:#c7d2ea;max-width:60ch">
+        {totalProducts} productos para tu negocio. Filtra, arma tu pedido y envíalo por WhatsApp en segundos.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Filtros -->
+      <div class="filters">
+        <div class="filters__search">
+          <Icon name="search" size={20} />
+          <input type="search" id="q" placeholder="Buscar producto, medida o material…" aria-label="Buscar productos" />
+        </div>
+        <select id="material" aria-label="Filtrar por material">
+          <option value="">Todos los materiales</option>
+          {materiales.map((m) => <option value={m}>{m}</option>)}
+        </select>
+      </div>
+
+      <div class="chips" role="tablist" aria-label="Categorías">
+        <button class="chip is-active" data-group="">Todos <span>{totalProducts}</span></button>
+        {grupos.map((g) => (
+          <button class="chip" data-group={g.slug}>{g.nombre} <span>{g.conteo}</span></button>
+        ))}
+      </div>
+
+      <p class="resultcount"><strong id="count">{totalProducts}</strong> productos</p>
+
+      <ul class="catgrid" id="grid">
+        {products.map((p) => (
+          <li
+            class="catgrid__item"
+            data-group={p.grupo}
+            data-name={`${p.nombre} ${p.categoria} ${p.medida} ${p.color}`.toLowerCase()}
+            data-material={p.material}
+          >
+            <ProductCard product={p} />
+          </li>
+        ))}
+      </ul>
+
+      <p class="empty" id="empty" hidden>No encontramos productos con esos filtros. <a href="/catalogo">Limpiar filtros</a></p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container"><CtaBlock origen="catalogo" /></div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: .7rem; margin-bottom: 1rem; }
+  .filters__search { flex: 1; min-width: 220px; display: flex; align-items: center; gap: .5rem; background: #fff; border: 1px solid var(--tp-line); border-radius: var(--r-pill); padding: .55rem 1rem; color: var(--tp-muted); }
+  .filters__search input { border: 0; outline: 0; flex: 1; font-size: 1rem; color: var(--tp-ink); background: transparent; }
+  #material { border: 1px solid var(--tp-line); border-radius: var(--r-pill); padding: .55rem 1rem; background: #fff; font-size: .95rem; color: var(--tp-ink); }
+  .chips { display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .5rem; margin-bottom: 1rem; scrollbar-width: thin; }
+  .chip { white-space: nowrap; border: 1px solid var(--tp-line); background: #fff; color: var(--tp-navy); border-radius: var(--r-pill); padding: .45rem .9rem; font-size: .88rem; font-weight: 600; }
+  .chip span { color: var(--tp-muted); font-weight: 500; }
+  .chip.is-active { background: var(--tp-blue); color: #fff; border-color: var(--tp-blue); }
+  .chip.is-active span { color: #cdd8f3; }
+  .resultcount { color: var(--tp-muted); font-size: .9rem; margin-bottom: 1rem; }
+  .catgrid { list-style: none; padding: 0; display: grid; gap: clamp(12px, 2vw, 20px); grid-template-columns: repeat(2, 1fr); }
+  .catgrid__item[hidden] { display: none; }
+  .empty { text-align: center; padding: 3rem 1rem; color: var(--tp-muted); }
+  .empty a { color: var(--tp-red); font-weight: 600; }
+  @media (min-width: 640px) { .catgrid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 980px) { .catgrid { grid-template-columns: repeat(4, 1fr); } }
+</style>
+
+<script>
+  const q = document.getElementById('q') as HTMLInputElement;
+  const material = document.getElementById('material') as HTMLSelectElement;
+  const chips = Array.from(document.querySelectorAll('.chip')) as HTMLButtonElement[];
+  const items = Array.from(document.querySelectorAll('.catgrid__item')) as HTMLElement[];
+  const count = document.getElementById('count')!;
+  const empty = document.getElementById('empty') as HTMLElement;
+  let group = '';
+
+  function apply() {
+    const term = q.value.trim().toLowerCase();
+    const mat = material.value;
+    let visible = 0;
+    for (const it of items) {
+      const okGroup = !group || it.dataset.group === group;
+      const okMat = !mat || it.dataset.material === mat;
+      const okTerm = !term || (it.dataset.name || '').includes(term);
+      const show = okGroup && okMat && okTerm;
+      it.hidden = !show;
+      if (show) visible++;
+    }
+    count.textContent = String(visible);
+    empty.hidden = visible !== 0;
+  }
+
+  q.addEventListener('input', apply);
+  material.addEventListener('change', apply);
+  chips.forEach((c) => c.addEventListener('click', () => {
+    chips.forEach((x) => x.classList.remove('is-active'));
+    c.classList.add('is-active');
+    group = c.dataset.group || '';
+    apply();
+  }));
+
+  // Soporte de ?cat=slug y ?q=texto al entrar
+  const params = new URLSearchParams(location.search);
+  const cat = params.get('cat');
+  if (cat) { const chip = chips.find((c) => c.dataset.group === cat); chip?.click(); }
+  if (params.get('q')) { q.value = params.get('q')!; apply(); }
+</script>

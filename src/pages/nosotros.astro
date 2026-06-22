@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import { totalProducts } from '../lib/products';
+import { site } from '../lib/site';
+
+const valores = [
+  { t: 'Calidad', d: 'Seleccionamos productos que rinden y cumplen, para que tu operación nunca falle.', i: 'check' },
+  { t: 'Precios bajos', d: 'Compra por mayor con precios competitivos para hacer crecer tu margen.', i: 'doc' },
+  { t: 'Atención cercana', d: 'Personas reales que entienden tu negocio y responden rápido por WhatsApp.', i: 'whatsapp' },
+];
+---
+<BaseLayout
+  title="Nosotros"
+  description={`${site.nombre} es tu socio en desechables y packaging: ${totalProducts} productos, atención cercana y despacho en RM.`}
+>
+  <section class="section--tight" style="background:var(--tp-navy);color:#fff">
+    <div class="container">
+      <p class="eyebrow" style="color:var(--tp-gold-light)">Nosotros</p>
+      <h1 style="color:#fff">Todo en desechables, con foco en tu negocio</h1>
+      <p class="lead" style="color:#c7d2ea;max-width:62ch">
+        En {site.nombre} ayudamos a minimarkets, cafeterías, cocinas de delivery, food trucks y clínicas
+        a mantenerse siempre con stock. Reunimos {totalProducts} productos de packaging y desechables
+        en un solo proveedor, con precios por mayor y atención directa.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ul class="vals grid">
+        {valores.map((v) => (
+          <li class="vals__card card">
+            <span class="vals__icon"><Icon name={v.i} size={24} /></span>
+            <h3>{v.t}</h3>
+            <p>{v.d}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mission card">
+        <h2>Nuestra promesa</h2>
+        <p>
+          No solo vendemos productos: nos preocupamos de que tu negocio nunca se quede sin stock.
+          Por eso trabajamos con un catálogo amplio, despacho coordinado y una vía de contacto simple
+          y directa. Cada solicitud que llega por WhatsApp la atiende una persona del equipo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight"><div class="container"><CtaBlock origen="nosotros" /></div></section>
+</BaseLayout>
+
+<style>
+  .vals { grid-template-columns: 1fr; margin-bottom: 2rem; }
+  .vals__card { padding: 1.4rem; }
+  .vals__icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: var(--r-md); background: var(--tp-red); color: #fff; margin-bottom: .8rem; }
+  .vals__card p { color: var(--tp-muted); font-size: .92rem; }
+  .mission { padding: clamp(24px, 5vw, 44px); }
+  .mission p { color: var(--tp-muted); max-width: 70ch; margin-top: .6rem; }
+  @media (min-width: 720px) { .vals { grid-template-columns: repeat(3, 1fr); } }
+</style>

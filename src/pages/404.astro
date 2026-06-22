@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+---
+<BaseLayout title="Página no encontrada" noindex={true}>
+  <section class="section">
+    <div class="container center nf">
+      <h1>404</h1>
+      <h2>No encontramos esta página</h2>
+      <p class="lead">Puede que el enlace haya cambiado. Vuelve al inicio o explora el catálogo.</p>
+      <div class="nf__cta">
+        <a href="/" class="btn btn--blue btn--lg">Ir al inicio</a>
+        <a href="/catalogo" class="btn btn--gold btn--lg"><Icon name="list" size={20} /> Ver catálogo</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { padding-block: clamp(40px, 8vw, 90px); }
+  .nf h1 { font-size: clamp(4rem, 18vw, 8rem); color: var(--tp-blue); line-height: 1; }
+  .nf__cta { display: flex; gap: .7rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+</style>

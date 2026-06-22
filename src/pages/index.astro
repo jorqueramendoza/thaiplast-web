@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import ProductCard from '../components/ProductCard.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import { activeCategories, featured, totalProducts } from '../lib/products';
+import { industrias, site } from '../lib/site';
+import { waGeneral, waListaPrecios } from '../lib/whatsapp';
+
+const grupos = activeCategories();
+const destacados = featured(8);
+const wa = waGeneral('home-hero');
+const lista = waListaPrecios('home-hero');
+
+const trust = [
+  { n: `+${totalProducts}`, t: 'productos en catálogo' },
+  { n: 'Despacho', t: 'programado en RM' },
+  { n: 'Atención', t: 'directa a empresas' },
+  { n: 'Health', t: 'línea clínica certificada' },
+];
+const ventajas = [
+  { t: 'Entregas rápidas', d: 'Coordinamos despacho según tu operación, sin quiebres de stock.', i: 'delivery' },
+  { t: 'Precios por mayor', d: 'Lista de precios competitiva para negocios y revendedores.', i: 'doc' },
+  { t: 'Atención cercana', d: 'Hablas directo por WhatsApp con un asesor, sin formularios eternos.', i: 'whatsapp' },
+  { t: 'Catálogo amplio', d: 'Todo el desechable en un solo proveedor: ahorras tiempo y costos.', i: 'list' },
+];
+---
+<BaseLayout
+  title="Desechables y packaging por mayor para tu negocio"
+  description={site.descripcion}
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow" style="color:var(--tp-gold-light)">Desechables para tu negocio</p>
+        <h1>Tu socio estratégico en <span class="hl">desechables</span>.</h1>
+        <p class="hero__sub">
+          No vendemos productos: ayudamos a que tu negocio nunca se quede sin stock.
+          {totalProducts} productos de packaging y desechables, con atención directa por WhatsApp.
+        </p>
+        <div class="hero__cta">
+          <a href="/catalogo" class="btn btn--gold btn--lg"><Icon name="list" size={20} /> Ver Catálogo</a>
+          <a href={lista} class="btn btn--red btn--lg" target="_blank" rel="noopener"><Icon name="doc" size={20} /> Solicitar Cotización</a>
+        </div>
+        <div class="hero__cta hero__cta--sec">
+          <a href="/pedido" class="hero__link"><Icon name="cart" size={18} /> Armar pedido</a>
+          <a href={wa} class="hero__link" target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> Hablar por WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__art">
+        <img src="/img/brand/logo.jpg" width="320" height="320" alt={`${site.nombre} — todo en desechables`} />
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="trust">
+        {trust.map((x) => <li><strong>{x.n}</strong><span>{x.t}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- INDUSTRIAS -->
+  <section class="section">
+    <div class="container">
+      <div class="center">
+        <p class="eyebrow">Soluciones para cada industria</p>
+        <h2>Sea cual sea tu rubro, tenemos lo que necesitas</h2>
+      </div>
+      <ul class="indus grid">
+        {industrias.map((ind) => (
+          <li class="indus__card card">
+            <a href={`/industrias/${ind.slug}`}>
+              <span class="indus__icon"><Icon name={ind.icono} size={26} /></span>
+              <h3>{ind.corto}</h3>
+              <p>{ind.descripcion}</p>
+              <span class="indus__more">Ver soluciones <Icon name="arrow" size={16} /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- CATEGORÍAS -->
+  <section class="section" style="background:#fff">
+    <div class="container">
+      <div class="center">
+        <p class="eyebrow">Explora por categoría</p>
+        <h2>Todo el desechable, organizado</h2>
+      </div>
+      <ul class="cats grid">
+        {grupos.map((g) => (
+          <li class="cats__card card">
+            <a href={`/catalogo/${g.slug}`}>
+              <span class="cats__icon"><Icon name={g.icono} size={28} /></span>
+              <h3>{g.nombre}</h3>
+              <span class="cats__count">{g.conteo} productos</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- DESTACADOS -->
+  <section class="section">
+    <div class="container">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">Productos destacados</p>
+          <h2>Los más pedidos</h2>
+        </div>
+        <a href="/catalogo" class="btn btn--ghost">Ver todo el catálogo</a>
+      </div>
+      <ul class="catgrid">
+        {destacados.map((p) => <li><ProductCard product={p} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- VENTAJAS -->
+  <section class="section" style="background:#fff">
+    <div class="container">
+      <div class="center">
+        <p class="eyebrow">¿Por qué ThaiPlast?</p>
+        <h2>Más que un proveedor</h2>
+      </div>
+      <ul class="adv grid">
+        {ventajas.map((v) => (
+          <li class="adv__card">
+            <span class="adv__icon"><Icon name={v.i} size={24} /></span>
+            <h3>{v.t}</h3>
+            <p>{v.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- HEALTH -->
+  <section class="section">
+    <div class="container">
+      <div class="health card">
+        <div class="health__copy">
+          <p class="eyebrow" style="color:var(--tp-gold-light)">ThaiPlast Health™</p>
+          <h2 style="color:#fff">Insumos clínicos desechables</h2>
+          <p>Guantes, mascarillas, gorros, pecheras y algodón para clínicas, laboratorios y manipulación de alimentos. Calidad certificada para entornos exigentes.</p>
+          <a href="/catalogo/insumos-clinicos" class="btn btn--gold btn--lg">Conocer la línea Health</a>
+        </div>
+        <div class="health__icon"><Icon name="health" size={120} /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section--tight">
+    <div class="container"><CtaBlock origen="home-final" /></div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { background: radial-gradient(120% 120% at 100% 0%, #16306e 0%, var(--tp-navy) 55%); color: #fff; padding-block: clamp(36px, 6vw, 72px) clamp(28px, 4vw, 48px); }
+  .hero__grid { display: grid; gap: 2rem; align-items: center; grid-template-columns: 1fr; }
+  .hero h1 { color: #fff; }
+  .hero h1 .hl { color: var(--tp-gold); }
+  .hero__sub { color: #c7d2ea; font-size: clamp(1rem, 2.3vw, 1.18rem); margin: 1rem 0 1.6rem; max-width: 52ch; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .hero__cta--sec { margin-top: 1rem; }
+  .hero__link { display: inline-flex; align-items: center; gap: .4rem; color: #cdd8f3; font-weight: 600; font-size: .95rem; padding: .4rem 0; }
+  .hero__link:hover { color: #fff; }
+  .hero__art { display: flex; justify-content: center; }
+  .hero__art img { border-radius: 50%; box-shadow: var(--shadow-lg); width: clamp(200px, 60vw, 320px); height: auto; }
+  .trust { list-style: none; padding: 0; margin-top: clamp(28px, 5vw, 48px); display: grid; gap: 1px; grid-template-columns: repeat(2, 1fr); background: rgba(255,255,255,.12); border-radius: var(--r-md); overflow: hidden; }
+  .trust li { background: rgba(255,255,255,.04); padding: 1rem 1.2rem; display: flex; flex-direction: column; }
+  .trust strong { font-size: 1.4rem; color: var(--tp-gold-light); }
+  .trust span { font-size: .85rem; color: #c7d2ea; }
+
+  .head-row { display: flex; align-items: end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+  .center { margin-bottom: 2rem; }
+
+  .indus { grid-template-columns: 1fr; }
+  .indus__card a { display: block; padding: 1.4rem; height: 100%; }
+  .indus__card { transition: transform .12s ease, box-shadow .12s ease; }
+  .indus__card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .indus__icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: var(--r-md); background: #eef2fb; color: var(--tp-blue); margin-bottom: .9rem; }
+  .indus__card p { color: var(--tp-muted); font-size: .92rem; margin: .4rem 0 .8rem; }
+  .indus__more { display: inline-flex; align-items: center; gap: .3rem; color: var(--tp-red); font-weight: 600; font-size: .9rem; }
+
+  .cats { grid-template-columns: repeat(2, 1fr); }
+  .cats__card a { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .5rem; padding: 1.4rem 1rem; }
+  .cats__card { transition: transform .12s ease, box-shadow .12s ease; }
+  .cats__card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .cats__icon { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #eef2fb, #dde6f6); color: var(--tp-blue); }
+  .cats__card h3 { font-size: 1rem; }
+  .cats__count { font-size: .82rem; color: var(--tp-muted); }
+
+  .catgrid { list-style: none; padding: 0; display: grid; gap: clamp(12px, 2vw, 20px); grid-template-columns: repeat(2, 1fr); }
+
+  .adv { grid-template-columns: 1fr; }
+  .adv__card { padding: 1.2rem 0; }
+  .adv__icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: var(--r-md); background: var(--tp-red); color: #fff; margin-bottom: .8rem; }
+  .adv__card p { color: var(--tp-muted); font-size: .92rem; }
+
+  .health { background: linear-gradient(135deg, var(--tp-blue), var(--tp-navy)); color: #dce6fb; display: grid; gap: 1.5rem; padding: clamp(24px, 5vw, 48px); align-items: center; grid-template-columns: 1fr; }
+  .health p { margin: .6rem 0 1.4rem; max-width: 50ch; }
+  .health__icon { display: none; color: rgba(255,255,255,.18); justify-self: end; }
+
+  @media (min-width: 760px) {
+    .hero__grid { grid-template-columns: 1.2fr .9fr; }
+    .trust { grid-template-columns: repeat(4, 1fr); }
+    .indus { grid-template-columns: repeat(3, 1fr); }
+    .cats { grid-template-columns: repeat(4, 1fr); }
+    .catgrid { grid-template-columns: repeat(4, 1fr); }
+    .adv { grid-template-columns: repeat(4, 1fr); }
+    .health { grid-template-columns: 1.5fr 1fr; }
+    .health__icon { display: block; }
+  }
+  @media (min-width: 980px) { .cats { grid-template-columns: repeat(6, 1fr); } }
+</style>

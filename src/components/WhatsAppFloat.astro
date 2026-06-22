@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+import { waGeneral } from '../lib/whatsapp';
+const href = waGeneral('boton-flotante');
+---
+<a class="wafloat" href={href} target="_blank" rel="noopener" aria-label="Hablar por WhatsApp">
+  <Icon name="whatsapp" size={30} />
+  <span class="wafloat__txt">WhatsApp</span>
+</a>
+
+<style>
+  .wafloat {
+    position: fixed; right: 16px; bottom: 16px; z-index: var(--z-float);
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--wa-green); color: #fff;
+    padding: .8rem; border-radius: var(--r-pill);
+    box-shadow: 0 8px 24px rgba(37,211,102,.45);
+    animation: wapop .4s ease both;
+  }
+  .wafloat:hover { background: var(--wa-green-dark); }
+  .wafloat__txt { display: none; font-weight: 700; padding-right: .35rem; }
+  @keyframes wapop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  @media (min-width: 880px) {
+    .wafloat { right: 24px; bottom: 24px; padding: .9rem 1.2rem; }
+    .wafloat__txt { display: inline; }
+  }
+</style>

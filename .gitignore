@@ -1,0 +1,32 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# environment
+.env
+.env.production
+.env.local
+
+# logs
+npm-debug.log*
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# archivos fuente originales del cliente (se mantienen fuera del repo público)
+# El CSV de trabajo vive en data/products.csv; los originales no se versionan.
+/Listado de Precios*.csv
+/Catálogo*.pdf
+/idea_pagina.png
+/logo.jpg
+/Excel/

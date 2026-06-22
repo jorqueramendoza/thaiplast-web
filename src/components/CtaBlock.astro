@@ -1,0 +1,29 @@
+---
+/**
+ * Bloque con los 4 CTA principales del proyecto. Reutilizable en todas las páginas.
+ * 1) Ver Catálogo  2) Solicitar Lista de Precios  3) Armar Pedido  4) Hablar por WhatsApp
+ */
+import Icon from './Icon.astro';
+import { waGeneral, waListaPrecios } from '../lib/whatsapp';
+
+interface Props { variant?: 'band' | 'inline'; origen?: string; }
+const { variant = 'band', origen = 'cta-block' } = Astro.props;
+const wa = waGeneral(origen);
+const lista = waListaPrecios(origen);
+---
+<div class={`ctab ctab--${variant}`}>
+  <a href="/catalogo" class="btn btn--blue btn--lg"><Icon name="list" size={20} /> Ver Catálogo</a>
+  <a href={lista} class="btn btn--gold btn--lg" target="_blank" rel="noopener"><Icon name="doc" size={20} /> Solicitar Lista de Precios</a>
+  <a href="/pedido" class="btn btn--ghost btn--lg"><Icon name="cart" size={20} /> Armar Pedido</a>
+  <a href={wa} class="btn btn--wa btn--lg" target="_blank" rel="noopener"><Icon name="whatsapp" size={20} /> Hablar por WhatsApp</a>
+</div>
+
+<style>
+  .ctab { display: grid; gap: .7rem; grid-template-columns: 1fr; }
+  .ctab .btn { width: 100%; }
+  .ctab--band { padding: clamp(20px, 4vw, 32px); background: linear-gradient(135deg, #fff, #eef2fb); border: 1px solid var(--tp-line); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); }
+  @media (min-width: 720px) {
+    .ctab { grid-template-columns: repeat(4, 1fr); }
+    .ctab .btn { width: auto; }
+  }
+</style>
