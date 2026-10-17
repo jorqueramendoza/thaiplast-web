@@ -1,0 +1,63 @@
+{
+  "checkedAt": "2026-10-17T02:33:09.474Z",
+  "origin": "https://thaiplast.cl",
+  "versionId": "74ffcebf-7844-4cdc-8a5c-0244000a2646",
+  "products": 325,
+  "revision": 1,
+  "checks": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/catalogo",
+      "status": 200
+    },
+    {
+      "path": "/lista-precios",
+      "status": 200
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200
+    },
+    {
+      "path": "/producto/vaso-90-cc-90-cc",
+      "status": 200
+    },
+    {
+      "path": "/admin",
+      "status": 302,
+      "protected": true
+    },
+    {
+      "path": "/api/admin/products",
+      "status": 302,
+      "protected": true
+    },
+    {
+      "path": "/api/admin/history",
+      "status": 302,
+      "protected": true
+    },
+    {
+      "path": "/api/admin/images",
+      "status": 302,
+      "protected": true
+    },
+    {
+      "path": "/media/catalog/9f6f63f62bfdd8bbdf3f96f77deef1021583dc8896c2b461f54c813e818b07ed.webp",
+      "status": 200,
+      "sha256Verified": true
+    },
+    {
+      "path": "/media/catalog/9f6f63f62bfdd8bbdf3f96f77deef1021583dc8896c2b461f54c813e818b07ed-thumb.webp",
+      "status": 200,
+      "sha256Verified": true
+    },
+    {
+      "path": "/producto/producto-inexistente-verificacion",
+      "status": 404
+    }
+  ]
+}

@@ -1,0 +1,370 @@
+@4|Vasos polipapel y accesorios|Vasos Polipapel|vasos-y-tapas|No indicado
+Vaso polipapel 4 onz 120cc|4 onz / 120 cc|50 unidades|1500||
+Vaso polipapel 6 onz 180cc|6 onz / 180 cc|50 unidades|1800||
+Vaso polipapel 8 onz 240cc|8 onz / 240 cc|50 unidades|2000||
+Vaso polipapel 10 onz 300cc|10 onz / 300 cc|50 unidades|2500||
+Vaso polipapel 12 onz 360cc|12 onz / 360 cc|50 unidades|3050||
+Vaso polipapel 16 onz 500cc|16 onz / 500 cc|50 unidades|3400||
+Tapa polipapel 8-10 onz|8-10 onz|50 unidades|1480||
+Tapa polipapel 12-16 onz|12-16 onz|50 unidades|1990||
+Vaso polipapel corrugado 8 onz 240cc|8 onz / 240 cc|25 unidades|2100||
+Vaso polipapel corrugado 10 onz 300cc|10 onz / 300 cc|25 unidades|2500||
+Vaso polipapel corrugado 12 onz 300cc|12 onz / 300 cc|25 unidades|2700||El PDF indica 300 cc para 12 onz. Se conserva literalmente; confirmar capacidad.
+Vaso polipapel corrugado 16 onz 500cc|16 onz / 500 cc|25 unidades|3300||
+Collarín para vaso||50 unidades|2200||
+Revolvedora de madera|Madera|100 unidades|700||
+Revolvedora de madera|Madera|500 unidades|2000||
+@5|Vaso PET con tapa domo|Vasos PET|vasos-y-tapas|Incluido
+Vaso PET con tapa domo 9 onz|9 onz|50 unidades|4500|VASO PET CON TAPA DOMO 9 ONZ|
+Vaso PET con tapa domo 12 onz|12 onz|50 unidades|5250|VASO PET CON TAPA DOMO 12 ONZ|
+Vaso PET con tapa domo 16 onz|16 onz|50 unidades|5500|VASO PET CON TAPA DOMO 16 ONZ|
+@6|Vasos plásticos|Vasos|vasos-y-tapas|Incluido
+Vaso plástico 90cc|90 cc|50 unidades|990|VASO PLASTICO 90cc|
+Vaso plástico 200cc|200 cc|50 unidades|1000|VASO PLASTICO 200cc|
+Vaso plástico 300cc|300 cc|50 unidades|1100||
+Vaso plástico 360cc|360 cc|50 unidades|1450|VASO PLASTICO 360cc|
+Vaso plástico 400cc|400 cc|50 unidades|2400||
+Vaso plástico 500cc|500 cc|50 unidades|2500|VASO PLASTICO 500cc|
+Vaso plástico económico BKN 400cc|400 cc|25 unidades|1100|VASO PLASTICO ECONOMICO 400cc|El PDF agrupa 400 cc y 500 cc en una fila con el mismo precio.
+Vaso plástico económico BKN 500cc|500 cc|25 unidades|1100|VASO PLASTICO ECONOMICO 500cc|El PDF agrupa 400 cc y 500 cc en una fila con el mismo precio.
+@7|Vasos acrílicos|Vasos Acrílicos|vasos-y-tapas|Incluido
+Vaso acrílico circular 60cc|60 cc|25 unidades|1700|VASO ACRÍLICO CIRCULAR 60cc|
+Vaso acrílico circular 90cc|90 cc|25 unidades|2500|VASO ACRÍLICO CIRCULAR 90cc|
+Copa cuadrada 60cc|60 cc|24 unidades|3500|COPA CUADRADA 60cc|
+Copa cuadrada 180cc|180 cc|12 unidades|3950|COPA CUADRADA 180cc|
+@8|Copas plásticas|Copas|copas-y-postres|No indicado
+Copa garza||10 unidades|1800||
+Copa champagne||10 unidades|2400||
+Copa genovesa con tapa||10 unidades|1850||
+Copa de vino||10 unidades|2400||
+Copa francesa con tapa||10 unidades|2500||
+@9|Vasos rojos gruesos|Vasos|vasos-y-tapas|Incluido
+Vaso rojo grueso 500cc|500 cc|50 unidades|4000|VASO ROJO GRUESO 500cc|
+Vaso rojo grueso 300cc|300 cc|50 unidades|1900|VASO ROJO GRUESO 300cc|
+@10|Vasos térmicos|Vasos Térmicos|vasos-y-tapas|Incluido
+Vaso térmico 180cc|180 cc|50 unidades|1100|VASO TÉRMICO 180CC|
+Vaso térmico 240cc|240 cc|50 unidades|1200|VASO TÉRMICO 240CC|
+Vaso térmico 300cc|300 cc|50 unidades|1300|VASO TÉRMICO 300CC|
+@11|Vasos sopa térmicos con tapa|Vasos Térmicos|vasos-y-tapas|Incluido
+Vaso pote sopa térmico con tapa 360cc|360 cc|20 unidades|3450|POTE SOPA 360 CC|
+Vaso pote sopa térmico con tapa 500cc|500 cc|20 unidades|4900|POTE SOPA 500CC|
+@12|Potes de degustación|Potes|copas-y-postres|No indicado
+Pote 0.75-1 onza con tapa|0.75-1 onza|100 unidades|1500|POTE 0.75 - 1 ONZA|
+Pote 1.5 onza con tapa|1.5 onza|100 unidades|2400|POTE 1.5 ONZA|
+Pote 2 onza con tapa|2 onza|100 unidades|2600|POTE 2 ONZA|
+Pote 3.25 onza con tapa|3.25 onza / 97.5 cc|50 unidades|1750|POTE 3.25 ONZA|
+Pote 5.5 onza con tapa|5.5 onza / 165 cc|50 unidades|2100|POTE 5.5 ONZA|
+@13|Potes con tapa|Potes|copas-y-postres|Incluido
+Pote con tapa 480cc|480 cc|10 unidades|1300|POTE TAPA 480CC|
+Pote con tapa 720cc|720 cc|10 unidades|1450|POTE TAPA 720CC|
+Pote con tapa 1 litro|1 litro|10 unidades|1750|POTE TAPA 1 LITRO|
+@14|Potes con tapa transparentes|Potes|copas-y-postres|Incluido
+Pote gelatinero con tapa 130cc|130 cc|50 unidades|2600|POTE GELATINERO CON TAPA|
+Pote avión con tapa 180cc|180 cc|50 unidades|3500|POTE AVIÓN CON TAPA|
+@15|Pote bisagra|Bisagras|copas-y-postres|Incluido
+Pote bisagra 408 FL liso 240cc|240 cc|25 unidades|1500|408 FL LISO|
+Pote bisagra 408 domo 240cc|240 cc|25 unidades|1640|408 DOMO|
+Pote bisagra 4012 FL 360cc|360 cc|25 unidades|1650|4012 FL 360cc|
+Pote bisagra 4012 domo 360cc|360 cc|25 unidades|1720|4012 DOMO 360cc|
+Pote bisagra 4016 FL 500cc|500 cc|25 unidades|1990|4016 FL 500cc|
+Pote bisagra 4016 domo 500cc|500 cc|25 unidades|2120|4016 DOMO 500cc|
+@16|Termoformados|Termoformados|envases-y-contenedores|Incluido
+Termoformado 233S|233S|10 unidades|1200|TERMOFORMADO 233S|
+Termoformado 243-2ROLL|243-2ROLL|10 unidades|1350|TERMOFORMADO 243-2ROLL|
+Termoformado 244|244|10 unidades|1400|TERMOFORMADO 244|
+Termoformado 244AA|244AA|10 unidades|1700|TERMOFORMADO 244-AA|
+Termoformado 247-3ROLL|247-3ROLL|10 unidades|1900|TERMOFORMADO 247-3ROLL|
+Termoformado 401A|401A|10 unidades|2190|TERMOFORMADO 401A|El PDF agrupa 401A y 401AA en una fila con el mismo precio.
+Termoformado 401AA|401AA|10 unidades|2190|TERMOFORMADO 401 AA|El PDF agrupa 401A y 401AA en una fila con el mismo precio.
+Termoformado 7190|7190|10 unidades|1200|TERMOFORMADO 7190|
+Termoformado 233S tartaleta|233S|10 unidades|1700|TERMOFORMADO 233S TARTALETA|
+Termoformado 242|242|20 unidades|2100|TERMOFORMADO 242|
+Termoformado 607A|607A|20 unidades|2400|TERMOFORMADO 607A|
+@17|Termoformados transparentes|Termoformados|envases-y-contenedores|Incluido
+Cúpula de cuchuflí||Unidad|500||
+Bisagra termoformado multiuso 180cc|180 cc|25 unidades|2500||
+Bisagra termoformado multiuso 160cc|160 cc|25 unidades|2500||
+Termoformado de miga||25 unidades|2850||
+Termoformado para 1 queque||25 unidades|2100||
+@18|Pastel triangular y rectangular|Triangulares|envases-y-contenedores|Incluido
+Pastel triangular 5x11|5x11|25 unidades|2800|TERMOFORMADO TRIANGULAR 5X11|
+Pastel triangular 7x11|7x11|25 unidades|2900|TERMOFORMADO TRIANGULAR 7X11|
+Pastel triangular 9x11|9x11|25 unidades|3000|TERMOFORMADO TRIANGULAR 9X11|
+Pastel rectangular 7189|7189|25 unidades|2600|TERMOFORMADO 7189|
+@19|Cúpulas de tartaletas, tortas y brazo de reina|Cupulas|copas-y-postres|Incluido
+Cúpula tartaleta 15 personas|Circunferencia 23 cm; altura 7 cm|Unidad|450||El PDF describe dimensiones en la columna Presentación.
+Cúpula tartaleta 20 personas|Circunferencia 26 cm; altura 7 cm|Unidad|500||El PDF describe dimensiones en la columna Presentación.
+Cúpula de torta 15 personas|Circunferencia 23 cm; altura 12 cm|Unidad|470||El PDF describe dimensiones en la columna Presentación.
+Cúpula de torta 20 personas|Circunferencia 26 cm; altura 12 cm|Unidad|500||El PDF describe dimensiones en la columna Presentación.
+Cúpula brazo de reina base negra|Rectangular|Unidad|400||
+Cúpula de torta 30 personas|Circunferencia 30 cm; altura 12 cm|Unidad|990||El PDF describe dimensiones en la columna Presentación.
+@20|Potes heladeros|Heladeras|copas-y-postres|Incluido
+Pote heladero 150cc|150 cc|50 unidades|2650|POTE HELADERO 150cc|
+Pote heladero 240cc|240 cc|50 unidades|3000|POTE HELADERO 240cc|
+@21|Contenedores de aluminio|Contenedores|envases-y-contenedores|Incluido
+Contenedor aluminio C5 tapa cartón|250 cc|20 unidades|1400||
+Contenedor aluminio C10L tapa cartón|400 cc|20 unidades|1500||
+Contenedor aluminio C10L tapa transparente|400 cc|20 unidades|2500||
+Contenedor aluminio C10XL tapa cartón|500 cc|20 unidades|2200||
+Contenedor aluminio C15 tapa cartón|570 cc|20 unidades|2659||Precio literal del PDF: $2.659.
+Contenedor aluminio C18 tapa cartón|650 cc|20 unidades|2300||
+Contenedor aluminio C18 tapa transparente|650 cc|20 unidades|3200||
+Contenedor aluminio C20 tapa cartón|850 cc|20 unidades|2700||
+Contenedor aluminio C20 tapa transparente|850 cc|20 unidades|3400||
+Contenedor aluminio C30 tapa cartón|1100 cc|10 unidades|3000||
+Contenedor aluminio C40 tapa transparente|2300 cc|Unidad|570||
+Contenedor aluminio C50 tapa transparente|2700 cc|Unidad|990||
+@22|Aluminio y alusa plástica|Plástico Film|film-y-empaque|No indicado
+Alusa plástica 30 metros|30 m|Rollo|990|ALUSA PLÁSTICA 30mts|
+Alusa plástica 100 metros|100 m|Rollo|2500|ALUSA PLÁSTICA 100 mts|
+Alusa plástica 300 metros sin caja|300 m|Rollo sin caja|5500||La carpeta de Drive dice 30 mts sin caja; no se asocia al producto de 300 mts.
+Alusa plástica 300 metros con caja|300 m|Rollo con caja|5990|ALUSA PLÁSTICA 300 mts con caja|
+Rollo de aluminio 40 metros|40 m|Rollo|2990|ROLLO DE ALUMINIO 40mts|
+Rollo de aluminio 100 metros|100 m|Rollo|6500|ROLLO DE ALUMINIO 100mts|
+@23|Espumados térmicos|Contenedores|envases-y-contenedores|Incluido
+Espumado térmico 205 con división|205 (J1-J2)|50 unidades|5400||El PDF agrupa las variantes con y sin división con el mismo precio.
+Espumado térmico 205 sin división|205 (J1-J2)|50 unidades|5400||El PDF agrupa las variantes con y sin división con el mismo precio.
+Contenedor CT5 con división|CT5|50 unidades|3850||
+Contenedor CT5 sin división|CT5|50 unidades|3850|CONTENEDOR CT-5 SIN DIVISION|
+Contenedor térmico hot dog grande|Grande|25 unidades|3800||
+Contenedor térmico hot dog chico|Chico|25 unidades|2100|CONTENEDOR TERMICO HOT DOG CHICO|
+Marmita Carvajal||50 unidades|6500||
+Porta sándwich Vander mediano|Mediano|25 unidades|1990|CONTENEDOR PORTA SANDWICH VANDER;PORTA SANDWICH VANDER|
+Porta sándwich Carvajal grande|Grande|25 unidades|2100|CONTENEDOR PORTA SANDWICH CARVAJAL|
+Bandeja plumavit 1S|1S|25 unidades|1000|BANDEJA PLUMAVIT 1S|
+Bandeja plumavit 2S|2S|25 unidades|1600|BANDEJA PLUMAVIT 2S|
+Bandeja plumavit 4S|4S|25 unidades|1990|BANDEJA PLUMAVIT 4S|
+Contenedor térmico CT1|CT1|25 unidades|4990|CONTENEDOR TERMICO CT1|
+Contenedor térmico CT6|CT6|50 unidades|4000|CONTENEDOR TERMICO CT6|
+Envase cuarto de pollo 2 broches|2 broches|25 unidades|1850|CONTENEDOR TERMICO CUARTO DE POLLO|
+@24|Bolsas kraft con manilla|Bolsas Kraft|bolsas|Incluido
+Bolsa kraft con manilla N1|22x10x25|10 unidades|1700||
+Bolsa kraft delivery N2|28x16x28|10 unidades|1300||
+Bolsa kraft con manilla N3|22x10x32|10 unidades|1800||
+Bolsa kraft con manilla N4|22x11x27|10 unidades|1700||
+Bolsa kraft con manilla N5|27x16x29|10 unidades|1990||
+Bolsa kraft con manilla N6|30x12x42|10 unidades|2300||
+Bolsa kraft con manilla N7|34x17x39|10 unidades|2400||
+Bolsa kraft con manilla N8|42x17x49|Unidad|300||
+Bolsa kraft con manilla N9|16x8x21|10 unidades|1750||
+@25|Sacos kraft|Bolsas Kraft|bolsas|Incluido
+Bolsa kraft kilo extra corto|Extra corto|100 unidades|1000|BOLSA KRAFT EXTRA CORTO|
+Bolsa kraft kilo corto|Kilo corto|100 unidades|1150|BOLSA KRAFT 0.75|
+Bolsa kraft 1 kilo|1 kg|100 unidades|1250|BOLSA KRAFT 1 KG|
+Bolsa kraft 2 kilos|2 kg|100 unidades|1900|BOLSA KRAFT 2 KG|
+Bolsa kraft 3 kilos|3 kg|100 unidades|2300|BOLSA KRAFT 3 KG|
+Bolsa kraft 4 kilos|4 kg|100 unidades|3380|BOLSA KRAFT 4 KG|
+Bolsa kraft 5 kilos|5 kg|100 unidades|3550|BOLSA KRAFT 5KG|
+Bolsa kraft 6 kilos|6 kg|100 unidades|4100|BOLSA KRAFT 6 KG|
+Bolsa kraft 7 kilos|7 kg|100 unidades|4800||Existe carpeta de 7.5 kg, sin coincidencia exacta con los 7 kg del PDF; revisar antes de asociar.
+@26|Cajas de cartón y food boxes|Cajas|cajas-y-delivery|No indicado
+Caja completo gigante #1|Gigante #1|100 unidades|5120|CAJA COMPLETO GIGANTE #1|
+Caja completo gigante #2|Gigante #2|100 unidades|6400|CAJA COMPLETO GIGANTE #2|
+Caja completo para 1|1 completo|100 unidades|5200|CAJA COMPLETO #1|
+Caja completo para 2|2 completos|100 unidades|5360|CAJA COMPLETO #2|
+Caja completo para 3|3 completos|100 unidades|5120|CAJA COMPLETO #3|
+Caja completo para 4|4 completos|100 unidades|7080|CAJA COMPLETO #4|
+Caja completo para 6|6 completos|100 unidades|9250|CAJA COMPLETO #6|
+Caja papa #1|#1|100 unidades|9600|CAJA PAPA #1|
+Caja papa #2|#2|100 unidades|10600|CAJA PAPA #2|
+Caja papa #3|#3|100 unidades|13680|CAJA PAPA #3|
+Caja salchipapa||100 unidades|4400|CAJA SALCHIPAPA|
+Caja de pollo||10 unidades|1980|CAJA DE POLLO|
+@27|Caja circular kraft|Cajas|cajas-y-delivery|No indicado
+Caja circular kraft 500cc|500 cc|20 unidades|2500|CAJA KRAFT 500CC|
+Caja circular kraft 780cc|780 cc|20 unidades|3300|CAJA KRAFT 780CC|
+Caja circular kraft 960cc|960 cc|20 unidades|3990|CAKA KRAFT 960CC|
+@28|Canasto kraft|Canastos|cajas-y-delivery|No indicado
+Canasto kraft #3|#3|25 unidades|1500||
+Canasto kraft #5|#5|25 unidades|2500||
+Canasto kraft #6|#6|25 unidades|2700||
+@29|Canastos, platos, canoas y huincha de cartón|Canastos|cajas-y-delivery|No indicado
+Canasto cartón 0-15|0-15|100 unidades|3200||
+Canasto cartón 0|0|100 unidades|3850||
+Canasto cartón N1|N1|100 unidades|4700||
+Canasto cartón N2|N2|100 unidades|5200||
+Plato cartón N1|N1|100 unidades|2500||
+Plato cartón N2|N2|100 unidades|2750|PLATO CARTÓN N°2|
+Canoa de completo normal|Normal|100 unidades|2300||
+Canoa de completo XL|XL|100 unidades|3000||
+Huincha de cartón||1 kilo|3200||
+@30|Moldes|Moldes|cafeteria|No indicado
+Molde pan de pascua 500 gramos|500 g|10 unidades|900|MOLDE PAN DE PASCUA 500grs|
+Molde pan de pascua 1 kilo|1 kg|10 unidades|990|MOLDE PAN DE PASCUA 1k|
+Molde queque inglés 600 gramos|600 g|10 unidades|1990|MOLDE QUEQUE INGLÉS 600grs|
+Molde 100 gramos|100 g|20 unidades|1290|MOLDE 100 grs|
+Molde tulipa||20 unidades|980|MOLDE TULIPA|
+@31|Estuches para papas fritas|Caja Papas|cajas-y-delivery|No indicado
+Estuche papas fritas pequeño|Pequeño|100 unidades|3300|ESTUCHE PEQUEÑO|
+Estuche papas fritas mediano|Mediano|100 unidades|3400|ESTUCHE MEDIANO|
+Estuche papas fritas grande|Grande|100 unidades|5200|ESTUCHE GRANDE|
+@32|Bolsas de papel blanco|Bolsas Blancas|bolsas|Incluido
+Bolsa papel blanco 0.125|0.125|100 unidades|1000|SACO BLANCO 0.125|
+Bolsa papel blanco 0.250|0.250|100 unidades|1200|SACO BLANCO 0.250|
+Bolsa papel blanco 0.500|0.500|100 unidades|1500|SACO BLANCO 0.500|
+@33|Bolsas taco|Bolsa Taco|bolsas|No indicado
+Bolsa taco 20x30|20x30|100 unidades|500||
+Bolsa taco 20x30|20x30|1000 unidades|450||El PDF indica $450 por 1000 unidades, menos que el pack de 100; confirmar precio antes de cambiarlo.
+Bolsa taco 30x40|30x40|100 unidades|1300||
+@34|Bolsas camiseta|Bolsas Camiseta|bolsas|Incluido
+Bolsa camiseta 28x35|28x35|100 unidades|800|BOLSA CAMISETA 28X35|
+Bolsa camiseta 35x45|35x45|100 unidades|1450|BOLSA CAMISETA 35X45|
+Bolsa camiseta 40x50|40x50|100 unidades|1990|BOLSA CAMISETA 40X50|
+Bolsa camiseta 45x55|45x55|100 unidades|2450|BOLSA CAMISETA 45X55|
+Bolsa camiseta 50x60|50x60|100 unidades|3100|BOLSA CAMISETA 50X60|
+Bolsa camiseta 60x70|60x70|100 unidades|4999|BOLSA CAMISETA 60X70|Precio literal del PDF: $4.999.
+@35|Bolsas de polietileno|Polietileno|film-y-empaque|No indicado
+Bolsa polietileno 10x15|10x15; grosor 0.0022 m|100 unidades|650||
+Bolsa polietileno 10x15 gruesa|10x15; grosor 0.007 m|100 unidades|1300||
+Bolsa polietileno 10x20|10x20; grosor 0.0022 m|100 unidades|700||
+Bolsa polietileno 10x25|10x25; grosor 0.0022 m|100 unidades|750||
+Bolsa polietileno 12x20|12x20; grosor 0.0022 m|100 unidades|720||
+Bolsa polietileno 12x20 gruesa|12x20; grosor 0.7|100 unidades|1700||Grosor literal 0.7 sin unidad en el PDF; confirmar.
+Bolsa polietileno 12x25|12x25; grosor 0.0022 m|100 unidades|780||
+Bolsa polietileno 12x25 gruesa|12x25; grosor 0.7|100 unidades|2190||Grosor literal 0.7 sin unidad en el PDF; confirmar.
+Bolsa polietileno 12x30|12x30; grosor 0.0022 m|100 unidades|870||
+Bolsa polietileno 12x35|12x35; grosor 0.0022 m|100 unidades|990||
+Bolsa polietileno 15x20|15x20; grosor 0.0022 m|100 unidades|790||
+Bolsa polietileno 15x20 gruesa|15x20; grosor 0.007 m|100 unidades|2250||
+Bolsa polietileno 15x25|15x25; grosor 0.0022 m|100 unidades|900||
+Bolsa polietileno 15x25 gruesa|15x25; grosor 0.7|100 unidades|2900||Grosor literal 0.7 sin unidad en el PDF; confirmar.
+Bolsa polietileno 15x30|15x30; grosor 0.0022 m|100 unidades|990||
+Bolsa polietileno 15x30 gruesa|15x30; grosor 0.7|100 unidades|3100||Grosor literal 0.7 sin unidad en el PDF; confirmar.
+Bolsa polietileno 15x35|15x35; grosor 0.0022 m|100 unidades|1200||
+Bolsa polietileno 15x35 gruesa|15x35; grosor 0.7|100 unidades|3400||Grosor literal 0.7 sin unidad en el PDF; confirmar.
+Bolsa polietileno 15x40|15x40; grosor 0.0022 m|100 unidades|1400||
+Bolsa polietileno 20x20|20x20; grosor 0.0022 m|100 unidades|890||
+Bolsa polietileno 20x25|20x25; grosor 0.0022 m|100 unidades|1300||
+Bolsa polietileno 20x30|20x30; grosor 0.0022 m|100 unidades|1340||
+Bolsa polietileno 20x30 gruesa|20x30; grosor 0.7|100 unidades|4990||Grosor literal 0.7 sin unidad en el PDF; confirmar.
+Bolsa polietileno 20x35|20x35; grosor 0.0022 m|100 unidades|1580||
+Bolsa polietileno 20x40|20x40; grosor 0.0025 m|100 unidades|1630||
+Bolsa polietileno 25x30|25x30; grosor 0.0025 m|100 unidades|2100||
+Bolsa polietileno 25x35|25x35; grosor 0.0025 m|100 unidades|2700||
+Bolsa polietileno 25x35 gruesa|25x35; grosor 0.7|100 unidades|6500||Grosor literal 0.7 sin unidad en el PDF; confirmar.
+Bolsa polietileno 25x40|25x40; grosor 0.0025 m|100 unidades|2600||
+Bolsa polietileno 30x40|30x40; grosor 0.0025 m|100 unidades|2990||
+Bolsa polietileno 30x45|30x45; grosor 0.0025 m|100 unidades|3600||
+Bolsa polietileno 35x40|35x40; grosor 0.0025 m|100 unidades|3400||
+Bolsa polietileno 35x45|35x45; grosor 0.0025 m|100 unidades|3800||
+Bolsa polietileno 40x50|40x50; grosor 0.0025 m|100 unidades|4500||
+Bolsa polietileno 40x60|40x60; grosor 0.0025 m|100 unidades|5200||
+Bolsa polietileno 60x90|60x90; grosor 0.0025 m|10 unidades (ver nota)|1900||La misma fila indica 10 unidades y 100 unidades. Se conserva el precio literal; confirmar presentación.
+@36|Bolsas de polipropileno|Polipropileno|film-y-empaque|No indicado
+Bolsa polipropileno 7x15|7x15|100 unidades|540||
+Bolsa polipropileno 8x15|8x15|100 unidades|600||
+Bolsa polipropileno 8x20|8x20|100 unidades|750||
+Bolsa polipropileno 9x20|9x20|100 unidades|990||
+Bolsa polipropileno 10x15|10x15|100 unidades|750||
+Bolsa polipropileno 10x20|10x20|100 unidades|1090||
+Bolsa polipropileno 10x25|10x25|100 unidades|1350||
+Bolsa polipropileno 12.5x15|12.5x15|100 unidades|890||El PDF escribe 12,5x15.
+Bolsa polipropileno 12x20|12x20|100 unidades|1180||
+Bolsa polipropileno 12x25|12x25|100 unidades|1450||
+Bolsa polipropileno 15x20|15x20|100 unidades|1350||
+Bolsa polipropileno 15x25|15x25|100 unidades|1800||
+Bolsa polipropileno 15x30|15x30|100 unidades|1990||
+Bolsa polipropileno 20x25|20x25|100 unidades|2150||
+Bolsa polipropileno 20x30|20x30|100 unidades|2350||
+Bolsa polipropileno 20x35|20x35|100 unidades|2990||
+Bolsa polipropileno 20x40|20x40|100 unidades|3500||
+Bolsa polipropileno 25x35|25x35|100 unidades|3990||
+Bolsa polipropileno 25x40|25x40|100 unidades|4100||
+Bolsa polipropileno 30x40|30x40|100 unidades|4700||
+Bolsa polipropileno 30x45|30x45|100 unidades|5900||
+Bolsa polipropileno 35x45|35x45|100 unidades|6700||
+@37|Bolsas zipper|Zipper|bolsas|No indicado
+Bolsa zipper 3x3|3x3|100 unidades|1100||
+Bolsa zipper 4x6|4x6|100 unidades|1200||
+Bolsa zipper 5x7|5x7|100 unidades|1700||
+Bolsa zipper 6x10|6x10|100 unidades|2259||Precio literal del PDF: $2.259.
+Bolsa zipper 8x10|8x10|100 unidades|2600||
+Bolsa zipper 15x16|15x16|100 unidades|2990||
+Bolsa zipper 18x20|18x20|100 unidades|3700||
+Bolsa zipper 20x25|20x25|100 unidades|5000||
+Bolsa zipper 27x28|27x28|100 unidades|8000||
+Bolsa zipper 35x45|35x45|100 unidades|15900||
+@38|Bolsas cubo de polietileno|Cubos|bolsas|Incluido
+Bolsa cubo polietileno 2.5x20|2.5x20|100 unidades|1000||
+Bolsa cubo polietileno 4x20|4x20|100 unidades|600||
+Bolsa cubo polietileno 4x30|4x30|100 unidades|990||
+Bolsa cubo polietileno 5x25|5x25|100 unidades|900||
+Bolsa cubo polietileno 5x30|5x30|100 unidades|1250||
+Bolsa cubo polietileno 6x20|6x20|100 unidades|990||
+Bolsa cubo polietileno 6x25|6x25|100 unidades|1100||
+Bolsa cubo polietileno 8x25|8x25|100 unidades|990||
+@39|Bolsas prepicadas y pull pack|Prepicados|bolsas|No indicado
+Bolsa prepicada 20x30|20x30|1 kilo|3200|BOLSA PREPICADA 20X30|
+Bolsa prepicada 25x35|25x35|1 kilo|3200|BOLSA PREPICADA 25X35|
+Bolsa prepicada 30x40|30x40|1 kilo|3200|BOLSA PREPICADA 30X40|
+Bolsa prepicada 35x50|35x50|1 kilo|3200|BOLSA PREPICADA 35X50|
+Bolsa prepicada 40x60|40x60|1 kilo|3200|BOLSA PREPICADA 40X60|
+Bolsa prepicada 60x90|60x90|1 kilo|3200|BOLSA PREPICADA 60X90|
+Bolsa pull pack liso|35x50 cm|700 unidades|7500|BOLSA PULL PACK LISO|
+@40|Pincho de bambú|Pinchos|cubiertos-y-bombillas|Incluido
+Pincho de bambú 9 cm|9 cm|50 unidades|1150||
+Pincho de bambú 12 cm|12 cm|50 unidades|1250||
+Pincho de bambú 15 cm|15 cm|50 unidades|1350||
+@41|Bombillas|Bombillas|cubiertos-y-bombillas|No indicado
+Bombilla plástica 10 ml|10 ml (literal del PDF)|50 unidades|900|BOMBILLA 10ml AZUL|El PDF escribe ml para el calibre; no se convierte a milímetros sin confirmación.
+Bombilla papel bicolor 6 ml|6 ml (literal del PDF)|100 unidades|1500|BOMBILLA 6ml ROJO Y BLANCO|El PDF escribe ml para el calibre; no se convierte a milímetros sin confirmación.
+Bombilla plástica 8 ml|8 ml (literal del PDF)|100 unidades|1200|BOMBILLA 8ml COLORES|El PDF escribe ml para el calibre; no se convierte a milímetros sin confirmación.
+Bombilla negra papel 8 ml|8 ml (literal del PDF)|100 unidades|2300|BOMBILLA 8ml NEGRA|El PDF escribe ml para el calibre; confirmar material de la fotografía.
+Bombilla flexible 6 ml|6 ml (literal del PDF)|100 unidades|1100||La carpeta 6 ml colores no especifica si es flexible; revisar antes de asociar.
+Bombilla con envoltorio||100 unidades|1850||
+@42|Palillos y brochetas de madera|Brochetas|cubiertos-y-bombillas|No indicado
+Mondadientes||100 unidades|400||
+Brocheta delgada 12 cm|12 cm|100 unidades|450||El PDF agrupa 12 y 15 cm con el mismo precio.
+Brocheta delgada 15 cm|15 cm|100 unidades|450||El PDF agrupa 12 y 15 cm con el mismo precio.
+Brocheta delgada 20 cm|20 cm|100 unidades|600||
+Brocheta delgada 25 cm|25 cm|100 unidades|650||
+Brocheta delgada 30 cm|30 cm|100 unidades|700||
+Brocheta gruesa 30 cm|30 cm|50 unidades|800||
+Brocheta gruesa 35 cm|35 cm|50 unidades|800||
+Brocheta gruesa 40 cm|40 cm|50 unidades|1100||
+Brocheta gruesa 50 cm|50 cm|50 unidades|1300||
+Palo de helado||100 unidades|750||
+Palillos desechables||100 unidades|2400||
+@43|Platos plásticos|Platos|bandejas-y-platos|No indicado
+Plato plástico 18 cm|18 cm|25 unidades|1600||Existe carpeta de 17 cm; no coincide con los 18 cm del PDF.
+Plato plástico 22 cm|22 cm|20 unidades|1600|PLATO PLÁSTICO 22cm|
+Plato plástico 26 cm|26 cm|25 unidades|4200|PLATO PLÁSTICO 26cm|
+@44|Servilletas|Servilletas|cafeteria|No indicado
+Servilleta 1 hoja plus||1000 unidades|1350||
+Servilleta dispensador||500 unidades|1500|SERVILLETA DISPENSADOR|
+Servilleta 24x24 cm|24x24 cm|300 unidades|1200|SERVILLETA 24x24cm|
+Servilleta 33x33 cm|33x33 cm|300 unidades|2990|SERVILLETA 33x33cm|
+Servilleta colores 33x33 cm|33x33 cm|100 unidades|2000|SERVILLETA COLORES 33x33 cm|
+@45|Guantes y accesorios desechables|Guantes|insumos-clinicos|No indicado
+Guantes de vinilo talla S|S|100 unidades|3000|GUANTES DE VINILO|Foto compartida de la familia de guantes de vinilo.
+Guantes de vinilo talla M|M|100 unidades|3000|GUANTES DE VINILO|Foto compartida de la familia de guantes de vinilo.
+Guantes de vinilo talla L|L|100 unidades|3000|GUANTES DE VINILO|Foto compartida de la familia de guantes de vinilo.
+Guantes de látex talla S|S|100 unidades|4000|GUANTES DE LÁTEX|Foto compartida de la familia de guantes de látex.
+Guantes de látex talla M|M|100 unidades|4000|GUANTES DE LÁTEX|Foto compartida de la familia de guantes de látex.
+Guantes de látex talla L|L|100 unidades|4000|GUANTES DE LÁTEX|Foto compartida de la familia de guantes de látex.
+Guantes de nitrilo negro talla S|S|100 unidades|4500|GUANTES DE NITRILLO NEGRO|Foto compartida de la familia de guantes de nitrilo.
+Guantes de nitrilo negro talla M|M|100 unidades|4500|GUANTES DE NITRILLO NEGRO|Foto compartida de la familia de guantes de nitrilo.
+Guantes de nitrilo negro talla L|L|100 unidades|4500|GUANTES DE NITRILLO NEGRO|Foto compartida de la familia de guantes de nitrilo.
+Guantes de nitrilo negro talla XL|XL|100 unidades|4500|GUANTES DE NITRILLO NEGRO|Foto compartida de la familia de guantes de nitrilo.
+Gorro redecilla negro|Negro|100 unidades|5990|GORRO REDSILLA NEGRO|
+Gorro clip blanco|Blanco|100 unidades|3500||La carpeta de gorro clip contiene variantes de color; revisar antes de asociar.
+Gorro clip negro|Negro|100 unidades|3500||La carpeta de gorro clip contiene variantes de color; revisar antes de asociar.
+Rollo sabanillas 50 metros|50 m cada rollo|Pack 2 rollos|6000|ROLLO SABANILLAS|
+@46|Hilos y ovillos|Hilo|film-y-empaque|No indicado
+Ovillo de hilo algodón 50 gramos|50 g|Ovillo|700||
+Ovillo de hilo algodón 100 gramos|100 g|Ovillo|1300||
+Cono de algodón H-8|8 hebras|Cono|9900||
+@47|Hilo plástico|Hilo|film-y-empaque|No indicado
+Ovillo hilo plástico T100|80 metros|Ovillo|700|OVILLO HILO PLÁSTICO T100|
+Ovillo hilo plástico T200|170 metros|Ovillo|1300|OVILLO HILO PLÁSTICO T200|
+Cono hilo plástico T1000|T1000|Cono|4990|CONO HILO PLÁSTICO T1000|
+Cono hilo plástico T2000|T2000|Cono|5500||La carpeta T12000 no coincide con T2000; revisar antes de asociar.
+@48|Sachet|Sachets|cafeteria|Incluido
+Sachet sal||100 unidades|990|SAL|
+Sachet aceite|10 cc|20 unidades|1180|ACEITE|
+Sachet azúcar|6.25 gramos|50 unidades|990||
+Sachet sucralosa|0.5 gramos|100 unidades|2100|SUCRALOSA|
+Sachet ají||20 unidades|800|AJÍ|
+Sachet mayonesa||20 unidades|1100|MAYONESA|
+Sachet mostaza||20 unidades|830|MOSTAZA|
+Sachet ketchup||20 unidades|990|KETCHUP|

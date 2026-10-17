@@ -1,150 +1,247 @@
 [
   {
     "n": 1,
-    "src": "/img/catalogo/pagina-01.jpg"
+    "src": "/img/catalogo/pagina-01.jpg",
+    "sha256": "d9a9c409c02f6ec0a8194cc42a8bf2912568e019d14afc68ac1d5fe544df9503"
   },
   {
     "n": 2,
-    "src": "/img/catalogo/pagina-02.jpg"
+    "src": "/img/catalogo/pagina-02.jpg",
+    "sha256": "91157ca3ce80879516555b5a059b05623af7224bf9df03dec126766417a4e010"
   },
   {
     "n": 3,
-    "src": "/img/catalogo/pagina-03.jpg"
+    "src": "/img/catalogo/pagina-03.jpg",
+    "sha256": "87ef6717d8d6a36416239adf6d1ad3f32ede9b061e6c9ea8ba44b3173185e8a3"
   },
   {
     "n": 4,
-    "src": "/img/catalogo/pagina-04.jpg"
+    "src": "/img/catalogo/pagina-04.jpg",
+    "sha256": "db526eb4d63ba9ad64f5e61f77abf71aee95c783ea974a8074fc744e6df7c3e2"
   },
   {
     "n": 5,
-    "src": "/img/catalogo/pagina-05.jpg"
+    "src": "/img/catalogo/pagina-05.jpg",
+    "sha256": "e64c83d734e2b66e2ac863c4be070fe04295e3086d0b2af857b1ad5efa34305a"
   },
   {
     "n": 6,
-    "src": "/img/catalogo/pagina-06.jpg"
+    "src": "/img/catalogo/pagina-06.jpg",
+    "sha256": "ea0dcde29e62768554e8d4df87ab86409b11ac0b49981a73fbf80e3790420140"
   },
   {
     "n": 7,
-    "src": "/img/catalogo/pagina-07.jpg"
+    "src": "/img/catalogo/pagina-07.jpg",
+    "sha256": "12b3e307415c40f92c4c0c236b3676a8db0969ebc2197c72c73604ec2237bdf0"
   },
   {
     "n": 8,
-    "src": "/img/catalogo/pagina-08.jpg"
+    "src": "/img/catalogo/pagina-08.jpg",
+    "sha256": "20752d1564393a7fd3fa6f497d350265d03b325bcb6a79cf282520a36ca99cb0"
   },
   {
     "n": 9,
-    "src": "/img/catalogo/pagina-09.jpg"
+    "src": "/img/catalogo/pagina-09.jpg",
+    "sha256": "eaa8600309dc2b98d673348ea980cef82e6b9436e248ca6d99e8f84e9d98c436"
   },
   {
     "n": 10,
-    "src": "/img/catalogo/pagina-10.jpg"
+    "src": "/img/catalogo/pagina-10.jpg",
+    "sha256": "a9f6fbd92b38bcd6c0c1b6c12856bfa511b2b879dfe06d4313ee532c9619c2a0"
   },
   {
     "n": 11,
-    "src": "/img/catalogo/pagina-11.jpg"
+    "src": "/img/catalogo/pagina-11.jpg",
+    "sha256": "23b0d1cb108327e7f0f6b1e27e96cb50b3096528e7ffa662da00f59c5fcbe57e"
   },
   {
     "n": 12,
-    "src": "/img/catalogo/pagina-12.jpg"
+    "src": "/img/catalogo/pagina-12.jpg",
+    "sha256": "bd82857f9d6d9d3e9573da83e83a8fb6795d9218f6125db65a7ea725d28febd9"
   },
   {
     "n": 13,
-    "src": "/img/catalogo/pagina-13.jpg"
+    "src": "/img/catalogo/pagina-13.jpg",
+    "sha256": "ef6fb9a2ab64309ce9f645d8b264d441fc9a51e1553ddfebdab44fb1cb93d372"
   },
   {
     "n": 14,
-    "src": "/img/catalogo/pagina-14.jpg"
+    "src": "/img/catalogo/pagina-14.jpg",
+    "sha256": "93f6f350f96c97883d29906f31ad96f9ca30a7b8b954e41bf42ec333e6e99c1a"
   },
   {
     "n": 15,
-    "src": "/img/catalogo/pagina-15.jpg"
+    "src": "/img/catalogo/pagina-15.jpg",
+    "sha256": "d0cf69e21b811be206a6ac02c0af65c61396cc8fabe41a6e26c7fd9a8b9f3c2a"
   },
   {
     "n": 16,
-    "src": "/img/catalogo/pagina-16.jpg"
+    "src": "/img/catalogo/pagina-16.jpg",
+    "sha256": "05d36fb9d757949021586acb1608b600bc9e57cf79664750d51d665623e4a057"
   },
   {
     "n": 17,
-    "src": "/img/catalogo/pagina-17.jpg"
+    "src": "/img/catalogo/pagina-17.jpg",
+    "sha256": "2cec0cd8bc6645d9d26dfe4f28d9b83b252e35a689f3d768186958eebbd9cafb"
   },
   {
     "n": 18,
-    "src": "/img/catalogo/pagina-18.jpg"
+    "src": "/img/catalogo/pagina-18.jpg",
+    "sha256": "3c451d625f1418669a1ae63b3bd96668aa7b5788d30d397db56e4c637cf42335"
   },
   {
     "n": 19,
-    "src": "/img/catalogo/pagina-19.jpg"
+    "src": "/img/catalogo/pagina-19.jpg",
+    "sha256": "721281ebd1914a041e9b78dc7850d1d87fa40b2f5144d109094c1e99dd9c8a0a"
   },
   {
     "n": 20,
-    "src": "/img/catalogo/pagina-20.jpg"
+    "src": "/img/catalogo/pagina-20.jpg",
+    "sha256": "3c0854a783653217682751e6bb21083ddf272898a5264080e950650be99f0c3d"
   },
   {
     "n": 21,
-    "src": "/img/catalogo/pagina-21.jpg"
+    "src": "/img/catalogo/pagina-21.jpg",
+    "sha256": "c99e38e3bf8ba088f6e902fe69d323f31e14aae4c175b7972ef8049f09e5e029"
   },
   {
     "n": 22,
-    "src": "/img/catalogo/pagina-22.jpg"
+    "src": "/img/catalogo/pagina-22.jpg",
+    "sha256": "7f04cdaa63eb947412523eedfe22b24f2df4cf7dee75658a32fc78baad5e6851"
   },
   {
     "n": 23,
-    "src": "/img/catalogo/pagina-23.jpg"
+    "src": "/img/catalogo/pagina-23.jpg",
+    "sha256": "44f82dd359951e4ab14c29020b5b990437e06af84b68c11b0ce620d714c6d3be"
   },
   {
     "n": 24,
-    "src": "/img/catalogo/pagina-24.jpg"
+    "src": "/img/catalogo/pagina-24.jpg",
+    "sha256": "a018ab1143ab4d9775cea14ee9f0f9a3a59cdfd97558a815733eae9a0266b999"
   },
   {
     "n": 25,
-    "src": "/img/catalogo/pagina-25.jpg"
+    "src": "/img/catalogo/pagina-25.jpg",
+    "sha256": "bdbbae5780c53634bf21029e0d72bf8f71858aeb23ac0813fcfcdc746916a3a4"
   },
   {
     "n": 26,
-    "src": "/img/catalogo/pagina-26.jpg"
+    "src": "/img/catalogo/pagina-26.jpg",
+    "sha256": "01bd2681fb501f049fa2cd705d4ce6695b87405b5aaf0679c241c4b49493824d"
   },
   {
     "n": 27,
-    "src": "/img/catalogo/pagina-27.jpg"
+    "src": "/img/catalogo/pagina-27.jpg",
+    "sha256": "675c56db64230602ffb62589c9f59ba28e2db251bf8d5345cd6b222ad46ddfed"
   },
   {
     "n": 28,
-    "src": "/img/catalogo/pagina-28.jpg"
+    "src": "/img/catalogo/pagina-28.jpg",
+    "sha256": "7fe24db19c2f8ae90f43816e8dee9b89abcd7cdb922b4e994386b5768dde15fc"
   },
   {
     "n": 29,
-    "src": "/img/catalogo/pagina-29.jpg"
+    "src": "/img/catalogo/pagina-29.jpg",
+    "sha256": "ffbdfd12a59d7bed6f1c708f8abcc8c291e00ce1d4b2fd97b3dd7940f2700dd0"
   },
   {
     "n": 30,
-    "src": "/img/catalogo/pagina-30.jpg"
+    "src": "/img/catalogo/pagina-30.jpg",
+    "sha256": "2ae4c3592ce1e7f7634407773b0ecbf5952383714b7545fcd42b0eceda7157aa"
   },
   {
     "n": 31,
-    "src": "/img/catalogo/pagina-31.jpg"
+    "src": "/img/catalogo/pagina-31.jpg",
+    "sha256": "146b5c5370bee869ef0dada073de1fd6cfb10ab807d8e8178d909c03028391e5"
   },
   {
     "n": 32,
-    "src": "/img/catalogo/pagina-32.jpg"
+    "src": "/img/catalogo/pagina-32.jpg",
+    "sha256": "bdd63266aeb1a14398b9f163bced976e80483f923c71d86a15d2ba9494b814a9"
   },
   {
     "n": 33,
-    "src": "/img/catalogo/pagina-33.jpg"
+    "src": "/img/catalogo/pagina-33.jpg",
+    "sha256": "98a9d5e10c38e2c516d0ece265f4337caccbc2c342cadc29805065e4c05e6a9c"
   },
   {
     "n": 34,
-    "src": "/img/catalogo/pagina-34.jpg"
+    "src": "/img/catalogo/pagina-34.jpg",
+    "sha256": "8d9734a6b0968895c639426b1ff478cbf8fe734afd05c58076174a6cbfd2a833"
   },
   {
     "n": 35,
-    "src": "/img/catalogo/pagina-35.jpg"
+    "src": "/img/catalogo/pagina-35.jpg",
+    "sha256": "f480cb5ec16ba8e78fab47c3f48baefbe1466155f380d27036abb18776eb7dc2"
   },
   {
     "n": 36,
-    "src": "/img/catalogo/pagina-36.jpg"
+    "src": "/img/catalogo/pagina-36.jpg",
+    "sha256": "631c625c9118a73bafc8e5c6eea27eab5795fe77fd41407a07242446773e9681"
   },
   {
     "n": 37,
-    "src": "/img/catalogo/pagina-37.jpg"
+    "src": "/img/catalogo/pagina-37.jpg",
+    "sha256": "60fc68e0f6d4200e27dfb67efc89106ea51a3bd6d59cb9dc257a1d4392973c40"
+  },
+  {
+    "n": 38,
+    "src": "/img/catalogo/pagina-38.jpg",
+    "sha256": "5e18440052cc634ec96dedd19128821435605507c20903bf7661d43e7f730648"
+  },
+  {
+    "n": 39,
+    "src": "/img/catalogo/pagina-39.jpg",
+    "sha256": "5bfbec20a442dd0b136729d10570f3123d6c464645ba252b9f4cd8a2130e8cd3"
+  },
+  {
+    "n": 40,
+    "src": "/img/catalogo/pagina-40.jpg",
+    "sha256": "acf92c492057afa09bb689856d6d588963207117f8af44d5eedbda4f9763e1d2"
+  },
+  {
+    "n": 41,
+    "src": "/img/catalogo/pagina-41.jpg",
+    "sha256": "90c235f0911edfe091f63fd5da79dc6215170987a677a28d63347464ad41bbaa"
+  },
+  {
+    "n": 42,
+    "src": "/img/catalogo/pagina-42.jpg",
+    "sha256": "12f9c0ea5c6a5c0e1baa36605e136040731a9187d5057f5c44cf7ae7a088d6d7"
+  },
+  {
+    "n": 43,
+    "src": "/img/catalogo/pagina-43.jpg",
+    "sha256": "a3ae2168f4dd4117ef53141ed8418778af79d33d182e280273c391d26ccc8390"
+  },
+  {
+    "n": 44,
+    "src": "/img/catalogo/pagina-44.jpg",
+    "sha256": "7f1191e69ec080dc9523956d7e45c284b76b014316538f1ef05c21456d1307f6"
+  },
+  {
+    "n": 45,
+    "src": "/img/catalogo/pagina-45.jpg",
+    "sha256": "ac932fb994f2f48cf8c9a293c8c8faca7a0b338f6ee54216c793d6ed1b9bd5af"
+  },
+  {
+    "n": 46,
+    "src": "/img/catalogo/pagina-46.jpg",
+    "sha256": "0eff38e425357fad5b97a0474729baffc71559a58942b0bb6f9598a9212f7b10"
+  },
+  {
+    "n": 47,
+    "src": "/img/catalogo/pagina-47.jpg",
+    "sha256": "8b484dfad39a7bcbd14b95755ffb3a353f8f159e3affaa83b5b2d6c4292f0cb5"
+  },
+  {
+    "n": 48,
+    "src": "/img/catalogo/pagina-48.jpg",
+    "sha256": "46af5f6d29185fe0b39c2787da5df3e2c135b34c0cc9cc93c998b289ff554222"
+  },
+  {
+    "n": 49,
+    "src": "/img/catalogo/pagina-49.jpg",
+    "sha256": "1d2250d259ff438de768d209045976f91a1bdc543db95b4d3aac73ee249ecb05"
   }
 ]

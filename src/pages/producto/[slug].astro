@@ -1,15 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductCard from '../../components/ProductCard.astro';
+import ProductGallery from '../../components/ProductGallery.astro';
 import Icon from '../../components/Icon.astro';
-import { products, related } from '../../lib/products';
+const { productsBySlug, related } = Astro.locals.catalog;
 import { waProducto, waListaPrecios } from '../../lib/whatsapp';
 import { site } from '../../lib/site';
 
-export function getStaticPaths() {
-  return products.map((p) => ({ params: { slug: p.slug }, props: { p } }));
-}
-const { p } = Astro.props;
+const p = productsBySlug.get(Astro.params.slug!);
+if (!p) return Astro.rewrite('/404');
 const wa = waProducto(p);
 const lista = waListaPrecios(`producto-${p.slug}`);
 const rel = related(p);
@@ -31,14 +30,14 @@ const productLd = {
   sku: p.sku,
   category: p.categoria,
   description: p.descripcion,
-  image: new URL(p.imagen, site.url).href,
+  image: (p.imagenes.length ? p.imagenes.map(image => image.src) : [p.imagen]).map(image => new URL(image, site.url).href),
   brand: { '@type': 'Brand', name: site.nombre },
   ...(p.precio != null && {
     offers: {
       '@type': 'Offer',
       price: p.precio,
       priceCurrency: 'CLP',
-      availability: 'https://schema.org/InStock',
+      ...(typeof p.stock === 'number' ? { availability: p.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' } : {}),
       url: new URL(`/producto/${p.slug}`, site.url).href,
       seller: { '@type': 'Organization', name: site.nombre },
     },
@@ -72,13 +71,14 @@ const breadcrumbLd = {
 
       <div class="prod">
         <div class="prod__media card">
-          <img src={p.imagen} alt={p.nombre} width="500" height="500" />
+          <ProductGallery product={p} />
           <span class="prod__cat">{p.categoria}</span>
         </div>
 
         <div class="prod__info">
           <h1>{p.nombre}</h1>
           <p class="prod__price">{p.precio_formato} <small>precio referencial · {p.unidad_venta}</small></p>
+          <p>{p.iva === 'Incluido' ? 'IVA incluido' : p.iva === 'No incluido' ? 'IVA no incluido' : 'Consultar condiciones de IVA'}</p>
           <p class="prod__desc">{p.descripcion}</p>
 
           <div class="prod__cta">
@@ -118,7 +118,7 @@ const breadcrumbLd = {
   .crumbs a:hover { color: var(--tp-red); }
   .crumbs span { margin: 0 .35rem; }
   .prod { display: grid; gap: clamp(20px, 4vw, 44px); grid-template-columns: 1fr; }
-  .prod__media { position: relative; aspect-ratio: 1; display: grid; place-items: center; background: #f1f4fb; overflow: hidden; }
+  .prod__media { position: relative; display: grid; place-items: center; background: #f1f4fb; overflow: hidden; }
   .prod__media img { width: 70%; height: 70%; object-fit: contain; }
   .prod__cat { position: absolute; top: 12px; left: 12px; background: rgba(11,27,69,.85); color: #fff; font-size: .72rem; font-weight: 600; padding: .25rem .7rem; border-radius: var(--r-pill); }
   .prod__info h1 { margin-bottom: .6rem; }

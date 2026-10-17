@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "thaiplast-web",
+  "workers_dev": false,
+  "preview_urls": false,
+  "account_id": "aca3b8555721f0af34388ce8420e68d1",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-10-16",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "directory": "./dist/client", "binding": "ASSETS" },
+  "routes": [{ "pattern": "thaiplast.cl", "custom_domain": true }],
+  "kv_namespaces": [{ "binding": "SESSION", "id": "9a895aeebbe441c4b153134ac3b9801f" }],
+  "d1_databases": [{ "binding": "CATALOG_DB", "database_name": "thaiplast-catalog", "database_id": "0e1770d7-7471-46ba-a9aa-214d2f9ca0e4", "migrations_dir": "migrations" }],
+  "r2_buckets": [{ "binding": "PRODUCT_IMAGES", "bucket_name": "thaiplast-products" }],
+  "vars": { "ADMIN_EMAILS": "thaiplast.spa@gmail.com", "ACCESS_TEAM_DOMAIN": "curly-water-67cc.cloudflareaccess.com", "ACCESS_AUD": "8d7b969297e5e39dc84d886b27df1297b42daafb29df4aac9bcb61dfbe5a3c52" },
+  "observability": { "enabled": true },
+  "env": {
+    "preview": {
+      "name": "thaiplast-web-preview",
+      "workers_dev": true,
+      "routes": [],
+      "d1_databases": [{ "binding": "CATALOG_DB", "database_name": "thaiplast-catalog-preview", "database_id": "3015c721-0fa8-4665-ba9b-e00423458692", "migrations_dir": "migrations" }],
+      "r2_buckets": [{ "binding": "PRODUCT_IMAGES", "bucket_name": "thaiplast-products-preview" }],
+      "vars": { "ADMIN_EMAILS": "thaiplast.spa@gmail.com", "ACCESS_TEAM_DOMAIN": "", "ACCESS_AUD": "" }
+    }
+  }
+}

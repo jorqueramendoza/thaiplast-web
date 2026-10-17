@@ -1,0 +1,354 @@
+{
+  "generatedAt": "2026-10-17T01:10:18.298Z",
+  "officialProducts": 325,
+  "legacyRetained": 43,
+  "legacyInactive": 319,
+  "noImages": 191,
+  "imageStates": {
+    "sin_imagenes": 186,
+    "galeria_incompleta": 42,
+    "galeria_completa": 91,
+    "pendiente_verificacion": 6
+  },
+  "pages": [
+    {
+      "page": 4,
+      "title": "Vasos polipapel y accesorios",
+      "products": 15
+    },
+    {
+      "page": 5,
+      "title": "Vaso PET con tapa domo",
+      "products": 3
+    },
+    {
+      "page": 6,
+      "title": "Vasos plásticos",
+      "products": 8
+    },
+    {
+      "page": 7,
+      "title": "Vasos acrílicos",
+      "products": 4
+    },
+    {
+      "page": 8,
+      "title": "Copas plásticas",
+      "products": 5
+    },
+    {
+      "page": 9,
+      "title": "Vasos rojos gruesos",
+      "products": 2
+    },
+    {
+      "page": 10,
+      "title": "Vasos térmicos",
+      "products": 3
+    },
+    {
+      "page": 11,
+      "title": "Vasos sopa térmicos con tapa",
+      "products": 2
+    },
+    {
+      "page": 12,
+      "title": "Potes de degustación",
+      "products": 5
+    },
+    {
+      "page": 13,
+      "title": "Potes con tapa",
+      "products": 3
+    },
+    {
+      "page": 14,
+      "title": "Potes con tapa transparentes",
+      "products": 2
+    },
+    {
+      "page": 15,
+      "title": "Pote bisagra",
+      "products": 6
+    },
+    {
+      "page": 16,
+      "title": "Termoformados",
+      "products": 11
+    },
+    {
+      "page": 17,
+      "title": "Termoformados transparentes",
+      "products": 5
+    },
+    {
+      "page": 18,
+      "title": "Pastel triangular y rectangular",
+      "products": 4
+    },
+    {
+      "page": 19,
+      "title": "Cúpulas de tartaletas, tortas y brazo de reina",
+      "products": 6
+    },
+    {
+      "page": 20,
+      "title": "Potes heladeros",
+      "products": 2
+    },
+    {
+      "page": 21,
+      "title": "Contenedores de aluminio",
+      "products": 12
+    },
+    {
+      "page": 22,
+      "title": "Aluminio y alusa plástica",
+      "products": 6
+    },
+    {
+      "page": 23,
+      "title": "Espumados térmicos",
+      "products": 15
+    },
+    {
+      "page": 24,
+      "title": "Bolsas kraft con manilla",
+      "products": 9
+    },
+    {
+      "page": 25,
+      "title": "Sacos kraft",
+      "products": 9
+    },
+    {
+      "page": 26,
+      "title": "Cajas de cartón y food boxes",
+      "products": 12
+    },
+    {
+      "page": 27,
+      "title": "Caja circular kraft",
+      "products": 3
+    },
+    {
+      "page": 28,
+      "title": "Canasto kraft",
+      "products": 3
+    },
+    {
+      "page": 29,
+      "title": "Canastos, platos, canoas y huincha de cartón",
+      "products": 9
+    },
+    {
+      "page": 30,
+      "title": "Moldes",
+      "products": 5
+    },
+    {
+      "page": 31,
+      "title": "Estuches para papas fritas",
+      "products": 3
+    },
+    {
+      "page": 32,
+      "title": "Bolsas de papel blanco",
+      "products": 3
+    },
+    {
+      "page": 33,
+      "title": "Bolsas taco",
+      "products": 3
+    },
+    {
+      "page": 34,
+      "title": "Bolsas camiseta",
+      "products": 6
+    },
+    {
+      "page": 35,
+      "title": "Bolsas de polietileno",
+      "products": 36
+    },
+    {
+      "page": 36,
+      "title": "Bolsas de polipropileno",
+      "products": 22
+    },
+    {
+      "page": 37,
+      "title": "Bolsas zipper",
+      "products": 10
+    },
+    {
+      "page": 38,
+      "title": "Bolsas cubo de polietileno",
+      "products": 8
+    },
+    {
+      "page": 39,
+      "title": "Bolsas prepicadas y pull pack",
+      "products": 7
+    },
+    {
+      "page": 40,
+      "title": "Pincho de bambú",
+      "products": 3
+    },
+    {
+      "page": 41,
+      "title": "Bombillas",
+      "products": 6
+    },
+    {
+      "page": 42,
+      "title": "Palillos y brochetas de madera",
+      "products": 12
+    },
+    {
+      "page": 43,
+      "title": "Platos plásticos",
+      "products": 3
+    },
+    {
+      "page": 44,
+      "title": "Servilletas",
+      "products": 5
+    },
+    {
+      "page": 45,
+      "title": "Guantes y accesorios desechables",
+      "products": 14
+    },
+    {
+      "page": 46,
+      "title": "Hilos y ovillos",
+      "products": 3
+    },
+    {
+      "page": 47,
+      "title": "Hilo plástico",
+      "products": 4
+    },
+    {
+      "page": 48,
+      "title": "Sachet",
+      "products": 8
+    }
+  ],
+  "unmatchedDriveFolders": [
+    {
+      "name": "CUCHARA PLÁSTICA DE TÉ",
+      "url": "https://drive.google.com/drive/folders/1dRTLtxcApUHQznNlfVNppxecMBAk7Ztt"
+    },
+    {
+      "name": "CUCHARA SOPERA DE PLÁSTICO ",
+      "url": "https://drive.google.com/drive/folders/1JVzFERj2z1LFtPTRYBp4YlsLGTxk9GrH"
+    },
+    {
+      "name": "TENEDOR PLÁSTICO ",
+      "url": "https://drive.google.com/drive/folders/1huF2FmlDDNoU1dxDVErLXX9lTlCTSemL"
+    },
+    {
+      "name": "CUCHARA LARGA ",
+      "url": "https://drive.google.com/drive/folders/1Y7w4PzOQIMUWJluqceImCKSLjIk0vfCd"
+    },
+    {
+      "name": "CUCHILLO DE MADERA",
+      "url": "https://drive.google.com/drive/folders/1pazzsX1qFkQO21B3JArQS_veMbLdjS_M"
+    },
+    {
+      "name": "BOMBILLA 6ml COLORES",
+      "url": "https://drive.google.com/drive/folders/12PLQ51qr1rfuAh5sOinPaDmx_-RA5J75"
+    },
+    {
+      "name": "CUCHILLO PLÁSTICO ",
+      "url": "https://drive.google.com/drive/folders/1ovL8Lmz1p-njZa2-ha4u_-V8RCtp8oZa"
+    },
+    {
+      "name": "TENEDOR DE MADERA",
+      "url": "https://drive.google.com/drive/folders/1mVYfBXVcnI6FhHpKD5AU1NitXPrT3h3z"
+    },
+    {
+      "name": "PAPEL ANTIGRASA 28x34cm",
+      "url": "https://drive.google.com/drive/folders/1cZ1HZHJDR_KtFzVTLB4mljZnDzbX8xCe"
+    },
+    {
+      "name": "CUCHARA TÉ DE MADERA",
+      "url": "https://drive.google.com/drive/folders/1KvT8b2HYaS9-YHf0KEPEbmf6mq6PNBpm"
+    },
+    {
+      "name": "CUCHARA DE MADERA GRANDE",
+      "url": "https://drive.google.com/drive/folders/1Kq9UgFcyPd8WywHpBmHOMiUiLlG9jGNY"
+    },
+    {
+      "name": "GORRO CLIP",
+      "url": "https://drive.google.com/drive/folders/1sZnyh0fY5ieSDNuKE0Q8xTl1m10rJzK7"
+    },
+    {
+      "name": "BOWL KRAFT 1300cc",
+      "url": "https://drive.google.com/drive/folders/1g48oT1QXBhRDC2YQ5GOm8yTRImF7Otcl"
+    },
+    {
+      "name": "BOWL KRAFT 750cc",
+      "url": "https://drive.google.com/drive/folders/1WNg5eZIdmnmJkXp2kN8I2Iww-Qslmfiz"
+    },
+    {
+      "name": "BOWL KRAFT 1000cc",
+      "url": "https://drive.google.com/drive/folders/14U71MWefsRrBZ2JAffWp6J_SAPRdFycz"
+    },
+    {
+      "name": "BOWL KRAFT 500cc",
+      "url": "https://drive.google.com/drive/folders/1GOegxhM3N874r7tvXAqtI3YlhPtQ4TBH"
+    },
+    {
+      "name": "BOLSA KRAFT 7.5 KG",
+      "url": "https://drive.google.com/drive/folders/1b0gyCFSAhEmjfIi0KgqE7Jj92LiStDN4"
+    },
+    {
+      "name": "VASO 14-16 VULCAN",
+      "url": "https://drive.google.com/drive/folders/1XKWHIQTs2izfxY1HetHAHaU1DBMQyB_E"
+    },
+    {
+      "name": "CONO HILO PLÁSTICO T12000",
+      "url": "https://drive.google.com/drive/folders/1eNJ9FUOMygaPUlAg0iTuRKJYpbjerCpe"
+    },
+    {
+      "name": "COPA VENECIANA 240CC",
+      "url": "https://drive.google.com/drive/folders/19nhtb6cAdPbUojg2kIUEvVtjEnosvSqn"
+    },
+    {
+      "name": "COPA VENECIANA 150CC",
+      "url": "https://drive.google.com/drive/folders/1NZ1jSSZo0Wf81xzMjzCSTKKsxMVs268R"
+    },
+    {
+      "name": "PLATO PLÁSTICO 26cm 3 DIVISIONES",
+      "url": "https://drive.google.com/drive/folders/1Bo-X_S9L6uFHCgcMwbXRnDZGuUSWUnLu"
+    },
+    {
+      "name": "PLATO PLÁSTICO 17cm",
+      "url": "https://drive.google.com/drive/folders/1xcFw-zdvJ2EEXri-8ofPs442EJjVxY_B"
+    },
+    {
+      "name": "PLATO CARTÓN N°3",
+      "url": "https://drive.google.com/drive/folders/1ZwDs6PtBl8B8xFLfraU_Z4jHCEXLc-H3"
+    },
+    {
+      "name": "COPA VENECIANA 360cc",
+      "url": "https://drive.google.com/drive/folders/1Z_gmRBe8DIC4YiIIZROSbPkogZS4fz-4"
+    },
+    {
+      "name": "COPA VENECIANA 90cc",
+      "url": "https://drive.google.com/drive/folders/1b_WKExktPnCJvg5XG0VhpgYLkxIponTy"
+    },
+    {
+      "name": "ALUSA PLÁSTICA 30mts sin caja",
+      "url": "https://drive.google.com/drive/folders/1DQ-LbvJ-9bWKWoT5i1veEpurZ1khcEu7"
+    },
+    {
+      "name": "JUGO DE LIMÓN",
+      "url": "https://drive.google.com/drive/folders/1XoDwflwR6m_rcW8CsUJD4DhjibMJB51A"
+    }
+  ]
+}

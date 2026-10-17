@@ -5,22 +5,44 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "dev:local": "node scripts/dev-local.mjs",
     "start": "astro dev",
-    "build": "npm run import && astro build",
+    "build": "astro build",
+    "build:preview": "node scripts/build-preview.mjs",
     "preview": "astro preview",
     "astro": "astro",
-    "validate": "node scripts/validate-products.mjs",
-    "import": "node scripts/import-products.mjs",
+    "validate": "node scripts/validate-catalog.mjs",
+    "import": "node scripts/prepare-catalog.mjs",
+    "import:legacy": "node scripts/import-products.mjs",
     "import:xlsx": "node scripts/import-products.mjs --xlsx",
-    "extract:catalogo": "node scripts/extract-catalog-images.mjs",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "test:browser": "node scripts/test-browser.mjs",
+    "deploy": "node scripts/deploy.mjs",
+    "images:publish": "node scripts/publish-images.mjs",
+    "check": "astro check",
+    "catalog:ocr": "node scripts/ocr-catalog.mjs",
+    "db:local": "wrangler d1 migrations apply thaiplast-catalog --local",
+    "db:seed:local": "wrangler d1 execute thaiplast-catalog --local --file artifacts/catalog-seed.sql",
+    "extract:catalogo": "node scripts/catalog-pdf.mjs",
     "qr": "node scripts/make-qr.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
-    "astro": "^6.4.8"
+    "@astrojs/cloudflare": "^14.4.0",
+    "astro": "^7.4.0",
+    "exceljs": "^4.4.0",
+    "jose": "^6.2.12"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/node": "^11.1.8",
+    "@cloudflare/workers-types": "^5.20261016.1",
+    "@types/node": "^26.6.5",
+    "@types/pdfkit": "^0.17.6",
+    "pdfkit": "^0.20.2",
+    "playwright": "^1.64.1",
     "qrcode": "^1.5.4",
-    "xlsx": "^0.18.5"
+    "tesseract.js": "^7.0.0",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.151.1"
   }
 }

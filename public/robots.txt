@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /pedido
 
-Sitemap: https://thaiplast.cl/sitemap-index.xml
+Sitemap: https://thaiplast.cl/sitemap.xml

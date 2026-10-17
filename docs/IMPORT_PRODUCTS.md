@@ -1,75 +1,24 @@
-# Importar y actualizar productos
+# Catálogo oficial e importaciones
 
-Toda la información de productos sale de **`data/products.csv`** (o un `.xlsx`). El código
-nunca contiene productos: editas el archivo y reimportas.
+## Preparación inicial
 
-## Columnas del archivo
+1. Ejecuta `node scripts/catalog-pdf.mjs "ruta/al/ThaiPlast_Catalogo_2026(1).pdf"` para extraer las 49 páginas y actualizar la descarga pública.
+2. `npm run catalog:ocr` ayuda a leer las páginas. El OCR requiere modelos de español e inglés y no sustituye la revisión visual.
+3. La transcripción revisada está en data/catalogo-oficial.txt. Cada sección empieza con @página, título, categoría, grupo e IVA, separados por barras verticales. Cada producto contiene nombre, medida, presentación, precio entero, alias exactos de carpetas separados por punto y coma, y notas.
+4. El inventario de ambas ramas de Drive está en data/drive-inventory.json. Las descargas autenticadas se guardan por ID en artifacts/drive-originals; nunca se guardan enlaces temporales ni credenciales en Git.
+5. `npm run import` optimiza imágenes, concilia los registros anteriores y produce la instantánea, informes y semilla SQL.
+6. `npm run validate` comprueba IDs, slugs, precios, cobertura de páginas y existencia de los archivos.
 
-El archivo debe tener esta fila de encabezado (en este orden):
+El generador conserva una copia de los datos anteriores y reutiliza identificadores solo ante correspondencias inequívocas. Los demás se conservan como inactivos. Nunca inventa una asociación por similitud entre medidas diferentes.
 
-```
-SKU,Categoría,Producto,Medida/Capacidad,Presentación,Color,Material,Uso Recomendado,Precio,Stock
-```
+## Entregables
 
-- **Precio:** se acepta "$1.000" o "1000". Se guarda como entero.
-- **Stock:** opcional. Si está vacío, no se muestra.
-- **Categoría:** debe existir en `data/category-map.json`. Si es nueva, agrégala ahí.
+entregables contiene la transcripción Markdown, el Excel completo, el Excel de faltantes y el PDF de productos sin imágenes. La hoja Sin imágenes incluye toda variante sin fotos asociadas, incluso si también aparece en Por verificar. La suma de estados no se obtiene sumando hojas superpuestas.
 
-## Flujo para actualizar precios o agregar productos
+Los resultados de Drive se registran en entregables/drive-links.json. Los originales, OCR y bases de pruebas permanecen fuera de Git.
 
-1. Edita `data/products.csv` (en Excel: "Guardar como" → CSV UTF-8) **o** `data/products.xlsx`.
-2. Revisa que no haya errores:
-   ```bash
-   npm run validate
-   ```
-3. Regenera los datos:
-   ```bash
-   npm run import          # desde CSV
-   npm run import:xlsx     # desde XLSX (instala antes: npm i -D xlsx)
-   ```
-4. Verifica localmente:
-   ```bash
-   npm run dev
-   ```
-5. Publica (ver [DEPLOYMENT.md](DEPLOYMENT.md)):
-   ```bash
-   git add data/ && git commit -m "Actualiza productos" && git push
-   ```
-   Cloudflare reconstruye el sitio solo. `npm run build` ya ejecuta el `import`.
+## Actualizaciones posteriores
 
-## Agregar una categoría nueva
+Usa el administrador y su exportación Excel como plantilla. Las escrituras pasan por la misma validación del servidor y requieren la versión que se exportó. El build no importa archivos ni modifica la base.
 
-1. En `data/category-map.json`, agrega el nombre exacto de la categoría dentro del grupo que
-   corresponda (o crea un grupo nuevo con su `slug`, `nombre`, `descripcion`, `icono`).
-2. Reimporta. La categoría aparecerá en el menú y en los filtros.
-
-## Fotos de producto
-
-Hoy cada producto usa un **placeholder por grupo**. El importador resuelve la imagen así
-(función `resolveImage()` en `scripts/import-products.mjs`), en orden de prioridad:
-
-1. **Columna `Imagen`** en el CSV (ruta `/img/...` o URL `https://...`), si existe.
-2. **Archivo por slug**: `public/img/products/<grupo>/<slug>.(jpg|jpeg|webp|png|avif)`.
-3. **Placeholder** del grupo.
-
-### Forma recomendada (sin tocar el CSV)
-1. Mira en `data/products.json` el `grupo` y el `slug` del producto.
-2. Guarda la foto (cuadrada, ~600×600, WebP/JPG) como
-   `public/img/products/<grupo>/<slug>.jpg`. Ejemplo:
-   `public/img/products/vasos-y-tapas/vaso-90-cc-90-cc.jpg`.
-3. `npm run import` y la foto aparece sola en la tarjeta y la ficha.
-
-> Las fotos se pueden recortar desde las páginas del catálogo en `public/img/catalogo/`.
-
-## Catálogo visual (páginas del PDF)
-
-El catálogo PDF son **páginas-imagen** (sin texto extraíble). Para regenerar la galería
-`/catalogo-visual` a partir del PDF:
-
-```bash
-npm run extract:catalogo   # vuelca las páginas a public/img/catalogo/pagina-*.jpg
-```
-
-Si llega un catálogo nuevo: reemplaza `Catálogo ThaiPlast .pdf` (o `public/catalogo-thaiplast.pdf`),
-corre `npm run extract:catalogo` y vuelve a publicar. El documento canónico de **datos**
-sigue siendo el CSV/Excel: transcribe los productos nuevos ahí y reimporta.
+Los comandos import:legacy e import:xlsx se conservan únicamente para recuperar el importador CSV/XLSX anterior. Esos comandos reemplazan la instantánea local; no deben usarse para mantener el catálogo oficial ni el catálogo publicado.

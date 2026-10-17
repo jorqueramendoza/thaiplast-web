@@ -14,21 +14,23 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {
-  ROOT, DATA_DIR, parseCsv, slugify, parsePrice, formatPrice,
+  ROOT, DATA_DIR, parseCsv, slugify, formatPrice,
   loadCategoryMap, findHeaderIndex, normalizeRow,
 } from './lib.mjs';
 
 const TODAY = new Date().toISOString().slice(0, 10);
 const useXlsx = process.argv.includes('--xlsx');
 
-function readRows() {
+async function readRows() {
   if (useXlsx) {
     // Carga perezosa: solo se requiere 'xlsx' si se usa --xlsx.
     const xlsxPath = path.join(DATA_DIR, 'products.xlsx');
-    const XLSX = require('xlsx');
-    const wb = XLSX.readFile(xlsxPath);
-    const sheet = wb.Sheets[wb.SheetNames[0]];
-    return XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false, defval: '' });
+    const { default: ExcelJS } = await import('exceljs');
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.readFile(xlsxPath);
+    const rows = [];
+    workbook.worksheets[0].eachRow(row => rows.push(Array.from({ length: row.cellCount }, (_, index) => String(row.getCell(index + 1).value ?? ''))));
+    return rows;
   }
   const csv = fs.readFileSync(path.join(DATA_DIR, 'products.csv'), 'utf8');
   return parseCsv(csv);
@@ -77,9 +79,9 @@ function buildDescription({ nombre, medida, material, uso }) {
   return desc.replace(/\.\.$/, '.');
 }
 
-function main() {
+async function main() {
   const { grupos, index } = loadCategoryMap();
-  const rows = readRows();
+  const rows = await readRows();
   const headerIdx = findHeaderIndex(rows);
   if (headerIdx < 0) { console.error('✖ No se encontró la fila de encabezado (SKU,...). Abortando.'); process.exit(1); }
 
@@ -176,9 +178,5 @@ function main() {
     if (warnings.length > 30) console.log(`  … y ${warnings.length - 30} más. Corrige en el Excel y reimporta.`);
   }
 }
-
-// Soporte require() dentro de ESM para el carga perezosa de 'xlsx'.
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
 
 main();

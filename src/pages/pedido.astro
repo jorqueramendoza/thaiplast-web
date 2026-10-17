@@ -34,6 +34,7 @@ const lista = waListaPrecios('pedido');
               <div><span>Total estimado</span><strong id="sum-total" class="order__total">$0</strong></div>
             </div>
             <p class="order__note">El total es referencial. El precio final por mayor se confirma por WhatsApp.</p>
+            <p class="order__note" id="price-status" role="status" aria-live="polite">Actualizando precios…</p>
             <a class="btn btn--wa btn--lg btn--block" id="send" href="#" target="_blank" rel="noopener">
               <Icon name="whatsapp" size={20} /> Enviar pedido por WhatsApp
             </a>
@@ -79,7 +80,7 @@ const lista = waListaPrecios('pedido');
 </style>
 
 <script>
-  import { getCart, setQty, removeItem, clearCart, onCartChange } from '../lib/cart';
+  import { getCart, setQty, removeItem, clearCart, onCartChange, refreshCart } from '../lib/cart';
   import { waPedido } from '../lib/whatsapp';
 
   const empty = document.getElementById('empty') as HTMLElement;
@@ -90,6 +91,7 @@ const lista = waListaPrecios('pedido');
   const send = document.getElementById('send') as HTMLAnchorElement;
 
   const clp = (n: number) => '$' + n.toLocaleString('es-CL');
+  const escapeHtml = (value: string) => value.replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]!));
 
   function render() {
     const items = getCart();
@@ -98,13 +100,15 @@ const lista = waListaPrecios('pedido');
     content.hidden = !has;
     if (!has) return;
 
-    list.innerHTML = items.map((i) => `
+    list.innerHTML = items.map((item) => {
+      const i = { ...item, id: escapeHtml(item.id), slug: escapeHtml(item.slug), imagen: escapeHtml(item.imagen), nombre: escapeHtml(item.nombre), sku: escapeHtml(item.sku), presentacion: escapeHtml(item.presentacion) };
+      return `
       <li class="oi card" data-id="${i.id}">
         <img class="oi__img" src="${i.imagen}" alt="" width="64" height="64" />
         <div>
           <div class="oi__name"><a href="/producto/${i.slug}">${i.nombre}</a></div>
           <div class="oi__meta">${i.presentacion || ''}${i.sku ? ' · ' + i.sku : ''}</div>
-          <div class="oi__price">${i.precio != null ? clp(i.precio) : 'Consultar'} c/u</div>
+          <div class="oi__price">${i.disponible === false ? 'Producto no disponible: retíralo del pedido' : i.precio != null ? clp(i.precio) + ' c/u' : 'Consultar precio'}</div>
         </div>
         <div class="oi__right">
           <div class="qty">
@@ -114,7 +118,8 @@ const lista = waListaPrecios('pedido');
           </div>
           <button class="oi__remove" data-remove>Eliminar</button>
         </div>
-      </li>`).join('');
+      </li>`;
+    }).join('');
 
     const totalItems = items.reduce((n, i) => n + i.cantidad, 0);
     const total = items.reduce((s, i) => s + (i.precio ?? 0) * i.cantidad, 0);
@@ -149,4 +154,25 @@ const lista = waListaPrecios('pedido');
 
   render();
   onCartChange(render);
+  let syncing = false;
+  async function syncPrices() {
+    if (syncing) return;
+    syncing = true;
+    try {
+      const items = await refreshCart();
+      document.getElementById('price-status')!.textContent = items.some(item => item.disponible === false) ? 'Retira los productos no disponibles antes de enviar.' : items.some(item => item.precio == null) ? 'El total incluye solo los productos con precio informado.' : 'Precios actualizados.';
+    } catch (error) { document.getElementById('price-status')!.textContent = (error as Error).message; }
+    finally { syncing = false; }
+  }
+  send.addEventListener('click', async event => {
+    event.preventDefault();
+    try {
+      const items = await refreshCart();
+      if (!items.length || items.some(item => item.disponible === false)) throw new Error('Retira los productos no disponibles antes de enviar el pedido.');
+      location.assign(waPedido(items));
+    } catch (error) { document.getElementById('price-status')!.textContent = (error as Error).message; }
+  });
+  window.addEventListener('focus', syncPrices);
+  window.setInterval(syncPrices, 30000);
+  syncPrices();
 </script>

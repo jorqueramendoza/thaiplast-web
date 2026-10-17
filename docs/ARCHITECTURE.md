@@ -1,54 +1,29 @@
 # Arquitectura
 
-Sitio **estático** generado con Astro y desplegado en Cloudflare Pages. Se renderiza
-HTML completo en el build (excelente SEO y velocidad). El JavaScript se limita a:
-carrito de pedido, buscador/filtros del catálogo y badge del carrito.
+Astro con renderizado en servidor y JavaScript nativo. La actualización a Astro 7 y adaptadores compatibles elimina los avisos críticos de la versión anterior al incorporar administración y solicitudes al servidor.
 
-## Estructura
+## Datos
 
-```
-data/
-  products.csv         Lista de precios (fuente de trabajo)
-  products.json        GENERADO por npm run import (fuente del build)
-  categories.json      GENERADO: grupos de navegación + conteos
-  category-map.json    Config: categoría del CSV → grupo de navegación
-scripts/
-  lib.mjs              Utilidades compartidas (CSV, slug, precios)
-  import-products.mjs  CSV/XLSX → products.json + categories.json
-  validate-products.mjs Reporta problemas del CSV sin modificarlo
-public/
-  catalogo-thaiplast.pdf       Descarga "Ver catálogo"
-  img/brand/logo.jpg           Logo oficial
-  img/products/_placeholder/   Placeholders SVG por grupo
-src/
-  lib/        site.ts, whatsapp.ts, products.ts, format.ts, cart.ts
-  components/ Header, Footer, WhatsAppFloat, CtaBlock, ProductCard, Icon
-  layouts/    BaseLayout.astro (SEO, JSON-LD, header/footer)
-  pages/      index, catalogo/, producto/[slug], industrias/, pedido, contacto…
-  styles/     tokens.css (marca), global.css
-```
+El catálogo vigente reside en Cloudflare D1, no en un Excel ni en el JSON del build. Cada petición lee D1; los datos se comparten dentro de la petición mediante Astro.locals. Inicio, categorías, industrias, fichas, conteos, precios y sitemap consultan ese catálogo. El HTML y la API se sirven con Cache-Control: no-store.
 
-## Flujo de datos
+Las pestañas públicas consultan la revisión cada 30 segundos y al recuperar el foco. Si cambió, recargan el catálogo. El pedido revalida los registros guardados en localStorage al abrirse, periódicamente y antes de generar WhatsApp. Los inactivos se señalan y bloquean el envío; los precios desconocidos permanecen como Consultar.
 
-```
-products.csv  ──(npm run import)──►  products.json ─┐
-category-map.json ──────────────────► categories.json ─┴─► Astro build ─► /dist ─► Cloudflare
-```
+## Fotografías
 
-Cero productos hardcodeados: las páginas leen `src/lib/products.ts`, que importa los JSON.
+Cada producto tiene una portada y hasta cuatro imágenes. Los archivos importados se optimizan a WebP con miniaturas y nombres por SHA-256. /media/catalog consulta R2 y conserva un respaldo de los archivos iniciales en los activos estáticos. Las nuevas cargas del panel van a R2. Los originales de Drive quedan en artifacts/drive-originals, excluidos de Git.
 
-## Decisiones clave
+ProductCarousel se comparte entre las tarjetas y ProductGallery. El controlador usa JavaScript nativo, precarga únicamente la siguiente fotografía solicitada y aplica un fundido de 400 ms. Un IntersectionObserver suspende los temporizadores fuera de pantalla; foco, cursor y visibilidad de la pestaña también detienen la reproducción. Hay controles de pausa, teclado y gestos horizontales. prefers-reduced-motion desactiva el inicio automático y el fundido. Sin JavaScript se conserva la portada y el enlace del producto, sin controles inoperantes.
 
-- **Sin framework UI (React/Vue):** se usan `<script>` nativos de Astro. Menos JS, más velocidad.
-- **Carrito en `localStorage`** (`src/lib/cart.ts`): no hay backend ni pagos. El pedido se
-  convierte en un mensaje de WhatsApp (`src/lib/whatsapp.ts`).
-- **Conversión centralizada:** todos los CTA importantes generan enlaces `wa.me` con
-  mensajes prearmados y una etiqueta de origen para medir desde qué punto llegó el lead.
-- **SKUs duplicados del CSV** se resuelven generando un `id` único por producto; el `sku`
-  original se conserva como dato informativo.
+Drive conserva los archivos originales y las planillas de auditoría. La primera versión no sincroniza automáticamente cambios posteriores de Drive ni planillas editadas allí.
 
-## Rendimiento
+## Administración
 
-- HTML estático + CSS crítico inline (`inlineStylesheets: 'auto'`).
-- Imágenes `loading="lazy"`, placeholders SVG livianos.
-- El JSON de productos **no** se envía al navegador (solo se usa en el build).
+Cloudflare Access identifica al administrador y la aplicación verifica firma, emisor, audiencia y correo del JWT en todas las rutas privadas, incluso en dominios alternativos. Las escrituras exigen mismo origen. No existe una contraseña guardada en código ni registro público de usuarios.
+
+La validación ocurre en el servidor. La vista previa de Excel no modifica datos. Confirmar realiza una transacción que comprueba versiones, guarda registros y auditoría e incrementa la revisión. Un conflicto o error cancela todo el lote.
+
+## Desarrollo
+
+Cloudflare es el destino de producción. El servidor alternativo Node usa SQLite y almacenamiento dentro de .local, mediante un alias de compilación que no se incluye en el Worker. El acceso de pruebas solo funciona con import.meta.env.DEV, loopback y un token explícito. Las pruebas crean una base separada.
+
+El sitio mantiene los pedidos por WhatsApp, sin cobros ni checkout.

@@ -1,0 +1,224 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+if (!Astro.locals.adminEmail) return new Response('No autorizado', { status: 403 });
+---
+<BaseLayout title="Administrar catálogo" noindex={true}>
+  <section class="section admin">
+    <div class="container">
+      <div class="admin__heading"><div><p class="eyebrow">ThaiPlast · Administración</p><h1>Tu catálogo, al día</h1><p>Precios, productos y fotografías. Los cambios guardados se publican automáticamente.</p></div><a href="/cdn-cgi/access/logout" class="btn">Cerrar sesión</a></div>
+      <p class="admin__account">Sesión: {Astro.locals.adminEmail}</p>
+      <div class="admin__stats" id="stats"></div>
+      <div class="admin__toolbar">
+        <label>Buscar producto<input id="search" type="search" placeholder="Nombre, SKU o medida" /></label>
+        <label>Mostrar<select id="filter"><option value="all">Todos</option><option value="active">Publicados</option><option value="inactive">Inactivos</option><option value="sin_imagenes">Sin imágenes</option><option value="galeria_incompleta">Galería incompleta</option><option value="pendiente_verificacion">Por verificar</option></select></label>
+        <button id="add" class="btn btn--blue">Nuevo producto</button>
+        <button id="export" class="btn">Exportar Excel</button>
+        <button id="missing" class="btn">Exportar faltantes</button>
+        <label class="btn admin__import">Importar Excel<input id="import" type="file" accept=".xlsx" /></label>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+      <div class="admin__table"><table><thead><tr><th>Producto</th><th>Presentación</th><th>Precio CLP</th><th>Imágenes</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="products"></tbody></table></div>
+      <button id="history" class="btn">Ver últimos cambios</button>
+      <pre id="history-output" hidden></pre>
+    </div>
+  </section>
+  <dialog id="editor" class="admin__dialog">
+    <form id="product-form">
+      <div class="admin__heading"><h2 id="editor-title">Editar producto</h2><button type="button" id="close" class="btn">Cerrar</button></div>
+      <div class="admin__fields">
+        <label>Nombre<input name="nombre" required maxlength="300" /></label>
+        <label>SKU<input name="sku" maxlength="300" /></label>
+        <label>URL del producto<input name="slug" required pattern="[a-z0-9]+(-[a-z0-9]+)*" /></label>
+        <label>Categoría<input name="categoria" required maxlength="300" /></label>
+        <label>Grupo<select name="grupo" required></select></label>
+        <label>Medida o capacidad<input name="medida" maxlength="300" /></label>
+        <label>Presentación<input name="presentacion" maxlength="300" /></label>
+        <label>Precio CLP<input name="precio" type="number" min="1" max="1000000000" step="1" placeholder="Vacío: Consultar" /></label>
+        <label>Color<input name="color" maxlength="300" /></label>
+        <label>Material<input name="material" maxlength="300" /></label>
+        <label>Uso<input name="uso" maxlength="300" /></label>
+        <label>IVA<select name="iva"><option>No indicado</option><option>Incluido</option><option>No incluido</option></select></label>
+        <label>Stock<input name="stock" type="number" min="0" step="1" placeholder="Sin información" /></label>
+        <label class="admin__check"><input name="activo" type="checkbox" /> Publicado</label>
+        <label class="admin__check"><input name="imagenes_compartidas" type="checkbox" /> Fotos compartidas entre variantes</label>
+        <label class="admin__check"><input name="revisar" type="checkbox" /> Requiere verificar las imágenes</label>
+      </div>
+      <label>Descripción<textarea name="descripcion" maxlength="6000" rows="3"></textarea></label>
+      <label>Notas internas<textarea name="notas" maxlength="6000" rows="2"></textarea></label>
+      <h3>Fotografías</h3><p>La primera será la portada. Hasta cuatro imágenes, de máximo 10 MB cada una.</p>
+      <div id="gallery" class="admin__gallery"></div>
+      <label class="btn">Agregar fotografías<input id="upload" type="file" accept="image/png,image/jpeg,image/webp" multiple /></label>
+      <p id="editor-status" role="status" aria-live="polite"></p>
+      <button id="save" class="btn btn--blue" type="submit">Guardar cambios</button>
+    </form>
+  </dialog>
+  <dialog id="preview" class="admin__dialog"><h2>Revisar importación</h2><p>No se ha guardado ningún cambio. Revisa los precios y estados antes de confirmar.</p><div id="preview-content" class="admin__table"></div><div class="admin__toolbar"><button id="confirm-import" class="btn btn--blue">Confirmar importación</button><button id="cancel-import" class="btn">Cancelar</button></div></dialog>
+</BaseLayout>
+
+<style>
+  .admin__heading { display:flex; justify-content:space-between; align-items:start; gap:1rem; flex-wrap:wrap; }
+  .admin__account { color:var(--tp-muted); font-size:.85rem; margin:1rem 0; }
+  .admin__stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1rem; margin:1.5rem 0; }
+  .admin__stats :global(div) { border:1px solid var(--tp-line); background:white; border-radius:14px; padding:1rem; }
+  .admin__stats :global(strong) { display:block; font-size:1.8rem; color:var(--tp-blue); }
+  .admin__toolbar { display:flex; flex-wrap:wrap; gap:.75rem; align-items:end; margin:1rem 0; }
+  .admin :global(label), .admin__dialog label { display:grid; gap:.35rem; font-weight:600; font-size:.9rem; }
+  .admin :global(input), .admin :global(select), .admin__dialog input, .admin__dialog select, .admin__dialog textarea { font:inherit; padding:.65rem; border:1px solid var(--tp-line); border-radius:8px; width:100%; background:white; color:var(--tp-ink); }
+  .admin__import input { position:absolute; width:1px; height:1px; opacity:0; }
+  .admin__table { overflow-x:auto; background:white; border:1px solid var(--tp-line); border-radius:12px; margin:1rem 0; }
+  .admin__table :global(table) { width:100%; border-collapse:collapse; text-align:left; font-size:.9rem; }
+  .admin__table :global(td), .admin__table :global(th) { padding:.85rem; border-bottom:1px solid var(--tp-line); }
+  .admin__table :global(th) { background:var(--tp-bg-soft); white-space:nowrap; }
+  .admin__dialog { width:min(900px,94vw); max-height:90vh; margin:auto; overflow:auto; border:0; border-radius:18px; padding:clamp(18px,3vw,32px); color:var(--tp-ink); }
+  .admin__dialog::backdrop { background:rgba(11,27,69,.65); }
+  .admin__fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin:1rem 0; }
+  .admin__dialog label { margin:.6rem 0; }
+  .admin__dialog .admin__check { display:flex; align-items:center; gap:.5rem; }
+  .admin__check input { width:auto; }
+  .admin__gallery { display:flex; gap:1rem; flex-wrap:wrap; margin:1rem 0; }
+  .admin__gallery :global(img) { width:120px; height:120px; object-fit:contain; background:var(--tp-bg); }
+  .admin__gallery :global(button) { display:block; margin:.25rem 0; }
+  #status, #editor-status { min-height:1.5rem; white-space:pre-wrap; }
+  #history-output { overflow:auto; background:white; padding:1rem; white-space:pre-wrap; }
+  @media(max-width:600px) { .admin__fields { grid-template-columns:1fr; } }
+</style>
+
+<script>
+  import { normalizeProduct, type Product, type ProductImage } from '../../lib/catalog-model';
+  import { createWorkbook, parseWorkbook } from '../../lib/workbook';
+  const element = <Type extends HTMLElement>(id: string) => document.getElementById(id) as Type;
+  const editor = element<HTMLDialogElement>('editor');
+  const preview = element<HTMLDialogElement>('preview');
+  const form = element<HTMLFormElement>('product-form');
+  const status = element('status');
+  const editorStatus = element('editor-status');
+  let products: Product[] = [];
+  let selected: Product | null = null;
+  let pending: Record<string, unknown>[] = [];
+  let groups: { slug: string; nombre: string }[] = [];
+  const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
+  const labels: Record<string, string> = { sin_imagenes: 'Sin imágenes', galeria_incompleta: 'Incompleta', galeria_completa: 'Completa', pendiente_verificacion: 'Por verificar' };
+  interface ApiResult {
+    products: Product[];
+    saved: number;
+    changes: { nombre: string; precio_anterior: number | null; precio_nuevo: number | null; activo: boolean }[];
+    history: { created_at: string; actor: string; product_id: string; action: string }[];
+    error?: string;
+    errors?: { row: number; message: string }[];
+  }
+  async function api(path: string, options?: RequestInit) {
+    const response = await fetch(path, { ...options, headers: { 'Content-Type': 'application/json', ...options?.headers } });
+    const data = await response.json() as ApiResult;
+    if (!response.ok) throw new Error(data.errors?.map((error: { row: number; message: string }) => `Fila ${error.row}: ${error.message}`).join('\n') || data.error || 'No se pudo completar la operación');
+    return data;
+  }
+  function cell(row: HTMLTableRowElement, text: unknown) { const result = row.insertCell(); result.textContent = String(text ?? ''); return result; }
+  function render() {
+    const search = element<HTMLInputElement>('search').value.toLowerCase();
+    const filter = element<HTMLSelectElement>('filter').value;
+    const body = element<HTMLTableSectionElement>('products');
+    body.replaceChildren();
+    for (const product of products.filter(product => `${product.nombre} ${product.sku} ${product.medida}`.toLowerCase().includes(search) && (filter === 'all' || filter === 'active' && product.activo || filter === 'inactive' && !product.activo || (filter === 'sin_imagenes' ? product.imagenes.length === 0 : filter === product.estado_imagenes)))) {
+      const row = body.insertRow();
+      cell(row, product.nombre); cell(row, product.presentacion); cell(row, product.precio_formato); cell(row, `${product.imagenes.length}/4 · ${labels[product.estado_imagenes]}`); cell(row, product.activo ? 'Publicado' : 'Inactivo');
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'btn'; button.textContent = 'Editar'; button.addEventListener('click', () => openEditor(product)); cell(row, '').append(button);
+    }
+    const stats = element('stats'); stats.replaceChildren();
+    for (const [label, count] of [['Publicados', products.filter(product => product.activo).length], ['Sin imágenes', products.filter(product => product.activo && product.imagenes.length === 0).length], ['Incompletos', products.filter(product => product.activo && product.estado_imagenes === 'galeria_incompleta').length], ['Por verificar', products.filter(product => product.activo && product.estado_imagenes === 'pendiente_verificacion').length]]) {
+      const box = document.createElement('div'); const value = document.createElement('strong'); value.textContent = String(count); box.append(value, String(label)); stats.append(box);
+    }
+  }
+  async function load() {
+    const data = await api('/api/admin/products'); products = data.products;
+    groups = [...new Map(products.map(product => [product.grupo, { slug: product.grupo, nombre: product.grupo_nombre }])).values()];
+    const select = field('grupo') as unknown as HTMLSelectElement; select.replaceChildren();
+    for (const group of groups) select.add(new Option(group.nombre, group.slug));
+    render();
+  }
+  function openEditor(product: Product) {
+    selected = structuredClone(product); editorStatus.textContent = '';
+    for (const name of ['nombre', 'sku', 'slug', 'categoria', 'grupo', 'medida', 'presentacion', 'precio', 'color', 'material', 'uso', 'iva', 'stock', 'descripcion', 'notas']) field(name).value = String(product[name as keyof Product] ?? '');
+    field('slug').readOnly = product.version > 0;
+    field('activo').checked = product.activo; field('imagenes_compartidas').checked = product.imagenes_compartidas; field('revisar').checked = product.estado_imagenes === 'pendiente_verificacion';
+    element('editor-title').textContent = product.version ? 'Editar producto' : 'Nuevo producto';
+    renderGallery(); editor.showModal();
+  }
+  function renderGallery() {
+    const gallery = element('gallery'); gallery.replaceChildren();
+    selected?.imagenes.forEach((image, index) => {
+      const box = document.createElement('div'); const photo = document.createElement('img'); photo.src = image.thumbnail || image.src; photo.alt = image.alt; box.append(photo);
+      for (const [text, action] of [['Hacer portada', () => { const [image] = selected!.imagenes.splice(index, 1); selected!.imagenes.unshift(image); renderGallery(); }], ['Quitar', () => { selected!.imagenes.splice(index, 1); renderGallery(); }]] as const) {
+        const button = document.createElement('button'); button.type = 'button'; button.textContent = text; button.addEventListener('click', action); box.append(button);
+      }
+      gallery.append(box);
+    });
+  }
+  element('close').addEventListener('click', () => editor.close());
+  element('search').addEventListener('input', render); element('filter').addEventListener('change', render);
+  element('add').addEventListener('click', () => {
+    const group = groups[0] || { slug: 'otros', nombre: 'Otros' };
+    const product = normalizeProduct({ id: crypto.randomUUID(), sku: '', nombre: '', slug: '', categoria: '', grupo: group.slug, grupo_nombre: group.nombre, medida: '', presentacion: '', color: '', material: '', uso: '', descripcion: '', precio: null, stock: null, activo: false });
+    product.version = 0; openEditor(product);
+  });
+  form.addEventListener('submit', async event => {
+    event.preventDefault(); if (!selected) return;
+    const save = element<HTMLButtonElement>('save'); save.disabled = true;
+    try {
+      const product = { ...selected };
+      for (const name of ['nombre', 'sku', 'slug', 'categoria', 'grupo', 'medida', 'presentacion', 'color', 'material', 'uso', 'iva', 'descripcion', 'notas'] as const) product[name] = field(name).value.trim();
+      product.precio = field('precio').value ? Number(field('precio').value) : null; product.stock = field('stock').value ? Number(field('stock').value) : null;
+      product.grupo_nombre = groups.find(group => group.slug === product.grupo)?.nombre || product.grupo;
+      product.activo = field('activo').checked; product.imagenes_compartidas = field('imagenes_compartidas').checked; product.estado_imagenes = field('revisar').checked ? 'pendiente_verificacion' : '';
+      await api('/api/admin/products', { method: 'POST', body: JSON.stringify({ products: [product] }) });
+      editor.close(); await load(); status.textContent = 'Cambios guardados. Los precios ya están actualizados.';
+    } catch (error) { editorStatus.textContent = (error as Error).message; } finally { save.disabled = false; }
+  });
+  element<HTMLInputElement>('upload').addEventListener('change', async event => {
+    const input = event.target as HTMLInputElement; if (!selected) return;
+    element<HTMLButtonElement>('save').disabled = true;
+    try {
+      for (const file of Array.from(input.files || [])) {
+        if (selected.imagenes.length >= 4) throw new Error('La galería ya tiene cuatro imágenes');
+        if (file.size > 10 * 1024 * 1024) throw new Error('Cada imagen debe pesar menos de 10 MB');
+        const response = await fetch('/api/admin/images', { method: 'POST', body: file, headers: { 'Content-Type': file.type } }); const image = await response.json() as ProductImage & { error?: string };
+        if (!response.ok) throw new Error(image.error);
+        selected.imagenes.push({ ...image, alt: field('nombre').value || file.name }); renderGallery();
+      }
+      editorStatus.textContent = 'Imágenes cargadas. Guarda el producto para publicarlas.';
+    } catch (error) { editorStatus.textContent = (error as Error).message; } finally { input.value = ''; element<HTMLButtonElement>('save').disabled = false; }
+  });
+  async function download(missing = false) {
+    status.textContent = 'Preparando Excel…';
+    try {
+      const current: Product[] = (await api('/api/admin/products')).products;
+      const active = current.filter(product => product.activo);
+      const sheets = missing ? [{ name: 'Sin imágenes', products: active.filter(product => product.imagenes.length === 0) }, { name: 'Galerías incompletas', products: active.filter(product => product.estado_imagenes === 'galeria_incompleta') }, { name: 'Por verificar', products: active.filter(product => product.estado_imagenes === 'pendiente_verificacion') }] : [{ name: 'Productos', products: current }];
+      const workbook = await createWorkbook(sheets); const bytes = await workbook.xlsx.writeBuffer();
+      const url = URL.createObjectURL(new Blob([bytes as BlobPart], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
+      const link = document.createElement('a'); link.href = url; link.download = `ThaiPlast_${missing ? 'Imagenes_Pendientes' : 'Productos'}_${new Date().toISOString().slice(0, 10)}.xlsx`; link.click(); setTimeout(() => URL.revokeObjectURL(url), 10000); status.textContent = 'Excel exportado.';
+    } catch (error) { status.textContent = (error as Error).message; }
+  }
+  element('export').addEventListener('click', () => download()); element('missing').addEventListener('click', () => download(true));
+  element<HTMLInputElement>('import').addEventListener('change', async event => {
+    const input = event.target as HTMLInputElement;
+    try {
+      const file = input.files?.[0]; if (!file) return; if (file.size > 10 * 1024 * 1024) throw new Error('El Excel debe pesar menos de 10 MB');
+      pending = await parseWorkbook(await file.arrayBuffer());
+      const result = await api('/api/admin/products', { method: 'POST', body: JSON.stringify({ products: pending, preview: true }) });
+      const table = document.createElement('table'); const head = table.createTHead().insertRow(); for (const label of ['Producto', 'Precio anterior', 'Precio nuevo', 'Publicado']) { const title = document.createElement('th'); title.textContent = label; head.append(title); }
+      for (const change of result.changes) { const row = table.insertRow(); cell(row, change.nombre); cell(row, change.precio_anterior ?? 'Consultar'); cell(row, change.precio_nuevo ?? 'Consultar'); cell(row, change.activo ? 'Sí' : 'No'); }
+      element('preview-content').replaceChildren(table); preview.showModal();
+    } catch (error) { pending = []; status.textContent = (error as Error).message; } finally { input.value = ''; }
+  });
+  element('cancel-import').addEventListener('click', () => { preview.close(); pending = []; });
+  element('confirm-import').addEventListener('click', async () => {
+    const button = element<HTMLButtonElement>('confirm-import'); button.disabled = true;
+    try { const result = await api('/api/admin/products', { method: 'POST', body: JSON.stringify({ products: pending }) }); preview.close(); pending = []; await load(); status.textContent = `${result.saved} productos actualizados.`; }
+    catch (error) { preview.close(); status.textContent = (error as Error).message; } finally { button.disabled = false; }
+  });
+  element('history').addEventListener('click', async () => {
+    try { const data = await api('/api/admin/history'); const output = element('history-output'); output.textContent = data.history.map((entry: { created_at: string; actor: string; product_id: string; action: string }) => `${entry.created_at} · ${entry.actor} · ${entry.action} · ${entry.product_id}`).join('\n') || 'Todavía no hay cambios.'; output.hidden = false; }
+    catch (error) { status.textContent = (error as Error).message; }
+  });
+  load().catch(error => { status.textContent = error.message; });
+</script>

@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import ProductCard from '../components/ProductCard.astro';
 import CtaBlock from '../components/CtaBlock.astro';
-import { activeCategories, featured, totalProducts } from '../lib/products';
+const { activeCategories, featured, totalProducts } = Astro.locals.catalog;
 import { industrias, site } from '../lib/site';
 import { waGeneral, waListaPrecios } from '../lib/whatsapp';
 

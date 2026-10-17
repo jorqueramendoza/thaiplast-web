@@ -30,3 +30,14 @@ Thumbs.db
 /idea_pagina.png
 /logo.jpg
 /Excel/
+
+artifacts/ocr/
+artifacts/drive-originals/
+artifacts/review/
+artifacts/*.sql
+artifacts/*.exe
+.wrangler/
+.npm-cache/
+.local/
+.dev.vars
+*.traineddata*

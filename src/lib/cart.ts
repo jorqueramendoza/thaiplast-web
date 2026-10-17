@@ -12,6 +12,7 @@ export interface CartItem {
   precio: number | null;
   imagen: string;
   cantidad: number;
+  disponible?: boolean;
 }
 
 const KEY = 'tp_pedido_v1';
@@ -41,6 +42,7 @@ export function addItem(item: Omit<CartItem, 'cantidad'>, cantidad = 1): void {
 }
 
 export function setQty(id: string, cantidad: number): void {
+  if (!Number.isSafeInteger(cantidad) || cantidad < 0 || cantidad > 1000000) return;
   let items = getCart();
   if (cantidad <= 0) {
     items = items.filter((i) => i.id !== id);
@@ -78,3 +80,16 @@ export function onCartChange(cb: (items: CartItem[]) => void): () => void {
 }
 
 export const CART_EVENT = EVENT;
+
+export async function refreshCart(): Promise<CartItem[]> {
+  const response = await fetch('/api/catalogo', { cache: 'no-store' });
+  if (!response.ok) throw new Error('No se pudieron confirmar los precios. Reintenta antes de enviar el pedido.');
+  const data = await response.json() as { products: CartItem[] };
+  const products = new Map<string, CartItem>((data.products as CartItem[]).map(product => [product.id, product]));
+  const items = getCart().map(item => {
+    const current = products.get(item.id);
+    return current ? { ...item, nombre: current.nombre, slug: current.slug, sku: current.sku, presentacion: current.presentacion, precio: current.precio, imagen: current.imagen, disponible: true } : { ...item, disponible: false };
+  });
+  save(items);
+  return items;
+}

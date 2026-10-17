@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-10-17T02:03:10.696Z",
+  "accountId": "aca3b8555721f0af34388ce8420e68d1",
+  "bucket": "thaiplast-products",
+  "uploaded": 766,
+  "bytes": 26836336,
+  "verified": [
+    "catalog/9f6f63f62bfdd8bbdf3f96f77deef1021583dc8896c2b461f54c813e818b07ed.webp",
+    "catalog/9f6f63f62bfdd8bbdf3f96f77deef1021583dc8896c2b461f54c813e818b07ed-thumb.webp",
+    "catalog/970222783666eac7720fe55c56f9d553a08ebf903fc2b2bbf6c426847129340b-thumb.webp",
+    "catalog/21d0e66f61aa596543c7f695905512e48144c922ad8afc6b911d380da3997fe0.webp",
+    "catalog/21d0e66f61aa596543c7f695905512e48144c922ad8afc6b911d380da3997fe0-thumb.webp"
+  ],
+  "previewBucket": "thaiplast-products-preview",
+  "previewImagesUploaded": false,
+  "websiteDeployed": false
+}

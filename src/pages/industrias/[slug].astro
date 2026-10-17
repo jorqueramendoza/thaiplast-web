@@ -4,12 +4,10 @@ import ProductCard from '../../components/ProductCard.astro';
 import CtaBlock from '../../components/CtaBlock.astro';
 import Icon from '../../components/Icon.astro';
 import { industrias, site } from '../../lib/site';
-import { getCategory, productsInGroup } from '../../lib/products';
+const { getCategory, productsInGroup } = Astro.locals.catalog;
 
-export function getStaticPaths() {
-  return industrias.map((ind) => ({ params: { slug: ind.slug }, props: { ind } }));
-}
-const { ind } = Astro.props;
+const ind = industrias.find(industry => industry.slug === Astro.params.slug);
+if (!ind) return Astro.rewrite('/404');
 
 const grupos = ind.grupos
   .map((g) => getCategory(g))

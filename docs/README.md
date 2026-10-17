@@ -1,61 +1,25 @@
-# ThaiPlast — Sitio web B2B
+# ThaiPlast — Catálogo administrable
 
-Sitio de catálogo **mobile-first** para ThaiPlast ("todo en desechables"). El objetivo
-no es vender online: es **generar solicitudes por WhatsApp**. Toda la información de
-productos vive en archivos externos (`/data`), nunca en el código.
+El catálogo oficial es ThaiPlast_Catalogo_2026(1).pdf, de 49 páginas. La transcripción contiene 325 variantes publicables. Hay 191 sin fotografías asociadas, 42 con galería incompleta y seis asociaciones por verificar; cinco de estas últimas también carecen de fotos.
 
-- **Stack:** [Astro](https://astro.build) (HTML estático + JS mínimo)
-- **Datos:** `data/products.csv` → `data/products.json` (vía `npm run import`)
-- **Hosting:** Cloudflare Pages
-- **Productos:** 362 (generados desde la lista de precios)
+## Empezar
 
-## Requisitos
+- `npm install`: instalar dependencias.
+- `npm run dev:local`: abrir el sitio en localhost con SQLite y archivos locales, sin Cloudflare.
+- `npm run dev`: emular el destino Cloudflare, con D1 y R2 locales.
+- `npm run validate`, `npm test`, `npm run check`: verificar datos y código.
+- `npm run test:browser`: probar panel, Excel, precios, fotografías y pedido en una base aislada.
+- `npm run build`: compilar para Cloudflare Workers.
 
-Este equipo **aún no tiene Node.js ni Git**. Para correr o publicar el sitio:
+El panel de producción exige Cloudflare Access. El modo local permanece cerrado salvo que se configure explícitamente un token de pruebas; el test de navegador lo genera temporalmente y no lo publica.
 
-1. Instala **Node.js LTS** (incluye npm): <https://nodejs.org/es> → botón "LTS".
-2. Instala **Git**: <https://git-scm.com/download/win>.
-3. Reinicia la terminal y verifica: `node -v` y `git -v`.
+## Documentación vigente
 
-> Mientras tanto, `data/products.json` y `data/categories.json` ya fueron generados,
-> así que el sitio se puede construir apenas instales Node.
+- [Estado y entregables](ESTADO_DEL_PROYECTO.md).
+- [Arquitectura](ARCHITECTURE.md).
+- [Modelo de datos](DATABASE.md).
+- [Guía del administrador](ADMIN_GUIDE.md).
+- [Importación y generación de informes](IMPORT_PRODUCTS.md).
+- [Configuración y publicación](DEPLOYMENT.md).
 
-## Puesta en marcha
-
-```bash
-npm install        # instala dependencias (una sola vez)
-npm run dev        # servidor local en http://localhost:4321
-npm run build      # importa productos + genera el sitio en /dist
-npm run preview    # previsualiza el build de producción
-```
-
-## Comandos de datos
-
-```bash
-npm run validate   # revisa data/products.csv y reporta problemas
-npm run import     # regenera products.json y categories.json desde el CSV
-npm run import:xlsx# igual, pero desde data/products.xlsx (requiere instalar 'xlsx')
-```
-
-## Antes de publicar (importante)
-
-Edita `src/lib/site.ts` con los **datos reales**:
-- `whatsapp` — número en formato internacional sin "+" (ej. `56912345678`)
-- `email`, `direccion`, `horario`, redes sociales
-- Actualiza `site` (dominio) en `astro.config.mjs` y `src/lib/site.ts`
-
-## Documentación
-
-| Archivo | Contenido |
-|---|---|
-| [ESTADO_DEL_PROYECTO.md](ESTADO_DEL_PROYECTO.md) | **Empieza aquí**: estado actual, despliegue y handoff |
-| [BITACORA.md](BITACORA.md) | Registro cronológico de todo lo hecho + config del dominio |
-| [CODEX_AGENTS_PROMPT.md](CODEX_AGENTS_PROMPT.md) | Prompt + roles de agentes para iterar con Codex |
-| [DISTRIBUCION.md](DISTRIBUCION.md) | Kit para traer visitas (Google Business, redes, QR) |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Estructura del proyecto y decisiones técnicas |
-| [DATABASE.md](DATABASE.md) | Esquema de datos de productos y categorías |
-| [IMPORT_PRODUCTS.md](IMPORT_PRODUCTS.md) | Cómo cargar/actualizar productos |
-| [ADMIN_GUIDE.md](ADMIN_GUIDE.md) | Guía no técnica para el cliente |
-| [DEPLOYMENT.md](DEPLOYMENT.md) | Publicar en Cloudflare Pages |
-| [SEO.md](SEO.md) | Estrategia y checklist SEO |
-| [ROADMAP.md](ROADMAP.md) | Fases y pendientes |
+`docs/BITACORA.md` conserva el historial del sitio anterior. Los documentos de SEO, distribución y roadmap describen trabajo previo y deben interpretarse con esta arquitectura actual.

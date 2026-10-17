@@ -1,0 +1,93 @@
+---
+import type { Product } from '../lib/catalog-model';
+
+interface Props { product: Product; compact?: boolean; }
+const { product, compact = false } = Astro.props;
+const images = product.imagenes.length ? product.imagenes : [{ src: product.imagen, alt: product.nombre }];
+const multiple = images.length > 1;
+---
+<div
+  class:list={['carousel', compact ? 'carousel--card' : 'carousel--detail']}
+  role="group"
+  aria-roledescription={multiple ? 'carrusel' : undefined}
+  aria-label={`Fotografías de ${product.nombre}`}
+  data-product-carousel={multiple ? '' : undefined}
+  data-carousel-images={multiple ? JSON.stringify(images.map(image => ({ src: image.src, alt: image.alt || product.nombre }))) : undefined}
+  data-carousel-current="0"
+  data-carousel-running="false"
+  data-gallery={!compact ? '' : undefined}
+>
+  <div class="carousel__stage" data-carousel-stage>
+    <a
+      class="carousel__link"
+      href={compact ? `/producto/${product.slug}` : images[0].src}
+      target={!compact ? '_blank' : undefined}
+      rel={!compact ? 'noopener' : undefined}
+      aria-label={compact ? `Ver ${product.nombre}` : `Abrir fotografía ampliada de ${product.nombre}`}
+      data-carousel-link
+      data-gallery-link={!compact ? '' : undefined}
+    >
+      <img class="carousel__image" src={images[0].src} alt={images[0].alt || product.nombre} width="600" height="600" loading={compact ? 'lazy' : 'eager'} decoding="async" data-carousel-image data-gallery-main={!compact ? '' : undefined} />
+      <img class="carousel__image carousel__overlay" alt="" width="600" height="600" aria-hidden="true" data-carousel-overlay hidden />
+      {compact && <span class="carousel__category">{product.categoria}</span>}
+    </a>
+    {multiple && <>
+      <div class="carousel__controls" data-carousel-controls hidden>
+        <button class="carousel__playback" type="button" aria-label={`Pausar carrusel de ${product.nombre}`} data-carousel-toggle><span aria-hidden="true" data-carousel-toggle-icon>Ⅱ</span><span class="carousel__playback-label" data-carousel-toggle-label>Pausar</span></button>
+        <button class="carousel__previous" type="button" aria-label={`Fotografía anterior de ${product.nombre}`} data-carousel-previous><span aria-hidden="true">‹</span></button>
+        <button class="carousel__next" type="button" aria-label={`Fotografía siguiente de ${product.nombre}`} data-carousel-next><span aria-hidden="true">›</span></button>
+        <span class="carousel__counter" aria-hidden="true" data-carousel-counter>1 / {images.length}</span>
+      </div>
+      <div class="carousel__selectors" role="group" aria-label="Seleccionar fotografía" data-carousel-selectors hidden>
+        {images.map((image, index) => <button type="button" aria-label={`Ver fotografía ${index + 1} de ${product.nombre}`} aria-pressed={index === 0 ? 'true' : 'false'} data-carousel-select={index} data-image-src={!compact ? image.src : undefined}>
+          {compact ? <span class="carousel__dot" aria-hidden="true"></span> : <img src={image.thumbnail || image.src} alt="" width="72" height="72" loading="lazy" />}
+        </button>)}
+      </div>
+      <span class="carousel__announcement" aria-live="polite" aria-atomic="true" data-carousel-announcement></span>
+    </>}
+  </div>
+</div>
+<style>
+  .carousel { width:100%; position:relative; }
+  .carousel__stage { position:relative; aspect-ratio:1; background:linear-gradient(160deg,#f6f9ff,#e9eef9); touch-action:pan-y pinch-zoom; }
+  .carousel--detail .carousel__stage { border-radius:12px; }
+  .carousel__link { position:absolute; inset:0; display:grid; place-items:center; border-radius:inherit; overflow:hidden; }
+  .carousel__image { width:100%; height:100%; object-fit:contain; grid-area:1 / 1; }
+  .carousel__overlay { position:absolute; inset:0; pointer-events:none; }
+  .carousel--card .carousel__image { width:80%; height:80%; }
+  .carousel--card .carousel__overlay { inset:10%; }
+  .carousel__category { position:absolute; top:10px; left:10px; max-width:calc(100% - 54px); background:color-mix(in srgb,var(--tp-navy) 88%,transparent); color:white; font-size:.68rem; font-weight:600; padding:.22rem .6rem; border-radius:var(--r-pill); backdrop-filter:blur(4px); }
+  .carousel__controls { position:absolute; inset:0; pointer-events:none; }
+  .carousel__controls button { position:absolute; pointer-events:auto; display:flex; align-items:center; justify-content:center; min-width:44px; height:44px; border:1px solid #ccd6e8; border-radius:999px; color:var(--tp-navy); background:rgb(255 255 255 / .94); box-shadow:0 2px 8px #10234518; cursor:pointer; }
+  .carousel__controls button:hover { background:var(--tp-navy); color:white; }
+  .carousel button:focus-visible { outline:3px solid var(--tp-blue); outline-offset:3px; }
+  .carousel__previous,.carousel__next { top:50%; transform:translateY(-50%); font-size:2rem; line-height:1; }
+  .carousel__previous { left:8px; }
+  .carousel__next { right:8px; }
+  .carousel__playback { top:10px; right:10px; gap:.35rem; padding:0 .65rem; font-size:.75rem; font-weight:600; }
+  .carousel__counter { position:absolute; right:10px; bottom:10px; padding:.2rem .45rem; border-radius:999px; background:rgb(255 255 255 / .94); color:var(--tp-navy); font-size:.7rem; font-weight:700; }
+  .carousel--card .carousel__controls button { min-width:32px; height:32px; }
+  .carousel--card .carousel__playback { padding:0; }
+  .carousel--card .carousel__playback-label { display:none; }
+  .carousel--card .carousel__previous { left:5px; }
+  .carousel--card .carousel__next { right:5px; }
+  .carousel__selectors { display:flex; justify-content:center; gap:.5rem; }
+  .carousel__selectors button { display:grid; place-items:center; cursor:pointer; }
+  .carousel--detail .carousel__selectors { position:absolute; top:100%; left:0; right:0; padding-top:.8rem; }
+  .carousel--detail { margin-bottom:5.5rem; }
+  .carousel--detail:not([data-product-carousel]) { margin-bottom:0; }
+  .carousel--detail .carousel__selectors button { min-width:0; flex:1; max-width:76px; padding:.2rem; background:white; border:2px solid var(--tp-line); border-radius:8px; }
+  .carousel--detail .carousel__selectors button[aria-pressed="true"] { border-color:var(--tp-blue); }
+  .carousel__selectors img { width:100%; height:auto; aspect-ratio:1; object-fit:contain; }
+  .carousel--card .carousel__selectors { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); gap:0; border-radius:999px; padding:0 .1rem; background:rgb(255 255 255 / .94); }
+  .carousel--card .carousel__selectors button { width:24px; height:24px; border:0; background:transparent; padding:0; }
+  .carousel__dot { width:5px; height:5px; border-radius:50%; background:#8997af; }
+  .carousel__selectors button[aria-pressed="true"] .carousel__dot { background:var(--tp-blue); box-shadow:0 0 0 2px #1b55ad25; }
+  .carousel__announcement { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  @media (max-width:480px) { .carousel--card .carousel__selectors button { width:18px; } .carousel--card .carousel__counter { right:6px; bottom:12px; font-size:.6rem; padding:.15rem .25rem; } }
+  @media (prefers-reduced-motion:reduce) { .carousel * { animation:none!important; transition:none!important; } }
+</style>
+<script>
+  import { initializeProductCarousels } from '../lib/product-carousel';
+  initializeProductCarousels();
+</script>

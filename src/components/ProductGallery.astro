@@ -1,0 +1,14 @@
+---
+import type { Product } from '../lib/catalog-model';
+import ProductCarousel from './ProductCarousel.astro';
+interface Props { product: Product; }
+const { product } = Astro.props;
+---
+<div class="gallery">
+  <ProductCarousel product={product} />
+  {product.imagenes_compartidas && <p>Imagen representativa de esta familia de productos.</p>}
+</div>
+<style>
+  .gallery { width:100%; padding:1rem; }
+  .gallery p { text-align:center; font-size:.8rem; color:var(--tp-muted); margin-top:.7rem; }
+</style>

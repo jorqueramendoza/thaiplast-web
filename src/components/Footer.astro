@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { site } from '../lib/site';
-import { activeCategories } from '../lib/products';
+const activeCategories = () => Astro.locals.catalog?.activeCategories() || [];
 import { waGeneral } from '../lib/whatsapp';
 
 const grupos = activeCategories().slice(0, 6);

@@ -89,7 +89,7 @@ const lds = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])
       rel="stylesheet"
     />
 
-    {lds.map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld)} />)}
+    {lds.map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld).replace(/</g, '\\u003c')} />)}
 
     {/* Analítica (se activan solo si hay un ID configurado en src/lib/site.ts) */}
     {site.analytics.ga4 && (
@@ -108,7 +108,7 @@ const lds = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])
       <script defer data-domain={site.analytics.plausibleDomain} src="https://plausible.io/js/script.js"></script>
     )}
   </head>
-  <body>
+  <body data-catalog-revision={Astro.locals.catalogRevision}>
     <a href="#main" class="sr-only">Saltar al contenido</a>
     <Header />
     <main id="main">
@@ -120,6 +120,26 @@ const lds = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])
     <!-- Toast de confirmación al agregar al pedido -->
     <div class="toast" data-toast hidden role="status" aria-live="polite"></div>
 
+    <script>
+      if (!location.pathname.startsWith('/admin')) {
+        let checking = false;
+        const refresh = async () => {
+          if (checking || document.hidden) return;
+          checking = true;
+          try {
+            const response = await fetch('/api/catalogo', { cache: 'no-store' });
+            if (!response.ok) return;
+            const data = await response.json() as { revision: number; products: unknown[] };
+            window.dispatchEvent(new CustomEvent('tp-catalog-change', { detail: data.products }));
+            const revision = document.body.dataset.catalogRevision;
+            if (revision && String(data.revision) !== revision && location.pathname !== '/pedido') location.reload();
+          } catch {} finally { checking = false; }
+        };
+        window.setInterval(refresh, 30000);
+        window.addEventListener('focus', refresh);
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
+      }
+    </script>
     <script>
       import { addItem, CART_EVENT } from '../lib/cart';
 

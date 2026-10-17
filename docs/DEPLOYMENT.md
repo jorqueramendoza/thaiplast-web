@@ -1,54 +1,47 @@
-# Despliegue — Cloudflare Pages
+# Publicación en Cloudflare Workers
 
-El sitio es estático: el build genera `/dist`, que Cloudflare sirve por su CDN global.
+El sitio usa Astro 7 con el adaptador oficial, D1 y R2. La configuración está versionada en wrangler.jsonc. Las credenciales se mantienen en la sesión de Wrangler o secretos del proveedor.
 
-## Requisitos previos
+## Requisitos
 
-- Node.js LTS y Git instalados (ver [README.md](README.md)).
-- Una cuenta en [Cloudflare](https://dash.cloudflare.com) (plan gratuito sirve).
-- El proyecto subido a un repositorio Git (GitHub/GitLab) **o** desplegado con Wrangler.
+Node 24, npm y una sesión de Cloudflare: `npx wrangler login`. En Windows, las dependencias nativas pueden requerir Microsoft Visual C++ Redistributable x64. `npm run dev:local` ofrece un servidor alternativo Node para desarrollo.
 
-## Opción A — Git + Cloudflare Pages (recomendada)
+## Configurar primero el entorno preview
 
-1. Sube el proyecto a GitHub:
-   ```bash
-   git init
-   git add .
-   git commit -m "Sitio ThaiPlast"
-   git branch -M main
-   git remote add origin <URL-de-tu-repo>
-   git push -u origin main
-   ```
-2. En Cloudflare: **Workers & Pages → Create → Pages → Connect to Git** y elige el repo.
-3. Configura el build:
-   - **Framework preset:** Astro
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - **Node version:** 18 o superior (variable `NODE_VERSION=18`)
-4. Deploy. Cada `git push` vuelve a desplegar automáticamente.
+Se reutiliza el proyecto existente `thaiplast-web` y el dominio `thaiplast.cl`; no hay que crear otra web. Producción está publicada con Cloudflare Access, D1, R2 y SESSION KV. Las dos bases D1 ya están creadas, migradas y cargadas con 325 productos activos y 319 anteriores inactivos. Sus IDs están configurados. R2 está activado y los contenedores `thaiplast-products` y `thaiplast-products-preview` están creados. Producción tiene 766 archivos iniciales de imágenes y miniaturas (26.8 MB). El entorno de prueba todavía no está publicado, su contenedor está vacío y sus variables Access faltan. No vuelvas a crear los recursos existentes.
 
-## Opción B — Wrangler (sin Git)
+La primera versión del catálogo administrable se publicó como `74ffcebf-7844-4cdc-8a5c-0244000a2646`. Consulta Deployments en Cloudflare para identificar la versión vigente después de publicaciones posteriores. Se comprobó el catálogo público, sus precios, las imágenes y la redirección a Access de las rutas administrativas. El inicio de sesión real con código de correo debe completarlo el propietario. Evidencia inicial en `artifacts/live-verification.json`. Se deshabilitaron workers.dev y las URL de versiones en producción; preview no tiene rutas sobre el dominio oficial.
 
-```bash
-npm install -g wrangler
-npm run build
-wrangler pages deploy dist --project-name=thaiplast
-```
+1. Configura una aplicación Cloudflare Access para el dominio de preview, incluyendo /admin y /api/admin. Autoriza únicamente thaiplast.spa@gmail.com mediante código de correo. Registra el dominio del equipo terminado en .cloudflareaccess.com y la audiencia AUD en env.preview.vars. Protege solo las rutas administrativas, no el catálogo público.
+2. `npm run images:publish -- --preview` carga los archivos iniciales en el contenedor de prueba. Los activos estáticos sirven de respaldo.
+3. `npm run build:preview` y `npm run deploy -- --preview`.
 
-## Dominio propio
+Solo para recuperar una instalación vacía: crea la base con `npx wrangler d1 create thaiplast-catalog-preview`, guarda el ID real en la configuración, aplica `npx wrangler d1 migrations apply thaiplast-catalog-preview --env preview --remote` y carga `npx wrangler d1 execute thaiplast-catalog-preview --env preview --remote --file artifacts/catalog-seed.sql`. No ejecutes la creación sobre los recursos existentes.
 
-En el proyecto de Pages → **Custom domains** → agrega `thaiplast.cl` (y `www`).
-Sigue las instrucciones de DNS de Cloudflare.
+El entorno se selecciona al compilar mediante CLOUDFLARE_ENV. El script comprueba que el Worker compilado coincida con el entorno que se va a publicar.
 
-## Checklist antes de publicar
+La semilla se genera con `npm run import` y no sobrescribe registros existentes. La configuración de preview usa recursos separados de producción. Protege también el hostname workers.dev o deshabilítalo; la aplicación valida JWT en todos los hostnames aunque Access no esté delante.
 
-- [ ] `site` correcto en `astro.config.mjs` y `src/lib/site.ts` (dominio final).
-- [ ] WhatsApp, correo, dirección y horario reales en `src/lib/site.ts`.
-- [ ] `npm run build` corre sin errores.
-- [ ] Probar en celular: catálogo, ficha, **armar pedido → WhatsApp**, botón flotante.
-- [ ] `robots.txt` y `sitemap-index.xml` accesibles tras el deploy.
+## Producción
 
-## Notas
+Usa la base existente thaiplast-catalog y el contenedor thaiplast-products. Las variables de nivel superior y la aplicación Access que cubre thaiplast.cl/admin y thaiplast.cl/api/admin ya están configuradas. Respalda la base con `npx wrangler d1 export thaiplast-catalog --remote --output artifacts/catalog-backup.sql` antes de una migración o importación importante.
 
-- `404.astro` se genera como `404.html`; Cloudflare lo usa automáticamente.
-- `/pedido` está marcado `noindex` y bloqueado en `robots.txt` (no aporta a SEO).
+Revisa las diferencias en preview y conserva el despliegue anterior para revertir código. Aplica la migración, carga inicial y fotografías. Ejecuta `npm run validate`, `npm test`, `npm run check`, `npm run test:browser`, `npm run build` y finalmente `npm run deploy`.
+
+El script de despliegue rechaza IDs provisionales o una configuración Access vacía. No publica un administrador sin protección.
+
+## Workers Builds existente
+
+El repositorio de código es `jorqueramendoza/thaiplast-web`, rama `main`. El propietario autorizó guardar y subir esta implementación, incluyendo catálogo administrable y carruseles. `.node-version` fija Node 24 para las compilaciones remotas.
+
+Elimina del comando del proveedor la instalación dinámica de astro add cloudflare; el adaptador ya está versionado. Usa `npm ci && npm run build` con Node 24 y `npm run deploy` como comando de publicación. El despliegue debe usar la configuración generada por el adaptador. Verifica los bindings D1 y R2 en el Worker y conserva el dominio oficial. Los cambios de precios y fotos guardados desde /admin consultan la base vigente y no requieren desplegar código.
+
+La sesión OAuth actual de Wrangler publica el Worker, pero la API de Workers Builds devuelve 403 por falta de Workers CI Read/Write. La configuración de los comandos de Builds debe confirmarse en el panel de Cloudflare. Subir un commit a GitHub no demuestra por sí solo que la publicación automática haya finalizado correctamente: comprueba el estado del build y la versión servida por el dominio.
+
+El respaldo previo está en `.local/deploy-backup`: código anterior, metadatos y SQL de D1. La versión anterior del Worker es `edce41d4-0d3a-48f2-9f42-1c215dc6bae7`.
+
+## Comprobación y recuperación
+
+Comprueba acceso privado, cambios de precio sin rebuild, galería, filtros, sitemap y pedido WhatsApp. Revisa errores del Worker e historial del panel. Un fallo de lectura de D1 se presenta como error; nunca sustituye silenciosamente los datos vigentes por un catálogo antiguo.
+
+Para revertir código usa la versión anterior del Worker. Conserva el respaldo D1 antes de restaurar datos; una reversión de código no revierte precios. No borres la base ni R2 durante una reversión.

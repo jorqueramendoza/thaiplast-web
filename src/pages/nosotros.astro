@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import CtaBlock from '../components/CtaBlock.astro';
-import { totalProducts } from '../lib/products';
+const { totalProducts } = Astro.locals.catalog;
 import { site } from '../lib/site';
 
 const valores = [

@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import CtaBlock from '../../components/CtaBlock.astro';
 import Icon from '../../components/Icon.astro';
-import { products, activeCategories, totalProducts } from '../../lib/products';
+const { products, activeCategories, totalProducts } = Astro.locals.catalog;
 
 const grupos = activeCategories();
 const materiales = [...new Set(products.map((p) => p.material).filter(Boolean))].sort();

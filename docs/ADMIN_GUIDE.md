@@ -1,55 +1,31 @@
-# Guía del administrador (sin tecnicismos)
+# Guía de administración
 
-Esta guía es para mantener el sitio sin ser programador.
+## Acceder
 
-## ¿Cómo funciona en simple?
+Abre /admin en el sitio publicado e inicia sesión con el código enviado a thaiplast.spa@gmail.com. El despliegue debe tener configurado Cloudflare Access; hasta entonces el panel se mantiene cerrado.
 
-- Hay un **archivo de productos** (una planilla, como un Excel).
-- Cuando cambias la planilla y la "subes", el sitio se actualiza solo.
-- El sitio **no cobra online**: cada cliente termina escribiéndote por **WhatsApp**.
+## Cambiar un producto o precio
 
-## Cambiar precios o agregar un producto
+Busca por nombre, SKU o medida, pulsa Editar, cambia los datos y guarda. El precio se expresa en pesos chilenos enteros. Deja el campo vacío para mostrar Consultar. El precio aparece en nuevas visitas inmediatamente; una pestaña abierta se actualiza en hasta 30 segundos.
 
-1. Abre `data/products.csv` con Excel.
-2. Cambia el precio o agrega una fila nueva (respeta las columnas existentes).
-3. Guarda como **CSV UTF-8**.
-4. Avisa a quien mantiene el sitio (o sigue los pasos de [IMPORT_PRODUCTS.md](IMPORT_PRODUCTS.md))
-   para reimportar y publicar.
+La URL existente se conserva. Desmarca Publicado para ocultar un producto sin borrarlo. El historial permite identificar quién hizo cada cambio.
 
-## Cambiar el número de WhatsApp, correo o dirección
+## Fotografías
 
-Estos datos están en un solo lugar: `src/lib/site.ts`. Hay que editar:
-- `whatsapp`: tu número en formato internacional **sin "+"** (ej. `56912345678`).
-- `whatsappLabel`: el número como se ve (ej. `+56 9 1234 5678`).
-- `email`, `direccion`, `horario` y las redes sociales.
+Agrega PNG, JPEG o WebP de hasta 10 MB. Puedes usar hasta cuatro fotografías, quitar imágenes o hacer que una sea la portada. Guarda el producto para publicar la galería. Marca Fotos compartidas cuando representen varias tallas de una misma familia y Requiere verificar si la asociación está pendiente.
 
-> ⚠️ Hoy esos valores son de ejemplo. **Hay que reemplazarlos por los reales antes de publicar.**
+Las tarjetas del catálogo y las fichas muestran un carrusel cuando hay al menos dos fotos. Cambia automáticamente cada cinco segundos mientras está visible; incluye anterior/siguiente, selección de fotografía, pausa y deslizamiento horizontal en celular. Al seleccionar una foto se pausa para poder revisarla. También se suspende al pasar el cursor, enfocar los controles, salir de pantalla o cambiar de pestaña. Si el dispositivo solicita movimiento reducido, empieza pausado y las transiciones son instantáneas. Los productos con una sola foto o sin imágenes permanecen estáticos.
 
-## Medir cuántas solicitudes llegan
+## Excel
 
-Cada botón de WhatsApp incluye una etiqueta de origen en el mensaje (ej. "Origen: home-hero").
-Así sabes desde qué parte del sitio te escribió cada cliente.
+Exportar Excel entrega los productos actuales, incluyendo inactivos, con identificador y versión. Cambia los campos de la planilla, conserva las columnas y vuelve a importarla. El panel muestra una vista previa antes de confirmar y rechaza los errores sin guardar cambios parciales.
 
-### Conectar analítica (para contar clics a WhatsApp)
+Si alguien editó un producto desde la exportación, descarga una planilla nueva y repite los cambios. No alteres el ID ni la URL de un producto existente. No uses fórmulas en la planilla de importación.
 
-El sitio ya registra el evento **`whatsapp_click`** en cada clic de WhatsApp. Solo falta
-conectar una herramienta. Edita `src/lib/site.ts` → bloque `analytics`:
+Editar un Excel descargado o la copia de Google Drive no cambia la web hasta importarlo. La base de datos del panel contiene los datos vigentes.
 
-**Opción A — Google Analytics 4 (gratis):**
-1. Crea una cuenta en <https://analytics.google.com> → Administrar → Crear propiedad.
-2. Agrega un flujo de datos "Web" con tu dominio y copia el **ID de medición** (`G-XXXXXXXXXX`).
-3. Pega ese ID en `analytics.ga4` y publica (`git push`).
-4. En GA4, marca el evento `whatsapp_click` como **conversión** (Administrar → Eventos).
+## Imágenes pendientes
 
-**Opción B — Plausible (más simple, de pago):**
-1. Crea cuenta en <https://plausible.io>, agrega tu dominio.
-2. Pon ese dominio en `analytics.plausibleDomain` y publica.
-3. Verás el objetivo "WhatsApp" con la propiedad `origen`.
+Exportar faltantes genera una planilla actualizada. Los entregables iniciales de Drive son una auditoría fechada; no se actualizan solos al cargar nuevas fotos en el panel.
 
-> Puedes usar una u otra (o ambas). Si dejas los dos en `''`, no se carga nada.
-
-## ¿Qué NO se puede romper fácil?
-
-- Si borras un producto del CSV, simplemente deja de aparecer.
-- Si pones `activo` en `false` (o quitas la fila), el producto se oculta.
-- El sitio no guarda datos de clientes ni pagos: es solo catálogo + WhatsApp.
+El PDF oficial es la edición documental de 2026. Para precios actuales consulta la web o exporta el Excel desde el administrador.

@@ -2,15 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import CtaBlock from '../../components/CtaBlock.astro';
-import { activeCategories, productsInGroup, getCategory } from '../../lib/products';
+const { productsInGroup, getCategory } = Astro.locals.catalog;
 import { site } from '../../lib/site';
 
-export function getStaticPaths() {
-  return activeCategories().map((c) => ({ params: { categoria: c.slug } }));
-}
-
 const { categoria } = Astro.params;
-const cat = getCategory(categoria!)!;
+const cat = getCategory(categoria!);
+if (!cat || cat.conteo === 0) return Astro.rewrite('/404');
 const items = productsInGroup(categoria!).sort((a, b) => (a.precio ?? 0) - (b.precio ?? 0));
 
 const breadcrumbLd = {

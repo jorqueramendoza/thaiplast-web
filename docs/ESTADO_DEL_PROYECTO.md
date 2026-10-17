@@ -1,147 +1,33 @@
-# Estado del proyecto — ThaiPlast Web (handoff)
+# Estado del proyecto — Catálogo 2026
 
-> **Punto de entrada para cualquier dev o agente (incluido Codex) que tome el proyecto.**
-> Lee este documento primero; luego el resto de `/docs`. Última actualización: 2026-06-22.
+La implementación publicada en https://thaiplast.cl reemplaza el catálogo estático por un catálogo administrable. D1 es la fuente vigente de productos y precios; guardar desde /admin no requiere una nueva publicación.
 
-## 1. Qué es y para qué
+## Datos y archivos entregados
 
-Sitio **catálogo B2B mobile-first** de **ThaiPlast** ("todo en desechables"), distribuidor
-chileno de productos desechables/packaging. **Métrica única de éxito: solicitudes por
-WhatsApp.** No es e-commerce: **no hay pagos ni checkout**; todo CTA importante termina en
-un mensaje de WhatsApp prearmado.
+- 49 páginas del PDF oficial extraídas y 45 páginas de productos transcritas y revisadas visualmente.
+- 325 variantes oficiales. Se conservan 43 identificadores anteriores; 319 registros anteriores quedan inactivos por falta de correspondencia inequívoca.
+- 170 carpetas de Drive auditadas, 18 vacías, 485 archivos descargados y procesados sin errores.
+- 191 variantes sin fotografías asociadas, 42 con galería incompleta y seis por verificar. Cinco de estas seis también están en Sin imágenes.
+- Markdown, Excel completo, Excel de faltantes y PDF en entregables; copias verificadas en THAIPLAST WEB de Drive. Enlaces en entregables/drive-links.json.
 
-## 2. Estado actual (vivo)
+## Implementación
 
-- **Producción (dominio oficial):** https://thaiplast.cl ✅ (con SSL).
-  `www.thaiplast.cl` redirige (301) al dominio sin www. La URL del Worker
-  `thaiplast-web.jorquera-mendoza.workers.dev` sigue activa como respaldo.
-- **Repo:** https://github.com/jorqueramendoza/thaiplast-web (rama `main`)
-- **Despliegue:** Cloudflare (Workers Builds, conectado a GitHub). En cada `git push` a
-  `main`, Cloudflare corre `npm run build` y publica. Durante ese build Cloudflare ejecuta
-  `astro add cloudflare` y agrega el adapter `@astrojs/cloudflare` + archivos `wrangler`
-  **dentro del contenedor de build** (no están commiteados en el repo). Implicancia: el
-  build local usa salida `static` y el de Cloudflare usa el adapter; ambos funcionan. Si se
-  quiere reproducibilidad total, commitear el adapter; por ahora **no es necesario**.
-- **Contacto real ya cargado** en `src/lib/site.ts`: WhatsApp `56957896128`
-  (+56 9 5789 6128), correo `thaiplast.spa@gmail.com`, Instagram `@thaiplast`, razón social
-  **ThaiPlast SpA**, dirección **Arturo Godoy 1713, Santiago**.
-- **Configuración del dominio:** detalle completo en `docs/BITACORA.md` §Dominio
-  (nameservers Cloudflare en NIC, custom domain del Worker, CNAME `www`, Page Rule de
-  redirección).
-- **Pendiente de confirmar:** horario de atención (hoy de ejemplo); ID de Google Analytics
-  (GA4) para activar la medición; subir fotos reales de producto.
+Panel /admin, validación de acceso y origen, edición de productos y galerías, importación Excel con vista previa, exportaciones, historial y control de versiones. Catálogo, fichas, precios, conteos y sitemap consultan D1. Los pedidos revalidan precios y productos antes de generar WhatsApp.
 
-## 3. Stack y versiones
+Los activos iniciales tienen WebP y miniaturas; las cargas del administrador usan R2. El sitio preserva identidad visual y pedidos por WhatsApp.
 
-- **Astro 6.x** (SSG, salida estática). Sin framework UI: la interactividad usa
-  `<script>` nativos de Astro (carrito, filtros, lightbox). Menos JS = más velocidad.
-- **@astrojs/sitemap** para `sitemap-index.xml`.
-- **Node 24** local / **Node 22** en Cloudflare. **npm**. Git instalado.
-- Datos en **archivos planos** (CSV → JSON). Sin base de datos, sin CMS.
-- Dependencia dev opcional: `xlsx` (solo si se importa desde `.xlsx`).
+## Producción publicada
 
-## 4. Cómo correr
+La cuenta Cloudflare jorquera.mendoza@gmail.com está autenticada. Las bases D1 thaiplast-catalog y thaiplast-catalog-preview están creadas y sus IDs están configurados. El usuario activó R2; se crearon thaiplast-products y thaiplast-products-preview. El contenedor de producción recibió 766 archivos de imágenes y miniaturas (26,836,336 bytes); cinco descargas de comprobación coincidieron por SHA-256 con sus originales locales. El contenedor de prueba todavía está vacío. La evidencia está en artifacts/r2-upload-verification.json.
 
-```bash
-npm install
-npm run dev        # http://localhost:4321
-npm run build      # corre import + genera /dist
-npm run preview
-# Datos:
-npm run validate           # revisa data/products.csv
-npm run import             # CSV  -> products.json + categories.json
-npm run import:xlsx        # XLSX -> idem (requiere 'xlsx')
-npm run extract:catalogo   # PDF  -> public/img/catalogo/pagina-*.jpg
-```
+El propietario configuró Cloudflare Access con la política Administrador ThaiPlast y One-time PIN para /admin y /api/admin. El dominio del equipo y el AUD se verificaron mediante las redirecciones públicas y se configuraron en producción. La primera versión administrable fue `74ffcebf-7844-4cdc-8a5c-0244000a2646`, en el proyecto existente thaiplast-web y su dominio thaiplast.cl. SESSION KV quedó vinculado; workers.dev y las URL de versiones de producción están deshabilitados.
 
-> Nota Windows: si una terminal no encuentra `node`/`git`, ábrela de nuevo (PATH viejo).
+Se verificaron 325 productos con los precios esperados, páginas públicas, sitemap, imágenes y miniaturas con SHA-256, redirecciones de todas las rutas administrativas a Access y respuesta 404 para un producto inexistente. Evidencia en artifacts/live-verification.json. El propietario debe completar la prueba de inicio de sesión por correo; no se solicitó ni utilizó su código.
 
-## 5. Mapa del proyecto
+El respaldo anterior está en .local/deploy-backup. El propietario autorizó crear un commit y subir los cambios a GitHub. La configuración de Workers Builds requiere confirmación desde Cloudflare porque la sesión OAuth no tiene permisos Workers CI; la publicación directa del Worker sí está autorizada y disponible.
 
-```
-data/
-  products.csv            Fuente de productos (lista de precios). EDITAR aquí.
-  products.json           GENERADO (no editar a mano).
-  categories.json         GENERADO (grupos de navegación + conteos).
-  category-map.json       Config editable: categoría CSV -> grupo de navegación.
-  catalogo-paginas.json   GENERADO por extract:catalogo (lista de páginas del PDF).
-scripts/
-  lib.mjs                 Utilidades (CSV, slug, precios, normalización de filas).
-  import-products.mjs     CSV/XLSX -> JSON. Resuelve SKUs duplicados, slugs, imágenes.
-  validate-products.mjs   Reporta problemas del CSV (no modifica nada).
-  extract-catalog-images.mjs  Extrae los 37 JPEG del PDF a public/img/catalogo/.
-public/
-  catalogo-thaiplast.pdf       Catálogo PDF (descarga).
-  img/brand/logo.jpg           Logo oficial (fuente de la marca).
-  img/catalogo/pagina-*.jpg    37 páginas del catálogo (galería visual).
-  img/products/_placeholder/   Placeholders SVG por grupo.
-  img/products/<grupo>/<slug>.* Fotos reales por producto (ver §7).
-src/
-  lib/site.ts             Datos del negocio + industrias. EDITAR contacto aquí.
-  lib/whatsapp.ts         NÚCLEO de conversión: arma todos los enlaces wa.me.
-  lib/products.ts         Carga products.json/categories.json + helpers de consulta.
-  lib/cart.ts             Carrito "Armar pedido" (localStorage), solo navegador.
-  lib/format.ts           Formato CLP.
-  components/             Header, Footer, WhatsAppFloat, CtaBlock, ProductCard, Icon.
-  layouts/BaseLayout.astro  SEO, Open Graph, JSON-LD, header/footer, add-to-cart global.
-  pages/                  index, catalogo/, catalogo/[categoria], producto/[slug],
-                          industrias/, pedido, contacto, nosotros, lista-precios,
-                          catalogo-visual, 404.
-  styles/tokens.css       Tokens de marca (colores del logo). styles/global.css.
-docs/                     Esta carpeta (README, ARCHITECTURE, DATABASE, etc.).
-```
+## Carruseles
 
-## 6. Flujo de datos (cero productos hardcodeados)
+Las tarjetas y fichas comparten carrusel con fundido, rotación cada cinco segundos, miniaturas o indicadores, anterior/siguiente, pausa, teclado y deslizamiento móvil. Solo rota cuando tiene dos o más fotografías y está visible. Respeta movimiento reducido y conserva la portada sin JavaScript. Las pruebas de navegador cubren reproducción, pausa, interacción, imágenes faltantes, móvil y respaldo estático, además de los flujos existentes del administrador y pedido.
 
-```
-data/products.csv ──(npm run import)──► data/products.json ─┐
-data/category-map.json ─────────────────► data/categories.json ─┴─► Astro build ─► /dist
-```
-
-Esquema de cada producto: ver `docs/DATABASE.md`. Para agregar/editar productos o precios:
-editar el CSV → `npm run import` → `git push`. Detalle en `docs/IMPORT_PRODUCTS.md`.
-
-## 7. Imágenes de producto
-
-- Hoy cada producto usa un **placeholder por grupo** (`/img/products/_placeholder/<grupo>.svg`).
-- El catálogo PDF se extrajo a **`public/img/catalogo/pagina-01..37.jpg`** y se muestra en
-  **`/catalogo-visual`** (galería con lightbox). El PDF son páginas aplanadas, así que las
-  fotos por producto **no** se pueden separar automáticamente: hay que recortarlas a mano.
-- **Pipeline listo para fotos por producto** (`resolveImage()` en `import-products.mjs`):
-  1. Si el CSV tiene columna `Imagen` con una ruta/URL, se usa esa.
-  2. Si no, busca `public/img/products/<grupo>/<slug>.(jpg|jpeg|webp|png|avif)`.
-  3. Si no hay, usa el placeholder del grupo.
-  → Basta dejar la foto con el **nombre = slug del producto** en la carpeta de su **grupo**
-  y reimportar; aparece sola sin tocar código. El `slug` y el `grupo` están en
-  `data/products.json`.
-
-## 8. Reglas duras (no romper)
-
-1. **No hardcodear productos** en el código: todo sale de `data/`.
-2. **Toda conversión pasa por `src/lib/whatsapp.ts`** (mantiene mensajes y UTM de origen).
-3. **No agregar pasarela de pago / checkout.** La meta es el lead por WhatsApp.
-4. **Mobile-first** (>80% del tráfico es móvil).
-5. **Marca desde el logo**: usar `src/styles/tokens.css`; no inventar colores nuevos.
-6. **Los 4 CTAs** (Ver Catálogo, Solicitar Lista de Precios, Armar Pedido, WhatsApp) y el
-   **botón flotante** deben seguir presentes/accesibles.
-7. JS mínimo: preferir `<script>` de Astro a añadir frameworks.
-
-## 9. Issues conocidos / deuda
-
-- Imágenes de producto = placeholders hasta cargar fotos reales (ver §7).
-- **Horario** del negocio aún de ejemplo en `site.ts` (dirección y razón social ya reales).
-- **Analítica pendiente de activar:** falta pegar el ID de GA4 (`G-XXXX`) en
-  `site.ts → analytics.ga4` (o el dominio en `plausibleDomain`). El código ya está integrado.
-- **QR del sitio** sin generar todavía: `npm run qr` crea `public/img/brand/qr-thaiplast.png`
-  apuntando a `https://thaiplast.cl`.
-- **Resuelto:** dominio `thaiplast.cl` en vivo con SSL + redirección `www`.
-- **Resuelto:** 5 filas "Vasos Térmicos" corregidas en el CSV (nombre/medida/material).
-- **Resuelto:** Open Graph 1200×630 (`og-image.jpg`) + favicons PNG (16/32/180).
-- **Resuelto:** schema `LocalBusiness` con teléfono, dirección y zona (RM).
-- **Resuelto:** medición de clics a WhatsApp en `BaseLayout.astro` (evento `whatsapp_click`
-  a GA4/`dataLayer`/Plausible, con el `origen` del CTA); inerte hasta conectar analítica.
-
-## 10. Próximos pasos
-
-Ver `docs/ROADMAP.md` (backlog priorizado) y `docs/CODEX_AGENTS_PROMPT.md` (cómo dividir el
-trabajo en roles para iterar con Codex).
+Empieza por README.md y DEPLOYMENT.md. Las pruebas de navegador se ejecutan en una base local aislada; nunca modifican Drive ni producción.
