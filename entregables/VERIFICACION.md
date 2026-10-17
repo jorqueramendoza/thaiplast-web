@@ -24,10 +24,10 @@ El propietario configuró Access con One-time PIN. El dominio del equipo y el AU
 
 Las verificaciones públicas confirmaron 325 productos con sus precios iniciales correctos, portada, catálogo, lista de precios, sitemap, ficha de producto, imágenes y miniaturas, respuesta 404 y protección Access de las rutas administrativas. No se editaron datos de producción durante las pruebas. Evidencia en artifacts/live-verification.json. Queda la prueba de inicio de sesión real por el propietario.
 
-Se conservó el respaldo anterior en .local/deploy-backup. Los cambios del panel se reflejan sin volver a publicar. La automatización de Workers Builds debe confirmarse desde Cloudflare: su API devuelve 403 a la sesión OAuth actual.
+Se conservó el respaldo anterior en .local/deploy-backup. Los cambios del panel se reflejan sin volver a publicar. La automatización de código también fue verificada: el push del commit f14f29d inició Workers Builds, terminó correctamente y publicó la versión 13e50e20-b642-41cb-8bf2-367d96ec8ae8 en el dominio oficial.
 
 ## Carruseles y repositorio
 
-El propietario autorizó crear un commit y subir el código a GitHub. Se incorporó un carrusel reutilizable en tarjetas y fichas, con fundido, reproducción cada cinco segundos, pausa, teclado, gestos móviles y respeto por movimiento reducido. Los productos con menos de dos imágenes permanecen estáticos.
+El propietario autorizó crear un commit y subir el código a GitHub; ambos pasos se completaron en main. Se incorporó un carrusel reutilizable en tarjetas y fichas, con fundido, reproducción cada cinco segundos, pausa, teclado, gestos móviles y respeto por movimiento reducido. Los productos con menos de dos imágenes permanecen estáticos.
 
 Las pruebas de navegador verifican cambio de foto en tarjetas, navegación por miniaturas y teclado, avance automático, pausa persistente, suspensión por foco y cursor, deslizamiento táctil, inicio pausado con movimiento reducido y portada funcional sin JavaScript. Se mantienen las pruebas del catálogo, Excel, precios, pedido, historial y permisos.

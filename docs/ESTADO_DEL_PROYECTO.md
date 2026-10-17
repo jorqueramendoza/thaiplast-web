@@ -24,7 +24,7 @@ El propietario configuró Cloudflare Access con la política Administrador ThaiP
 
 Se verificaron 325 productos con los precios esperados, páginas públicas, sitemap, imágenes y miniaturas con SHA-256, redirecciones de todas las rutas administrativas a Access y respuesta 404 para un producto inexistente. Evidencia en artifacts/live-verification.json. El propietario debe completar la prueba de inicio de sesión por correo; no se solicitó ni utilizó su código.
 
-El respaldo anterior está en .local/deploy-backup. El propietario autorizó crear un commit y subir los cambios a GitHub. La configuración de Workers Builds requiere confirmación desde Cloudflare porque la sesión OAuth no tiene permisos Workers CI; la publicación directa del Worker sí está autorizada y disponible.
+El respaldo anterior está en .local/deploy-backup. La implementación se guardó y subió a GitHub en `f14f29d42738a597fbc54a721154aae40107c2e3`, con autorización del propietario. Workers Builds publicó automáticamente la versión `13e50e20-b642-41cb-8bf2-367d96ec8ae8` al 100 %. Se verificaron el resultado exitoso en GitHub, la versión activa en Cloudflare y el carrusel servido por thaiplast.cl. La automatización GitHub → Cloudflare funciona; no fue necesario publicar este cambio por CLI. La sesión OAuth no puede editar comandos de Builds, pero esa limitación no bloquea la integración existente.
 
 ## Carruseles
 

@@ -32,11 +32,13 @@ El script de despliegue rechaza IDs provisionales o una configuración Access va
 
 ## Workers Builds existente
 
-El repositorio de código es `jorqueramendoza/thaiplast-web`, rama `main`. El propietario autorizó guardar y subir esta implementación, incluyendo catálogo administrable y carruseles. `.node-version` fija Node 24 para las compilaciones remotas.
+El repositorio de código es `jorqueramendoza/thaiplast-web`, rama `main`. La implementación, incluyendo catálogo administrable y carruseles, se guardó y subió con autorización del propietario en el commit `f14f29d42738a597fbc54a721154aae40107c2e3`. `.node-version` fija Node 24 para las compilaciones remotas.
+
+Se verificó el ciclo automático completo: push a main → Workers Builds exitoso → versión `13e50e20-b642-41cb-8bf2-367d96ec8ae8` publicada al 100 % → carrusel disponible en thaiplast.cl. Build: `e7fd0c03-324a-40d0-9d29-dd13e58590c6`. No fue necesario publicar este cambio manualmente desde Wrangler. Los siguientes cambios de código enviados a main utilizan la integración existente.
 
 Elimina del comando del proveedor la instalación dinámica de astro add cloudflare; el adaptador ya está versionado. Usa `npm ci && npm run build` con Node 24 y `npm run deploy` como comando de publicación. El despliegue debe usar la configuración generada por el adaptador. Verifica los bindings D1 y R2 en el Worker y conserva el dominio oficial. Los cambios de precios y fotos guardados desde /admin consultan la base vigente y no requieren desplegar código.
 
-La sesión OAuth actual de Wrangler publica el Worker, pero la API de Workers Builds devuelve 403 por falta de Workers CI Read/Write. La configuración de los comandos de Builds debe confirmarse en el panel de Cloudflare. Subir un commit a GitHub no demuestra por sí solo que la publicación automática haya finalizado correctamente: comprueba el estado del build y la versión servida por el dominio.
+La sesión OAuth actual de Wrangler publica el Worker, pero la API de Workers Builds devuelve 403 por falta de Workers CI Read/Write. Eso impide editar sus comandos desde esta sesión, no ejecutar la integración Git ya configurada. Su resultado se verificó mediante la comprobación Workers Builds de GitHub, el historial de despliegues y el dominio público. Para modificar comandos futuros usa el panel de Cloudflare. Subir un commit por sí solo no demuestra que la publicación finalizó: comprueba siempre el build y la versión servida.
 
 El respaldo previo está en `.local/deploy-backup`: código anterior, metadatos y SQL de D1. La versión anterior del Worker es `edce41d4-0d3a-48f2-9f42-1c215dc6bae7`.
 
